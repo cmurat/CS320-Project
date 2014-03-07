@@ -1,9 +1,5 @@
-CS320-Project-Group CUBUC 
+CS320-Project-Group 
 =============
-
-Group Name:
-CUBUC (Group members' first initials. Will be replaced when a good group name found.)
-
 
 Group Members: 
 - Cholpon Abdyzhaparova
@@ -14,7 +10,7 @@ Group Members:
 
 
 Group Project Name: 
-Twitter Desktop App
+Twitter Desktop Streamer (TDS)
 
 
 Project Description:
