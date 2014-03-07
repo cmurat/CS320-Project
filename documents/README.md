@@ -19,3 +19,11 @@ With this app users can
   - see their and others tweets
   - post their own tweets
   - search for tweets
+
+
+Question,inquiries and bug reports can be sent to the e-mails below:
+  - celebi.murat@ozu.edu.tr
+  - ugur.ozkan@ozu.edu.tr
+  - burak.tutanlar@ozu.edu.tr
+  - cholpon.abdyzhaparova@ozu.edu.tr
+  - umut.uzgur@ozu.edu.tr
