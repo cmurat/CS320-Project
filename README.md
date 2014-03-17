@@ -12,7 +12,7 @@ Group Members:
 Group Project Name:  
 Twitter Desktop Streamer (TDS)
 
-* dsad *
+
 Project Description:
 This project will be a desktop version of famous social network site Twitter. 
 With this app users can 
