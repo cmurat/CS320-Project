@@ -21,7 +21,7 @@ With this app users can
   - search for tweets
 
 
-Question,inquiries and bug reports can be sent to the e-mails below:
+Question, inquiries and bug reports can be sent to the e-mails below:
   - celebi.murat@ozu.edu.tr
   - ugur.ozkan@ozu.edu.tr
   - burak.tutanlar@ozu.edu.tr
