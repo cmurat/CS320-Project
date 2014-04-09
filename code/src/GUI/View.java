@@ -5,7 +5,7 @@ public class View {
 	private MainFrame mainFrame;
 	
 	public View() {
-		LoginPage loginPage = new LoginPage("www.google.com");
+		LoginPage loginPage = new LoginPage("https://www.google.com.tr/");
 		loginPage.printLoginPage();
 	}
 	
