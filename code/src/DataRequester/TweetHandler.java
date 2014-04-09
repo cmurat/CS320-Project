@@ -18,13 +18,16 @@ public class TweetHandler {
 		this.twitter = twitter;
 	}
 	public void postTweet(String tweet, String imageLocation) throws TwitterException, InvalidAttributesException {
-		if(tweet.length()>TWEET_LENGTH)
-			throw new InvalidAttributesException();
-		if(tweet.length()>=TWEET_LENGTH-MEDIA_LENGTH && imageLocation.length()!=0)
-			throw new InvalidAttributesException();
 		StatusUpdate status = new StatusUpdate(tweet);
 		status.media(new File(imageLocation));
 		twitter.updateStatus(status);
+	}
+	public boolean checkTweetValid(String tweet, String imageLocation){
+		if(tweet.length()>TWEET_LENGTH)
+			return false;
+		if(tweet.length()>=TWEET_LENGTH-MEDIA_LENGTH && imageLocation.length()!=0)
+			return false;
+		return true;
 	}
 	public void deleteTweet(long tweetID) throws TwitterException {
 		twitter.destroyStatus(tweetID);
