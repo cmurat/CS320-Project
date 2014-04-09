@@ -25,6 +25,7 @@ public class LoginPage extends JFrame {
 
 	public LoginPage(String loginURL) {
 		this.loginURL = loginURL;
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		width = (int) (screenSize.getWidth() / 4);
 		height = (int) screenSize.getHeight();
