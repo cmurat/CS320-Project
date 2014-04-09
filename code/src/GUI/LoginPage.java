@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Locale;
 
@@ -39,7 +40,12 @@ public class LoginPage extends JFrame {
 		loginButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				openWebPage();
+				try {
+					openWebPage();
+				} catch (URISyntaxException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		add(loginButton);
@@ -47,9 +53,9 @@ public class LoginPage extends JFrame {
 		setVisible(true);
 	}
 
-	private void openWebPage() {
+	private void openWebPage() throws URISyntaxException {
 		try {
-			java.awt.Desktop.getDesktop().browse(java.net.URI.create(loginURL));
+			java.awt.Desktop.getDesktop().browse(new URL(loginURL).toURI());
 		} catch (java.io.IOException e) {
 			System.out.println(e.getMessage());
 		}
