@@ -2,6 +2,7 @@ package DataRequester;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,30 +18,31 @@ import twitter4j.auth.RequestToken;
 
 public class AccountHandler {
 	Twitter twitter;
-	public AccountHandler(Twitter twitter){
+
+	public AccountHandler(Twitter twitter) {
 		this.twitter = twitter;
 	}
+
 	public void loginToTwitter() throws TwitterException, IOException {
 		twitter = TwitterFactory.getSingleton();
 		AccessToken accessToken = loadAccessToken();
-		if(accessToken==null){
+		if (accessToken == null) {
 			accessToken = getAccessCode();
 			storeAccessToken(accessToken);
 		}
 		twitter.setOAuthAccessToken(accessToken);
 	}
 
-	private AccessToken getAccessCode()
-			throws TwitterException, IOException {
+	private AccessToken getAccessCode() throws TwitterException, IOException {
 		AccessToken accessToken = null;
 		RequestToken requestToken = twitter.getOAuthRequestToken();
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while (null == accessToken) {
 			System.out
-			.println("Open the following URL and grant access to your account:");
+					.println("Open the following URL and grant access to your account:");
 			System.out.println(requestToken.getAuthorizationURL());
 			System.out
-			.print("Enter the PIN(if aviailable) or just hit enter.[PIN]:");
+					.print("Enter the PIN(if aviailable) or just hit enter.[PIN]:");
 			String pin = br.readLine();
 			try {
 				if (pin.length() > 0) {
@@ -60,8 +62,7 @@ public class AccountHandler {
 		return accessToken;
 	}
 
-	private void storeAccessToken(AccessToken accessToken)
-			throws IOException {
+	private void storeAccessToken(AccessToken accessToken) throws IOException {
 		Writer output;
 		output = new BufferedWriter(new FileWriter("twitter4j.password", true));
 		output.append(accessToken.getToken() + "\n"
@@ -81,9 +82,11 @@ public class AccountHandler {
 		} catch (FileNotFoundException e) {
 			return null;
 		}
-		
 
-
+	}
+	public void logout(){
+		File passwordFile = new File("twitter4j.password");
+		passwordFile.delete();	
 	}
 
 }
