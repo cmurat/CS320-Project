@@ -20,4 +20,5 @@ public class DataRequestManager {
 		this.dMessageHandler = new DMessageHandler(twitter);
 		this.navigationHandler = new NavigationHandler(twitter);
 	}
+	
 }
