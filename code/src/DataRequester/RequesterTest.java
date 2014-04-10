@@ -11,7 +11,6 @@ public class RequesterTest {
 		Twitter twitter = TwitterFactory.getSingleton();
 		AccountHandler handle = new AccountHandler(TwitterFactory.getSingleton());
 		handle.loginTwitterFromStorage();
-		System.out.print(handle.getAccount(twitter.getId()));
 	}
 
 }
