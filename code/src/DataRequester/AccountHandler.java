@@ -9,9 +9,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+import javax.swing.ImageIcon;
+
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
@@ -76,6 +79,15 @@ public class AccountHandler {
 			return null;
 		}
 
+	}
+	public DetailedAccount getAccount(long userId) throws TwitterException{
+		User user = twitter.showUser(userId);
+		String userName = user.getName();
+		ImageIcon profilePicture = new ImageIcon(user.getProfileImageURL());
+		int followers = user.getFollowersCount();
+		int followings = user.getFriendsCount();
+		return new DetailedAccount(profilePicture, userName, userId, tweets, followers, followings)
+		
 	}
 
 	public void logout() {

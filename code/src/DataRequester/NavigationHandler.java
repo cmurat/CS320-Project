@@ -53,6 +53,23 @@ public class NavigationHandler {
 		}
 		return mentions;
 	}
+	public ArrayList<Tweet> getFavorites() throws TwitterException {
+		List<Status> statuses = twitter.getFavorites();
+		ArrayList<Tweet> favorites = new ArrayList<Tweet>();
+		for (Status status : statuses) {
+			long userId = status.getUser().getId();
+			long tweetId = status.getId();
+			String userName = status.getUser().getName();
+			String content = status.getText();
+			Date createTime = status.getCreatedAt();
+			ImageIcon profileImage = new ImageIcon(status.getUser()
+					.getProfileImageURL());
+			Tweet currentTweet = new Tweet(userId, tweetId, userName, content,
+					createTime, profileImage);
+			favorites.add(currentTweet);
+		}
+		return favorites;
+	}
 
 	public ArrayList<RepresentationAccount> getFollowers()
 			throws TwitterException {
@@ -68,4 +85,26 @@ public class NavigationHandler {
 		}
 		return accounts;
 	}
+	public ArrayList<RepresentationAccount> getFollowings()
+			throws TwitterException {
+		List<User> users = twitter.getFriendsList(twitter.getId(), -1);
+		ArrayList<RepresentationAccount> accounts = new ArrayList<RepresentationAccount>();
+		for (User user : users) {
+			ImageIcon profileImage = new ImageIcon(user.getProfileImageURL());
+			String userName = user.getName();
+			long userId = user.getId();
+			RepresentationAccount currentAccount = new RepresentationAccount(
+					userName, userId, profileImage);
+			accounts.add(currentAccount);
+		}
+		return accounts;
+	}
+	
+	public void follow(long userToFollowId) throws TwitterException{
+		twitter.createFriendship(userToFollowId);
+	}
+	public void unFollow(long userToUnFollowId) throws TwitterException{
+		twitter.destroyFriendship(userToUnFollowId);
+	}
+	
 }
