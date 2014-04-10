@@ -12,7 +12,7 @@ public class NavigationHandler {
 	public NavigationHandler(Twitter twitter){
 		this.twitter = twitter;
 	}
-	public ArrayList<Tweet> printTimeline() throws TwitterException {
+	public ArrayList<Tweet> getTimeline() throws TwitterException {
 		List<Status> statuses = twitter.getHomeTimeline();
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 		for (Status status : statuses) {
@@ -21,7 +21,7 @@ public class NavigationHandler {
 		}
 		return tweets;
 	}
-	public ArrayList<Tweet> printMentions() throws TwitterException {
+	public ArrayList<Tweet> getMentions() throws TwitterException {
 		List<Status> statuses = twitter.getMentions();
 		ArrayList<Tweet> mentions = new ArrayList<Tweet>();
 		for (Status status : statuses) {
