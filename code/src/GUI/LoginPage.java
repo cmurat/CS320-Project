@@ -31,6 +31,12 @@ public class LoginPage extends JFrame {
 		yPos = 0;
 		xPos = (int) (screenSize.getWidth() - width);
 	}
+	
+
+	public void setLoginURL(String loginURL) {
+		this.loginURL = loginURL;
+	}
+
 
 	public void printLoginPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
