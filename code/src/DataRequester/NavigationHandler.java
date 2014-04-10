@@ -1,5 +1,6 @@
 package DataRequester;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import twitter4j.Status;
@@ -11,22 +12,22 @@ public class NavigationHandler {
 	public NavigationHandler(Twitter twitter){
 		this.twitter = twitter;
 	}
-	public void printTimeline() throws TwitterException {
+	public ArrayList<Tweet> printTimeline() throws TwitterException {
 		List<Status> statuses = twitter.getHomeTimeline();
-		System.out.println("Showing home timeline.");
+		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 		for (Status status : statuses) {
-			System.out.println( "@" +status.getUser().getName() + ""
-					+status.getText());
-			System.out.println();
+			Tweet currentTweet = new Tweet(status.getUser().getId(),status.getId(),status.getUser().getName(),status.getText(),status.getCreatedAt());
+			tweets.add(currentTweet);
 		}
+		return tweets;
 	}
-	public void printMentions() throws TwitterException {
+	public ArrayList<Tweet> printMentions() throws TwitterException {
 		List<Status> statuses = twitter.getMentions();
-		System.out.println("Showing followers.");
+		ArrayList<Tweet> mentions = new ArrayList<Tweet>();
 		for (Status status : statuses) {
-			System.out.println( "@" +status.getUser().getName() + ""
-					+status.getText());
-			System.out.println();
+			Tweet currentTweet = new Tweet(status.getUser().getId(),status.getId(),status.getUser().getName(),status.getText(),status.getCreatedAt());
+			mentions.add(currentTweet);
 		}
+		return mentions;
 	}
 }
