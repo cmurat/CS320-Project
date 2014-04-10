@@ -1,5 +1,6 @@
 package DataRequester;
 
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,12 +9,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import twitter4j.Paging;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -84,7 +89,7 @@ public class AccountHandler {
 		}
 
 	}
-	public DetailedAccount getAccount(long userId) throws TwitterException{
+	public DetailedAccount getAccount(long userId) throws TwitterException, MalformedURLException, IOException{
 		User user = twitter.showUser(userId);
 		String userName = user.getName();
 		ImageIcon profilePicture = new ImageIcon(user.getProfileImageURL());
@@ -97,10 +102,8 @@ public class AccountHandler {
 			long tweetId = status.getId();
 			String content = status.getText();
 			Date createTime = status.getCreatedAt();
-			ImageIcon profileImage = new ImageIcon(status.getUser()
-					.getProfileImageURL());
 			Tweet currentTweet = new Tweet(userId, tweetId, userName, content,
-					createTime, profileImage);
+					createTime, profilePicture);
 			tweets.add(currentTweet);
 		}
 		return new DetailedAccount(profilePicture, userName, userId, tweets, followers, followings,numberOfTweets);
