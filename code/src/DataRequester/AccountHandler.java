@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Writer;
 
 import twitter4j.Twitter;
@@ -24,28 +23,35 @@ public class AccountHandler {
 		twitter = TwitterFactory.getSingleton();
 	}
 
-	public boolean loginTwitterFromStorage() throws TwitterException, IOException {
+	public boolean loginTwitterFromStorage() throws 
+			IOException {
 		AccessToken accessToken = loadAccessToken();
-		if (accessToken == null) {
-			return false;
-		}
 		twitter.setOAuthAccessToken(accessToken);
 		return true;
 	}
-	public void loginTwitterNewUser(RequestToken requestToken, String Pin) throws TwitterException, IOException{
-		AccessToken accessToken = createAccessToken(requestToken,Pin);
-		storeAccessToken(accessToken);
+
+	public boolean loginTwitterNewUser(RequestToken requestToken, String Pin)
+			throws IOException {
+		AccessToken accessToken;
+		try {
+			accessToken = createAccessToken(requestToken, Pin);
+			
+		} catch (TwitterException e) {
+			return false;
+		}
 		twitter.setOAuthAccessToken(accessToken);
+		storeAccessToken(accessToken);
+		return true;
 	}
 
-	public RequestToken createRequestToken() throws TwitterException, IOException {
+	public RequestToken createRequestToken() throws TwitterException{
 		RequestToken requestToken = twitter.getOAuthRequestToken();
 		return requestToken;
 	}
-	
-	private AccessToken createAccessToken(RequestToken requestToken, String Pin) throws TwitterException{
-		AccessToken access = null;
-		access = twitter.getOAuthAccessToken(requestToken, Pin);
+
+	private AccessToken createAccessToken(RequestToken requestToken, String Pin)
+			throws TwitterException {
+		AccessToken access = twitter.getOAuthAccessToken(requestToken, Pin);
 		return access;
 	}
 
@@ -71,9 +77,10 @@ public class AccountHandler {
 		}
 
 	}
-	public void logout(){
+
+	public void logout() {
 		File passwordFile = new File("twitter4j.password");
-		passwordFile.delete();	
+		passwordFile.delete();
 	}
 
 }

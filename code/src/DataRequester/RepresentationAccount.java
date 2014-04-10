@@ -1,10 +1,10 @@
 package DataRequester;
 
-import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public class RepresentationAccount extends Account {
-	public RepresentationAccount(String userName, long userId,Image profilePicture){
-		super(userName,userId, profilePicture);
+	public RepresentationAccount(String userName, long userId,ImageIcon profileImage){
+		super(userName,userId, profileImage);
 	}
 
 }

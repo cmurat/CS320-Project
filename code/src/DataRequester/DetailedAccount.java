@@ -1,14 +1,15 @@
 package DataRequester;
 
-import java.awt.Image;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 
 public class DetailedAccount extends Account {
 	private ArrayList<Tweet> tweets;
 	private int followers;
 	private int followings;
 
-	public DetailedAccount(Image profilePicture, String userName, long userId,
+	public DetailedAccount(ImageIcon profilePicture, String userName, long userId,
 			ArrayList<Tweet> tweets, int followers,
 			int followings) {
 		super(userName, userId, profilePicture);

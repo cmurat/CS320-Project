@@ -1,18 +1,18 @@
 package DataRequester;
 
-import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public class Account {
-	private Image profilePicture;
+	private ImageIcon profilePicture;
 	private String userName;
 	private long userId;
 	
-	public Account(String userName, long userId,Image profilePicture) {
-		this.profilePicture = profilePicture;
+	public Account(String userName, long userId,ImageIcon profileImage) {
+		this.profilePicture = profileImage;
 		this.userName = userName;
 		this.userId = userId;
 	}
-	public Image getProfilePicture() {
+	public ImageIcon getProfilePicture() {
 		return profilePicture;
 	}
 	public String getUserName() {
