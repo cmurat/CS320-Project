@@ -24,10 +24,10 @@ import twitter4j.auth.RequestToken;
 
 public class AccountHandler {
 	Twitter twitter;
+	private RequestToken requestToken;
 
 	public AccountHandler(Twitter twitter) {
-		this.twitter = twitter;
-		twitter = TwitterFactory.getSingleton();
+		this.twitter = TwitterFactory.getSingleton();
 	}
 
 	public boolean loginTwitterFromStorage() throws 
@@ -37,11 +37,11 @@ public class AccountHandler {
 		return true;
 	}
 
-	public boolean loginTwitterNewUser(RequestToken requestToken, String Pin)
+	public boolean loginTwitterNewUser(String Pin)
 			throws IOException {
 		AccessToken accessToken;
 		try {
-			accessToken = createAccessToken(requestToken, Pin);
+			accessToken = createAccessToken(Pin);
 			
 		} catch (TwitterException e) {
 			return false;
@@ -51,12 +51,12 @@ public class AccountHandler {
 		return true;
 	}
 
-	public RequestToken createRequestToken() throws TwitterException{
-		RequestToken requestToken = twitter.getOAuthRequestToken();
-		return requestToken;
+	public String createRequestTokenURL() throws TwitterException{
+		requestToken = twitter.getOAuthRequestToken();
+		return requestToken.getAuthenticationURL();
 	}
 
-	private AccessToken createAccessToken(RequestToken requestToken, String Pin)
+	private AccessToken createAccessToken(String Pin)
 			throws TwitterException {
 		AccessToken access = twitter.getOAuthAccessToken(requestToken, Pin);
 		return access;
