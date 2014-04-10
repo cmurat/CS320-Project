@@ -8,9 +8,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -86,7 +90,20 @@ public class AccountHandler {
 		ImageIcon profilePicture = new ImageIcon(user.getProfileImageURL());
 		int followers = user.getFollowersCount();
 		int followings = user.getFriendsCount();
-		return new DetailedAccount(profilePicture, userName, userId, tweets, followers, followings)
+		int numberOfTweets = user.getStatusesCount();
+		List<Status> statuses = twitter.getUserTimeline(userId);
+		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+		for (Status status : statuses) {
+			long tweetId = status.getId();
+			String content = status.getText();
+			Date createTime = status.getCreatedAt();
+			ImageIcon profileImage = new ImageIcon(status.getUser()
+					.getProfileImageURL());
+			Tweet currentTweet = new Tweet(userId, tweetId, userName, content,
+					createTime, profileImage);
+			tweets.add(currentTweet);
+		}
+		return new DetailedAccount(profilePicture, userName, userId, tweets, followers, followings,numberOfTweets);
 		
 	}
 

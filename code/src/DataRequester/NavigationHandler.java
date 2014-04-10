@@ -35,6 +35,7 @@ public class NavigationHandler {
 		}
 		return tweets;
 	}
+	
 
 	public ArrayList<Tweet> getMentions() throws TwitterException {
 		List<Status> statuses = twitter.getMentions();
