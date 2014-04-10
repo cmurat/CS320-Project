@@ -38,6 +38,10 @@ public class Tweet {
 	public long getTweetId() {
 		return tweetId;
 	}
+	public String toString(){
+		String s = userName + "\n" + content;
+		return s;
+	}
 	
 	
 }

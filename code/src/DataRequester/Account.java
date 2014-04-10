@@ -21,4 +21,9 @@ public class Account {
 	public long getUserId() {
 		return userId;
 	}
+	public String toString(){
+		String s = userName + " " + userId;
+		return s;
+		
+	}
 }
