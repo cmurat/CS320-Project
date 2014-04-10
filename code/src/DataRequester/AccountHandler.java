@@ -27,7 +27,7 @@ public class AccountHandler {
 	private RequestToken requestToken;
 
 	public AccountHandler(Twitter twitter) {
-		this.twitter = TwitterFactory.getSingleton();
+		this.twitter = twitter;
 	}
 
 	public boolean loginTwitterFromStorage() throws 

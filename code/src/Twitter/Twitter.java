@@ -1,9 +1,11 @@
 package Twitter;
 
+import DataRequesterManager.DataRequestManager;
+
 public class Twitter {
 
 	public static void main(String args[]){
-		DataRequesterManager 
+		DataRequestManager dataRequestManager = new DataRequestManager();
 	}
 	
 }
