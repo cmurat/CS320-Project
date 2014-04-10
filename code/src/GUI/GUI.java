@@ -7,6 +7,7 @@ public class GUI {
 	
 //	private GUIManager guiManager;
 	private MainFrame mainFrame;
+	private LoginPage loginPage;
 	
 	// {xPos, yPos, width, height}
 	private int[] bounds;
@@ -14,9 +15,9 @@ public class GUI {
 	
 	public GUI(/*GUIManager guiManager*/) {
 //		this.guiManager = guiManager;
+		mainFrame = null;
+		loginPage = null;
 		calculateBounds();
-		LoginPage loginPage = new LoginPage(this, "https://www.google.com.tr/");
-		loginPage.printLoginPage();
 	}
 	
 	private void calculateBounds() {
@@ -38,6 +39,15 @@ public class GUI {
 	
 	public int[] getBounds() {
 		return bounds;
+	}
+	
+	public void loginButtonClicked() {
+//		guiManager.loginButtonClicked();
+	}
+	
+	public void printLoginPage(String webAddress) {
+		loginPage = new LoginPage(this, webAddress);
+		loginPage.printLoginPage();
 	}
 
 }

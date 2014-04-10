@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -8,6 +9,8 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -62,20 +65,17 @@ public class LoginPage extends JFrame {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					openWebPage();
-				} catch (URISyntaxException e1) {
-					e1.printStackTrace();
-				}
+//				openWebPage();
+				gui.loginButtonClicked();				
 			}
 		};
 	}
 
-	private void openWebPage() throws URISyntaxException {
+	private void openWebPage() {
 		try {
-			java.awt.Desktop.getDesktop().browse(new URL(loginURL).toURI());
-		} catch (java.io.IOException e) {
-			System.out.println(e.getMessage());
+			Desktop.getDesktop().browse(new URL(loginURL).toURI());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
