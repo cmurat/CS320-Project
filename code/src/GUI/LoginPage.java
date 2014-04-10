@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,31 +18,17 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class LoginPage extends JFrame {
 
-	private int height;
-	private int width;
-	private int xPos;
-	private int yPos;
+	private GUI gui;
 	private String loginURL;
 
-	public LoginPage(String loginURL) {
-		this.loginURL = loginURL;
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		width = (int) (screenSize.getWidth() / 4);
-		height = (int) screenSize.getHeight();
-		yPos = 0;
-		xPos = (int) (screenSize.getWidth() - width);
-	}
-	
-
-	public void setLoginURL(String loginURL) {
+	public LoginPage(GUI gui, String loginURL) {
+		this.gui = gui;
 		this.loginURL = loginURL;
 	}
-
 
 	public void printLoginPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(width, height);
-		setLocation(xPos, yPos);
+		setBounds(getBounRectangle());
 		setLayout(new GridBagLayout());
 		getContentPane().setBackground(Color.WHITE);
 		add(getLoginButton());
@@ -49,17 +36,26 @@ public class LoginPage extends JFrame {
 		setVisible(true);
 	}
 
+	private Rectangle getBounRectangle() {
+		return new Rectangle(gui.getBounds()[0], gui.getBounds()[1],
+				gui.getBounds()[2], gui.getBounds()[3]);
+	}
+
 	private JButton getLoginButton() {
 		JButton loginButton = new JButton();
-		//loginButton.setText("Login");
 		loginButton.setBorderPainted(false);
 		loginButton.setFocusable(false);
 		loginButton.setBackground(Color.WHITE);
-		Image img = new ImageIcon("icon/loginIcon.png").getImage();
-		img = img.getScaledInstance(90, 90,Image.SCALE_SMOOTH);
-		loginButton.setIcon(new ImageIcon(img));
+		loginButton.setContentAreaFilled(false);
+		loginButton.setIcon(getImageIcon("icon/loginIcon.png"));
 		loginButton.addActionListener(getLoginButtonListener());
 		return loginButton;
+	}
+
+	private ImageIcon getImageIcon(String iconPath) {
+		Image img = new ImageIcon(iconPath).getImage();
+		img = img.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+		return new ImageIcon(img);
 	}
 
 	private ActionListener getLoginButtonListener() {
