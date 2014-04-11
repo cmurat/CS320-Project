@@ -2,8 +2,17 @@ package GUI;
 
 import java.util.ArrayList;
 
+import DataRequester.Tweet;
+
 public class TweetStream implements MainContent {
 	
-//	private ArrayList<Tweet> tweets;	// TODO Tweet class has be implemented!!
-
+	ArrayList<Tweet> tweets;
+	
+	public TweetStream() {
+		tweets = new ArrayList<Tweet>();
+	}
+	
+	public void addTweets(ArrayList<Tweet> tweets) {
+		tweets.addAll(tweets);
+	}
 }
