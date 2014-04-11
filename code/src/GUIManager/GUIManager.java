@@ -13,12 +13,13 @@ import GUI.GUI;
 public class GUIManager {
 
 	private GUI gui;
-	private String loginURL = "https://api.twitter.com/oauth/authorize";
+	private String loginURL;
 	private DataRequestManager dataRequestManager;
 
 	public GUIManager(DataRequestManager dataRequestManager) {
 		this.dataRequestManager = dataRequestManager;
-		gui = new GUI(this);
+		this.loginURL = dataRequestManager.createRequestTokenURL();
+		this.gui = new GUI(this);
 	}
 
 	public void pinEntered() {

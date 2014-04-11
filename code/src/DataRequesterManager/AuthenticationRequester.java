@@ -21,6 +21,10 @@ public class AuthenticationRequester {
 		return accountHandler.loginTwitterNewUser(pin);
 	}
 	
+	public String createRequestTokenURL(){
+		return accountHandler.createRequestTokenURL();
+	}
+	
 	public boolean isAuthExists() {
 		boolean result = false;
 		try {

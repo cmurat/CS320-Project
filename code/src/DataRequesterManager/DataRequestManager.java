@@ -15,9 +15,6 @@ public class DataRequestManager {
 	
 	public GUIManager guiManager;
 	public TweetHandler tweetHandler;
-
-	
-	
 	public AuthenticationRequester authenticationRequests;
 	public DirectMessageRequests directMessagesRequests;
 	public ProfileRequests profileRequests;
@@ -35,8 +32,6 @@ public class DataRequestManager {
 		 
 		//TODO continue with constructor 
 		
-		
-		
 	}
 	public boolean checkPIN(String pin) throws IOException{
 		return authenticationRequests.checkPIN(pin);
@@ -49,5 +44,7 @@ public class DataRequestManager {
 		return authenticationRequests.isAuthExists();
 	}
 	
-	
+	public String createRequestTokenURL(){
+		return authenticationRequests.createRequestTokenURL();
+	}
 }

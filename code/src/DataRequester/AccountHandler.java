@@ -52,8 +52,13 @@ public class AccountHandler {
 		return true;
 	}
 
-	public String createRequestTokenURL() throws TwitterException {
-		requestToken = twitter.getOAuthRequestToken();
+	public String createRequestTokenURL() {
+		try {
+			requestToken = twitter.getOAuthRequestToken();
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return requestToken.getAuthenticationURL();
 	}
 
