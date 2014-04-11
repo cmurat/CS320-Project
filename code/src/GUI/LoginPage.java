@@ -43,35 +43,27 @@ public class LoginPage extends JFrame {
 		setVisible(true);
 	}
 
-	public void printLoginPage() {
-		addLoginPanel();
-	}
-
 	private Rectangle getBounRectangle() {
 		return new Rectangle(gui.getBounds()[0], gui.getBounds()[1],
 				gui.getBounds()[2], gui.getBounds()[3]);
+	}
+
+	public void printLoginPage() {
+		addLoginPanel();
 	}
 
 	private void addLoginPanel() {
 		getContentPane().removeAll();
 		JPanel loginPanel = new JPanel();
 		loginPanel.setLayout(new BorderLayout());
-		JLabel greetingNote = new JLabel("To Enter Twitter Please Click on the Icon");
-		greetingNote.setHorizontalAlignment(JLabel.CENTER);
-		greetingNote.setVerticalAlignment(JLabel.TOP);
-		JButton loginButton = getIconButton("icon/loginIcon.png", getWidth()/5, getLoginButtonListener());
+		JButton loginButton = getIconButton("icon/loginIcon.png",
+				getWidth() / 5, getLoginButtonListener());
 		loginPanel.setBackground(Color.white);
-		loginPanel.add(greetingNote,BorderLayout.NORTH);
-		loginPanel.add(loginButton,BorderLayout.SOUTH);
+		loginPanel.add(getGreetingNote(), BorderLayout.NORTH);
+		loginPanel.add(loginButton, BorderLayout.SOUTH);
 		add(loginPanel);
 		getContentPane().repaint();
 		getContentPane().validate();
-	}
-
-	private ImageIcon getImageIcon(String iconPath,int dimension) {
-		Image img = new ImageIcon(iconPath).getImage();
-		img = img.getScaledInstance(dimension, dimension, Image.SCALE_SMOOTH);
-		return new ImageIcon(img);
 	}
 
 	private ActionListener getLoginButtonListener() {
@@ -83,58 +75,76 @@ public class LoginPage extends JFrame {
 			}
 		};
 	}
-	
-	public void printPINField() {
-		getContentPane().removeAll();
-		//pinInputPanel created
-		JPanel pinInputPanel = new JPanel();
-		pinInputPanel.setLayout(new BorderLayout());
-		pinInputPanel.setBackground(Color.white);
-		//text field created
-		pinInputField = new JTextField();
-		pinInputField.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));;
-		pinInputField.setHorizontalAlignment(JTextField.CENTER);
-		pinInputPanel.add(pinInputField, BorderLayout.CENTER);
-		//ButtonPanel created
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BorderLayout());
-		buttonPanel.setBackground(Color.white);
-		//Ok and Back buttons are created
-		JButton okButton = getIconButton("icon/ok.png",getWidth()/5,getOkButtonListener());
-		JButton backButton = getIconButton("icon/back.png",getWidth()/5,getBackButtonListener());
-		//pinLabel created
-		JLabel pinLabel = new JLabel("Please enter PIN");
-		pinLabel.setHorizontalAlignment(JLabel.CENTER);
 
-		pinLabel.setVerticalAlignment(JLabel.TOP);
-		pinInputPanel.add(pinLabel,BorderLayout.NORTH);
-		buttonPanel.add(okButton, BorderLayout.WEST);
-		buttonPanel.add(backButton, BorderLayout.EAST);
-		pinInputPanel.add(buttonPanel, BorderLayout.SOUTH);
-		add(pinInputPanel);
-		getContentPane().repaint();
-		getContentPane().validate();
-	}
-
-	private JButton getIconButton(String iconLocation, int size, ActionListener listener){
+	private JButton getIconButton(String iconLocation, int size,
+			ActionListener listener) {
 		JButton button = new JButton();
 		button.setBorderPainted(false);
 		button.setFocusable(false);
 		button.setBackground(Color.white);
 		button.setContentAreaFilled(false);
-		button.setIcon(getImageIcon(iconLocation,size));
+		button.setIcon(getImageIcon(iconLocation, size));
 		button.addActionListener(listener);
 		return button;
 	}
 
-	
-	private ActionListener getBackButtonListener() {
-		return new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				gui.backToLoginButtonClicked();
-			}
-		};
+	private ImageIcon getImageIcon(String iconPath, int dimension) {
+		Image img = new ImageIcon(iconPath).getImage();
+		img = img.getScaledInstance(dimension, dimension, Image.SCALE_SMOOTH);
+		return new ImageIcon(img);
+	}
+
+	private JLabel getGreetingNote() {
+		JLabel greetingNote = new JLabel(
+				"To Enter Twitter Please Click on the Icon");
+		greetingNote.setHorizontalAlignment(JLabel.CENTER);
+		greetingNote.setVerticalAlignment(JLabel.TOP);
+		return greetingNote;
+	}
+
+	public void printPINField() {
+		getContentPane().removeAll();
+		JPanel pinInputPanel = createWhiteBorderPanel();
+		addPINLabelTo(pinInputPanel);
+		addPINInputFieldTo(pinInputPanel);
+		addButtonPanelTo(pinInputPanel);
+		add(pinInputPanel);
+		getContentPane().repaint();
+		getContentPane().validate();
+	}
+
+	private JPanel createWhiteBorderPanel() {
+		JPanel pinInputPanel = new JPanel();
+		pinInputPanel.setLayout(new BorderLayout());
+		pinInputPanel.setBackground(Color.white);
+		return pinInputPanel;
+	}
+
+	private void addPINLabelTo(JPanel pinInputPanel) {
+		JLabel pinLabel = new JLabel("Please enter PIN");
+		pinLabel.setHorizontalAlignment(JLabel.CENTER);
+		pinLabel.setVerticalAlignment(JLabel.TOP);
+		pinInputPanel.add(pinLabel, BorderLayout.NORTH);
+	}
+
+	private void addPINInputFieldTo(JPanel pinInputPanel) {
+		pinInputField = new JTextField();
+		pinInputField.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
+		pinInputField.setHorizontalAlignment(JTextField.CENTER);
+		pinInputPanel.add(pinInputField, BorderLayout.CENTER);
+	}
+
+	private void addButtonPanelTo(JPanel pinInputPanel) {
+		JPanel buttonPanel = createWhiteBorderPanel();
+		addOkButtonTo(buttonPanel);
+		addBackButtonTo(buttonPanel);
+		pinInputPanel.add(buttonPanel, BorderLayout.SOUTH);
+	}
+
+	private void addOkButtonTo(JPanel buttonPanel) {
+		JButton okButton = getIconButton("icon/ok.png", getWidth() / 5,
+				getOkButtonListener());
+		buttonPanel.add(okButton, BorderLayout.WEST);
 	}
 
 	private ActionListener getOkButtonListener() {
@@ -146,6 +156,21 @@ public class LoginPage extends JFrame {
 		};
 	}
 
+	private void addBackButtonTo(JPanel buttonPanel) {
+		JButton backButton = getIconButton("icon/back.png", getWidth() / 5,
+				getBackButtonListener());
+		buttonPanel.add(backButton, BorderLayout.EAST);
+	}
+
+	private ActionListener getBackButtonListener() {
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gui.backToLoginButtonClicked();
+			}
+		};
+	}
+	
 	public String getPIN() {
 		return pinInputField.getText();
 	}

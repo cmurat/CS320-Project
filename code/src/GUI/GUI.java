@@ -41,7 +41,7 @@ public class GUI {
 	}
 
 	public void loginButtonClicked() {
-		//		guiManager.loginButtonClicked();
+		guiManager.loginButtonClicked();
 	}
 
 	public void printLoginPage() {
