@@ -19,7 +19,8 @@ public class TweetHandler {
 	}
 	public void postTweet(String tweet, String imageLocation) throws TwitterException, InvalidAttributesException {
 		StatusUpdate status = new StatusUpdate(tweet);
-		status.media(new File(imageLocation));
+		if(!imageLocation.equals(""))
+			status.media(new File(imageLocation));
 		twitter.updateStatus(status);
 	}
 	public boolean checkTweetValid(String tweet, String imageLocation){

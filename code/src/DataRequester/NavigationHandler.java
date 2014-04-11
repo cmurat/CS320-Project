@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import twitter4j.Query;
+import twitter4j.QueryResult;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -35,9 +37,9 @@ public class NavigationHandler {
 		}
 		return tweets;
 	}
-	
 
 	public ArrayList<Tweet> getMentions() throws TwitterException {
+		@SuppressWarnings("deprecation")
 		List<Status> statuses = twitter.getMentions();
 		ArrayList<Tweet> mentions = new ArrayList<Tweet>();
 		for (Status status : statuses) {
@@ -54,6 +56,7 @@ public class NavigationHandler {
 		}
 		return mentions;
 	}
+
 	public ArrayList<Tweet> getFavorites() throws TwitterException {
 		List<Status> statuses = twitter.getFavorites();
 		ArrayList<Tweet> favorites = new ArrayList<Tweet>();
@@ -86,6 +89,7 @@ public class NavigationHandler {
 		}
 		return accounts;
 	}
+
 	public ArrayList<RepresentationAccount> getFollowings()
 			throws TwitterException {
 		List<User> users = twitter.getFriendsList(twitter.getId(), -1);
@@ -100,12 +104,33 @@ public class NavigationHandler {
 		}
 		return accounts;
 	}
-	
-	public void follow(long userToFollowId) throws TwitterException{
+
+	public ArrayList<Tweet> searchTweets(String toBeSearched)
+			throws TwitterException {
+		ArrayList<Tweet> queryResult = new ArrayList<Tweet>();
+		Query query = new Query(toBeSearched);
+		QueryResult result = twitter.search(query);
+		for (Status status : result.getTweets()) {
+			long userId = status.getUser().getId();
+			long tweetId = status.getId();
+			String userName = status.getUser().getName();
+			String content = status.getText();
+			Date createTime = status.getCreatedAt();
+			ImageIcon profileImage = new ImageIcon(status.getUser()
+					.getProfileImageURL());
+			Tweet currentTweet = new Tweet(userId, tweetId, userName, content,
+					createTime, profileImage);
+			queryResult.add(currentTweet);
+		}
+		return queryResult;
+	}
+
+	public void follow(long userToFollowId) throws TwitterException {
 		twitter.createFriendship(userToFollowId);
 	}
-	public void unFollow(long userToUnFollowId) throws TwitterException{
+
+	public void unFollow(long userToUnFollowId) throws TwitterException {
 		twitter.destroyFriendship(userToUnFollowId);
 	}
-	
+
 }
