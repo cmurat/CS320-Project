@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -35,10 +36,8 @@ public class LoginPage extends JFrame {
 	public LoginPage(GUI gui, String loginURL) {
 		this.gui = gui;
 		this.loginURL = loginURL;
-	}
-
-	public void printLoginPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Twitter Desktop Application");
 		setBounds(getBounRectangle());
 		setLayout(new GridBagLayout());
 		getContentPane().setBackground(Color.WHITE);
@@ -46,15 +45,27 @@ public class LoginPage extends JFrame {
 		setVisible(true);
 	}
 
+	public void printLoginPage() {
+		addLoginPanel();
+	}
+
 	private Rectangle getBounRectangle() {
 		return new Rectangle(gui.getBounds()[0], gui.getBounds()[1],
 				gui.getBounds()[2], gui.getBounds()[3]);
 	}
 
-	public void addLoginButton() {
+	public void addLoginPanel() {
 		getContentPane().removeAll();
+		JPanel loginPanel = new JPanel();
+		loginPanel.setLayout(new BorderLayout());
+		JLabel greetingNote = new JLabel("To Enter Twitter Please Click on the Icon");
+		greetingNote.setHorizontalAlignment(JLabel.CENTER);
+		greetingNote.setVerticalAlignment(JLabel.TOP);
 		JButton loginButton = getIconButton("icon/loginIcon.png", getWidth()/5, getLoginButtonListener());
-		add(loginButton);
+		loginPanel.setBackground(Color.white);
+		loginPanel.add(greetingNote,BorderLayout.NORTH);
+		loginPanel.add(loginButton,BorderLayout.SOUTH);
+		add(loginPanel);
 		getContentPane().repaint();
 		getContentPane().validate();
 	}
@@ -81,11 +92,12 @@ public class LoginPage extends JFrame {
 		//pinInputPanel created
 		JPanel pinInputPanel = new JPanel();
 		pinInputPanel.setLayout(new BorderLayout());
+		pinInputPanel.setBackground(Color.white);
 		//text field created
 		pinInputField = new JTextField();
 		pinInputField.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));;
 		pinInputField.setHorizontalAlignment(JTextField.CENTER);
-		pinInputPanel.add(pinInputField, BorderLayout.NORTH);
+		pinInputPanel.add(pinInputField, BorderLayout.CENTER);
 		//ButtonPanel created
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BorderLayout());
@@ -93,6 +105,12 @@ public class LoginPage extends JFrame {
 		//Ok and Back buttons are created
 		JButton okButton = getIconButton("icon/ok.png",getWidth()/5,getOkButtonListener());
 		JButton backButton = getIconButton("icon/back.png",getWidth()/5,getBackButtonListener());
+		//pinLabel created
+		JLabel pinLabel = new JLabel("Please enter PIN");
+		pinLabel.setHorizontalAlignment(JLabel.CENTER);
+
+		pinLabel.setVerticalAlignment(JLabel.TOP);
+		pinInputPanel.add(pinLabel,BorderLayout.NORTH);
 		buttonPanel.add(okButton, BorderLayout.WEST);
 		buttonPanel.add(backButton, BorderLayout.EAST);
 		pinInputPanel.add(buttonPanel, BorderLayout.SOUTH);
