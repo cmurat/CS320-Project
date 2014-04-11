@@ -15,36 +15,36 @@ public class DataRequestManager {
 	
 	public GUIManager guiManager;
 	public TweetHandler tweetHandler;
-	public AuthenticationRequester authenticationRequests;
-	public DirectMessageRequests directMessagesRequests;
+	public AuthenticationRequester authenticationRequester;
+	public DirectMessageRequester directMessagesRequester;
 	public ProfileRequests profileRequests;
 	public SearchRequests searchRequests;
 	public TweetRequests tweetRequests;
 	public UserRequests userRequests;
-	public TweetStreamRequests tweetStreamRequests;
+	public TweetStreamRequester tweetStreamRequester;
 	
 	public DataRequestManager(GUIManager guiManager2) {
 		Twitter twitter = TwitterFactory.getSingleton();
 		//this.navigationHandler = new NavigationHandler(twitter);
-		this.authenticationRequests=new AuthenticationRequester(new AccountHandler(twitter),guiManager,this);
-		this.directMessagesRequests=new DirectMessageRequests(new DMessageHandler(twitter));
-		this.tweetStreamRequests=new TweetStreamRequests(this,new NavigationHandler(twitter) );
+		this.authenticationRequester=new AuthenticationRequester(new AccountHandler(twitter),guiManager,this);
+		this.directMessagesRequester=new DirectMessageRequester(new DMessageHandler(twitter));
+		this.tweetStreamRequester=new TweetStreamRequester(this,new NavigationHandler(twitter) );
 		 
 		//TODO continue with constructor 
 		
 	}
 	public boolean checkPIN(String pin) throws IOException{
-		return authenticationRequests.checkPIN(pin);
+		return authenticationRequester.checkPIN(pin);
 	}
 	
 	public ArrayList<Tweet> getTimeline() throws TwitterException{
-		return tweetStreamRequests.getTimeline();
+		return tweetStreamRequester.getTimeline();
 	}
 	public boolean isAuthExists(){
-		return authenticationRequests.isAuthExists();
+		return authenticationRequester.isAuthExists();
 	}
 	
 	public String createRequestTokenURL(){
-		return authenticationRequests.createRequestTokenURL();
+		return authenticationRequester.createRequestTokenURL();
 	}
 }
