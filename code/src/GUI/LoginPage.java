@@ -30,12 +30,10 @@ import DataRequester.Tweet;
 public class LoginPage extends JFrame {
 
 	private GUI gui;
-	private String loginURL;
 	private JTextField pinInputField;
 
-	public LoginPage(GUI gui, String loginURL) {
+	public LoginPage(GUI gui) {
 		this.gui = gui;
-		this.loginURL = loginURL;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Twitter Desktop Application");
 		setBounds(getBounRectangle());
@@ -80,14 +78,13 @@ public class LoginPage extends JFrame {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				gui.loginButtonClicked();
-				System.out.println("Login button is clicked!");
-				printPinField();
+				gui.loginButtonClicked();
+				printPINField();
 			}
 		};
 	}
 	
-	public void printPinField() {
+	public void printPINField() {
 		getContentPane().removeAll();
 		//pinInputPanel created
 		JPanel pinInputPanel = new JPanel();
@@ -149,7 +146,7 @@ public class LoginPage extends JFrame {
 		};
 	}
 
-	public String getPin() {
+	public String getPIN() {
 		return pinInputField.getText();
 	}
 

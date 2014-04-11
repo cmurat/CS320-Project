@@ -1,24 +1,53 @@
 package DataRequesterManager;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import twitter4j.Twitter;
+import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
-import DataRequester.AccountHandler;
-import DataRequester.DMessageHandler;
-import DataRequester.NavigationHandler;
-import DataRequester.TweetHandler;
+import DataRequester.*;
+import GUIManager.*;
+
+
 
 public class DataRequestManager {
-	public AccountHandler accountHandler;
-	public TweetHandler tweetHandler;
-	public DMessageHandler dMessageHandler;
-	public NavigationHandler navigationHandler;
 	
-	public DataRequestManager() {
+	public GUIManager guiManager;
+	public TweetHandler tweetHandler;
+
+	
+	
+	public AuthenticationRequests authenticationRequests;
+	public DirectMessageRequests directMessagesRequests;
+	public ProfileRequests profileRequests;
+	public SearchRequests searchRequests;
+	public TweetRequests tweetRequests;
+	public UserRequests userRequests;
+	public TweetStreamRequests tweetStreamRequests;
+	
+	public DataRequestManager(GUIManager guiManager2) {
 		Twitter twitter = TwitterFactory.getSingleton();
-		this.accountHandler = new AccountHandler(twitter);
-		this.tweetHandler = new TweetHandler(twitter);
-		this.dMessageHandler = new DMessageHandler(twitter);
-		this.navigationHandler = new NavigationHandler(twitter);
+		//this.navigationHandler = new NavigationHandler(twitter);
+		this.authenticationRequests=new AuthenticationRequests(new AccountHandler(twitter),guiManager,this);
+		this.directMessagesRequests=new DirectMessageRequests(new DMessageHandler(twitter));
+		this.tweetStreamRequests=new TweetStreamRequests(this,new NavigationHandler(twitter) );
+		 
+		//TODO continue with constructor 
+		
+		
+		
 	}
+	public boolean checkPIN(String pin) throws IOException{
+		return authenticationRequests.checkPIN(pin);
+	}
+	
+	public ArrayList<Tweet> getTimeline() throws TwitterException{
+		return tweetStreamRequests.getTimeline();
+	}
+	public boolean isAuthExists(){
+		return authenticationRequests.isAuthExists();
+	}
+	
 	
 }

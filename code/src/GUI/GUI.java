@@ -16,8 +16,8 @@ public class GUI {
 	// {xPos, yPos, width, height}
 	private int[] bounds;
 
-	public GUI(/*GUIManager guiManager*/) {
-		//		this.guiManager = guiManager;
+	public GUI(GUIManager guiManager) {
+		this.guiManager = guiManager;
 		mainFrame = null;
 		loginPage = null;
 		calculateBounds();
@@ -44,8 +44,8 @@ public class GUI {
 		//		guiManager.loginButtonClicked();
 	}
 
-	public void printLoginPage(String webAddress) {
-		loginPage = new LoginPage(this, webAddress);
+	public void printLoginPage() {
+		loginPage = new LoginPage(this);
 		loginPage.printLoginPage();
 	}
 
@@ -57,16 +57,16 @@ public class GUI {
 		//		guiManager.pinEntered();
 	}
 
-	public void printPinField() {
-		loginPage.printPinField();
+	public void printPINField() {
+		loginPage.printPINField();
 	}
 
 	public void backToLoginButtonClicked() {
 		loginPage.printLoginPage();
 	}
 
-	public String getPin() {
-		return loginPage.getPin();
+	public String getPIN() {
+		return loginPage.getPIN();
 	}
 
 	public void printMainFrame(ArrayList<Tweet> tweets) {
