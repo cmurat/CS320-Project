@@ -100,17 +100,19 @@ public class LoginPage extends JFrame {
 	}
 
 	private JButton getOkButton() {
-		JButton okButton = new JButton("Ok");
-		okButton.setBackground(Color.black);
+		JButton okButton = new JButton(getImageIcon("icon/ok.png"));
+		okButton.setBackground(Color.white);
 		okButton.setFocusable(false);
+		okButton.setBorderPainted(false);
 		okButton.addActionListener(getOkButtonListener());
 		return okButton;
 	}
 
 	private JButton getBackButton() {
-		JButton backButton = new JButton("Back");
-		backButton.setBackground(Color.black);
+		JButton backButton = new JButton(getImageIcon("icon/back.png"));
+		backButton.setBackground(Color.white);
 		backButton.setFocusable(false);
+		backButton.setBorderPainted(false);
 		backButton.addActionListener(getBackButtonListener());
 		return backButton;
 	}
