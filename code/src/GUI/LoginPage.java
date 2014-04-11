@@ -54,7 +54,7 @@ public class LoginPage extends JFrame {
 				gui.getBounds()[2], gui.getBounds()[3]);
 	}
 
-	public void addLoginPanel() {
+	private void addLoginPanel() {
 		getContentPane().removeAll();
 		JPanel loginPanel = new JPanel();
 		loginPanel.setLayout(new BorderLayout());
