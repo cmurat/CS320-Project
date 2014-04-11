@@ -31,9 +31,9 @@ public class AccountHandler {
 	}
 
 	public boolean loginTwitterFromStorage() throws IOException {
-		
+
 		AccessToken accessToken = loadAccessToken();
-		if(accessToken ==null)
+		if (accessToken == null)
 			return false;
 		twitter.setOAuthAccessToken(accessToken);
 		return true;
@@ -56,7 +56,6 @@ public class AccountHandler {
 		try {
 			requestToken = twitter.getOAuthRequestToken();
 		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return requestToken.getAuthenticationURL();
@@ -102,7 +101,7 @@ public class AccountHandler {
 				profilePicture);
 		DetailedAccount account = new DetailedAccount(profilePicture, userName,
 				userId, tweets, followers, followings, numberOfTweets);
-		
+
 		boolean followStatus = twitter.showFriendship(twitter.getId(),
 				user.getId()).isTargetFollowedBySource();
 		boolean followRequestSent = user.isFollowRequestSent();
