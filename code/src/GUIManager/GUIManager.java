@@ -19,14 +19,17 @@ public class GUIManager {
 	public GUIManager(DataRequestManager dataRequestManager) {
 		this.dataRequestManager = dataRequestManager;
 		gui = new GUI(this);
-		//.printLoginPage();
 	}
 
-	public void pinEntered() throws IOException, TwitterException {
-		if (dataRequestManager.checkPIN(gui.getPIN())) {
-			gui.printMainFrame(dataRequestManager.getTimeline());
-		} else {
-			// if pin is not true
+	public void pinEntered() {
+		try {
+			if (dataRequestManager.checkPIN(gui.getPIN())) {
+					gui.printMainPanel(dataRequestManager.getTimeline());
+			} else {
+				// if pin is not true
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}
@@ -37,7 +40,7 @@ public class GUIManager {
 
 	public void loginButtonClicked() {
 		openWebPage();
-		gui.printPINField();
+		gui.printPINInputPanel();
 
 	}
 
@@ -49,8 +52,8 @@ public class GUIManager {
 		}
 	}
 
-	public void printMainFrame() throws TwitterException {
-		gui.printMainFrame(dataRequestManager.getTimeline());
+	public void printMainPanel() throws TwitterException {
+		gui.printMainPanel(dataRequestManager.getTimeline());
 
 	}
 
@@ -58,8 +61,8 @@ public class GUIManager {
 		gui.printLoginButton();
 	}
 
-	public void printLoginPage() {
-		gui.printLoginPage();
+	public void printLoginPanel() {
+		gui.printLoginPanel();
 
 	}
 

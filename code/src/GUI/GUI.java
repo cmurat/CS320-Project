@@ -1,26 +1,38 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
 
 import DataRequester.Tweet;
 import GUIManager.GUIManager;
 
-public class GUI {
+@SuppressWarnings("serial")
+public class GUI extends JFrame {
 
 	private GUIManager guiManager;
-	private MainFrame mainFrame;
-	private LoginPage loginPage;
-
-	// {xPos, yPos, width, height}
-	private int[] bounds;
+	private MainPanel mainPanel;
+	private LoginPanel loginPanel;
 
 	public GUI(GUIManager guiManager) {
 		this.guiManager = guiManager;
-		mainFrame = null;
-		loginPage = null;
+		mainPanel = null;
+		loginPanel = null;
+		initFrame();
+	}
+
+	private void initFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Twitter Desktop Streamer");
 		calculateBounds();
+		setLayout(new GridBagLayout());
+		getContentPane().setBackground(Color.WHITE);
+		setResizable(false);
+		setVisible(true);
 	}
 
 	private void calculateBounds() {
@@ -29,53 +41,53 @@ public class GUI {
 		int height = (int) screenSize.getHeight();
 		int yPos = 0;
 		int xPos = (int) (screenSize.getWidth() - width);
-		bounds = new int[]{xPos, yPos, width, height};
-	}
-
-	public void setBounds(int[] bounds) {
-		this.bounds = bounds;
-	}
-
-	public int[] getBounds() {
-		return bounds;
+		setBounds(xPos, yPos, width, height);
 	}
 
 	public void loginButtonClicked() {
 		guiManager.loginButtonClicked();
 	}
 
-	public void printLoginPage() {
-		loginPage = new LoginPage(this);
-		loginPage.printLoginPage();
+	public void printLoginPanel() {
+		getContentPane().removeAll();
+		if (loginPanel == null)
+			loginPanel = new LoginPanel(this);
+		loginPanel.printLoginPanel();
+		add(loginPanel);
+		getContentPane().validate();
 	}
 
 	public void printLoginButton() {
-		loginPage.printLoginPage();
+		printLoginPanel();
 	}
 
 	public void pinEntered() {
-		//		guiManager.pinEntered();
+		guiManager.pinEntered();
 	}
 
-	public void printPINField() {
-		loginPage.printPINField();
+	public void printPINInputPanel() {
+		getContentPane().removeAll();
+		loginPanel.printPINInputPanel();
+		add(loginPanel);
+		getContentPane().repaint();
+		getContentPane().validate();
 	}
 
 	public void backToLoginButtonClicked() {
-		loginPage.printLoginPage();
+		loginPanel.printLoginPanel();
 	}
 
 	public String getPIN() {
-		return loginPage.getPIN();
+		return loginPanel.getPIN();
 	}
 
-	public void printMainFrame(ArrayList<Tweet> tweets) {
-		mainFrame = new MainFrame();
+	public void printMainPanel(ArrayList<Tweet> tweets) {
+		mainPanel = new MainPanel();
 		printTimeline(tweets);
 	}
 
 	public void printTimeline(ArrayList<Tweet> tweets) {
-		mainFrame.printTimeline(tweets);
+		mainPanel.printTimeline(tweets);
 	}
 
 }

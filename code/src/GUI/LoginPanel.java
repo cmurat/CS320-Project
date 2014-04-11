@@ -27,34 +27,22 @@ import javax.swing.JTextField;
 import DataRequester.Tweet;
 
 @SuppressWarnings("serial")
-public class LoginPage extends JFrame {
+public class LoginPanel extends JPanel {
 
 	private GUI gui;
+	private JPanel loginPanel;
+	private JPanel PINInputPanel;
 	private JTextField pinInputField;
 
-	public LoginPage(GUI gui) {
+	public LoginPanel(GUI gui) {
 		this.gui = gui;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Twitter Desktop Application");
-		setBounds(getBounRectangle());
-		setLayout(new GridBagLayout());
-		getContentPane().setBackground(Color.WHITE);
-		setResizable(false);
-		setVisible(true);
+		setBounds(gui.getBounds());
+		setOpaque(false);
 	}
 
-	private Rectangle getBounRectangle() {
-		return new Rectangle(gui.getBounds()[0], gui.getBounds()[1],
-				gui.getBounds()[2], gui.getBounds()[3]);
-	}
-
-	public void printLoginPage() {
-		addLoginPanel();
-	}
-
-	private void addLoginPanel() {
-		getContentPane().removeAll();
-		JPanel loginPanel = new JPanel();
+	public void printLoginPanel() {
+		removeAll();
+		loginPanel = new JPanel();
 		loginPanel.setLayout(new BorderLayout());
 		JButton loginButton = getIconButton("icon/loginIcon.png",
 				getWidth() / 5, getLoginButtonListener());
@@ -62,8 +50,6 @@ public class LoginPage extends JFrame {
 		loginPanel.add(getGreetingNote(), BorderLayout.NORTH);
 		loginPanel.add(loginButton, BorderLayout.SOUTH);
 		add(loginPanel);
-		getContentPane().repaint();
-		getContentPane().validate();
 	}
 
 	private ActionListener getLoginButtonListener() {
@@ -71,7 +57,7 @@ public class LoginPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gui.loginButtonClicked();
-				printPINField();
+				printPINInputPanel();
 			}
 		};
 	}
@@ -81,7 +67,6 @@ public class LoginPage extends JFrame {
 		JButton button = new JButton();
 		button.setBorderPainted(false);
 		button.setFocusable(false);
-		button.setBackground(Color.white);
 		button.setContentAreaFilled(false);
 		button.setIcon(getImageIcon(iconLocation, size));
 		button.addActionListener(listener);
@@ -102,15 +87,14 @@ public class LoginPage extends JFrame {
 		return greetingNote;
 	}
 
-	public void printPINField() {
-		getContentPane().removeAll();
-		JPanel pinInputPanel = createWhiteBorderPanel();
-		addPINLabelTo(pinInputPanel);
-		addPINInputFieldTo(pinInputPanel);
-		addButtonPanelTo(pinInputPanel);
-		add(pinInputPanel);
-		getContentPane().repaint();
-		getContentPane().validate();
+	public void printPINInputPanel() {
+		removeAll();
+		PINInputPanel = createWhiteBorderPanel();
+		addPINLabelTo(PINInputPanel);
+		addPINInputFieldTo(PINInputPanel);
+		addButtonPanelTo(PINInputPanel);
+		add(PINInputPanel);
+		validate();
 	}
 
 	private JPanel createWhiteBorderPanel() {
