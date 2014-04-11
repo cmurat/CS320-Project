@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -52,21 +53,15 @@ public class LoginPage extends JFrame {
 
 	public void addLoginButton() {
 		getContentPane().removeAll();
-		JButton loginButton = new JButton();
-		loginButton.setBorderPainted(false);
-		loginButton.setFocusable(false);
-		loginButton.setBackground(Color.WHITE);
-		loginButton.setContentAreaFilled(false);
-		loginButton.setIcon(getImageIcon("icon/loginIcon.png"));
-		loginButton.addActionListener(getLoginButtonListener());
+		JButton loginButton = getIconButton("icon/loginIcon.png", getWidth()/5, getLoginButtonListener());
 		add(loginButton);
 		getContentPane().repaint();
 		getContentPane().validate();
 	}
 
-	private ImageIcon getImageIcon(String iconPath) {
+	private ImageIcon getImageIcon(String iconPath,int dimension) {
 		Image img = new ImageIcon(iconPath).getImage();
-		img = img.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+		img = img.getScaledInstance(dimension, dimension, Image.SCALE_SMOOTH);
 		return new ImageIcon(img);
 	}
 
@@ -83,14 +78,21 @@ public class LoginPage extends JFrame {
 	
 	public void printPinField() {
 		getContentPane().removeAll();
+		//pinInputPanel created
 		JPanel pinInputPanel = new JPanel();
 		pinInputPanel.setLayout(new BorderLayout());
+		//text field created
 		pinInputField = new JTextField();
+		pinInputField.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));;
+		pinInputField.setHorizontalAlignment(JTextField.CENTER);
 		pinInputPanel.add(pinInputField, BorderLayout.NORTH);
+		//ButtonPanel created
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BorderLayout());
-		JButton okButton = getOkButton();
-		JButton backButton = getBackButton();
+		buttonPanel.setBackground(Color.white);
+		//Ok and Back buttons are created
+		JButton okButton = getIconButton("icon/ok.png",getWidth()/5,getOkButtonListener());
+		JButton backButton = getIconButton("icon/back.png",getWidth()/5,getBackButtonListener());
 		buttonPanel.add(okButton, BorderLayout.WEST);
 		buttonPanel.add(backButton, BorderLayout.EAST);
 		pinInputPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -99,23 +101,17 @@ public class LoginPage extends JFrame {
 		getContentPane().validate();
 	}
 
-	private JButton getOkButton() {
-		JButton okButton = new JButton(getImageIcon("icon/ok.png"));
-		okButton.setBackground(Color.white);
-		okButton.setFocusable(false);
-		okButton.setBorderPainted(false);
-		okButton.addActionListener(getOkButtonListener());
-		return okButton;
+	private JButton getIconButton(String iconLocation, int size, ActionListener listener){
+		JButton button = new JButton();
+		button.setBorderPainted(false);
+		button.setFocusable(false);
+		button.setBackground(Color.white);
+		button.setContentAreaFilled(false);
+		button.setIcon(getImageIcon(iconLocation,size));
+		button.addActionListener(listener);
+		return button;
 	}
 
-	private JButton getBackButton() {
-		JButton backButton = new JButton(getImageIcon("icon/back.png"));
-		backButton.setBackground(Color.white);
-		backButton.setFocusable(false);
-		backButton.setBorderPainted(false);
-		backButton.addActionListener(getBackButtonListener());
-		return backButton;
-	}
 	
 	private ActionListener getBackButtonListener() {
 		return new ActionListener() {
