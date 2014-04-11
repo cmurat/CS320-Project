@@ -82,7 +82,12 @@ public class GUI extends JFrame {
 	}
 
 	public void printMainPanel(ArrayList<Tweet> tweets) {
-		mainPanel = new MainPanel();
+		getContentPane().removeAll();
+		if (mainPanel == null)
+			mainPanel = new MainPanel(this);
+		add(mainPanel);
+		getContentPane().repaint();
+		getContentPane().validate();
 		printTimeline(tweets);
 	}
 

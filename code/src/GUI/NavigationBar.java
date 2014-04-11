@@ -1,5 +1,144 @@
 package GUI;
 
-public class NavigationBar {
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
+public class NavigationBar extends JPanel {
+	
+	private MainPanel mainPanel;
+	private ArrayList<JButton> buttonList;
+	
+	public NavigationBar(MainPanel mainPanel) {
+		this.mainPanel = mainPanel;
+		buttonList = new ArrayList<JButton>();
+		calculateBounds(mainPanel);
+		setLayout(new FlowLayout());
+		addButtonToButtonList();
+		printbuttonList();
+	}
+
+	private void printbuttonList() {
+		int widthOfButtons = getWidth() / buttonList.size();
+		for (int buttonIndex = 0; buttonIndex < buttonList.size(); ++buttonIndex) {
+			JButton button = buttonList.get(buttonIndex);
+			int xPos = getBounds().x + buttonIndex * widthOfButtons;
+			int yPos = getBounds().y;
+			int width = widthOfButtons;
+			int height = getBounds().height;
+			button.setBounds(xPos, yPos, width, height);
+			add(button);
+		}
+	}
+
+	private void addButtonToButtonList() {
+		addHomeButton();
+		addNotificationsButton();
+		addMeButton();
+		addSearchButton();
+		addDMessageButton();
+		addSettingsButton();
+	}
+
+	private void calculateBounds(MainPanel mainPanel) {
+		setBounds(mainPanel.getBounds().x,
+				mainPanel.getBounds().y,
+				mainPanel.getBounds().width,
+				mainPanel.getBounds().height/10);
+	}
+	
+	private void addHomeButton() {
+		JButton homeButton = new JButton("Home");
+		homeButton.addActionListener(getHomeButtonListener());
+		buttonList.add(homeButton);
+	}
+	
+	private ActionListener getHomeButtonListener() {
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("\nHome button is clicked!");
+			}
+		};
+	}
+	
+	private void addNotificationsButton(){
+		JButton notificationsButton = new JButton("Notifications");
+		notificationsButton.addActionListener(getNotificationsButtonListener());
+		buttonList.add(notificationsButton);
+	}
+
+	private ActionListener getNotificationsButtonListener() {
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("\nNotifications button is clicked!");
+			}
+		};
+	}
+	
+	private void addMeButton() {
+		JButton meButton = new JButton("Me");
+		meButton.addActionListener(getMeButtonListener());
+		buttonList.add(meButton);
+	}
+
+	private ActionListener getMeButtonListener() {
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("\nMe button is clicked!");
+			}
+		};
+	}
+	
+	private void addSearchButton() {
+		JButton searchButton = new JButton("Search");
+		searchButton.addActionListener(getSearchButtonListener());
+		buttonList.add(searchButton);
+	}
+
+	private ActionListener getSearchButtonListener() {
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("\nSearch button is clicked!");
+			}
+		};
+	}
+	
+	private void addDMessageButton() {
+		JButton dMessageButton = new JButton("DMessage");
+		dMessageButton.addActionListener(getDMessageButtonListener());
+		buttonList.add(dMessageButton);
+	}
+
+	private ActionListener getDMessageButtonListener() {
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("\nDMessage button is clicked!");
+			}
+		};
+	}
+	
+	private void addSettingsButton() {
+		JButton settingsButton = new JButton("Settings");
+		settingsButton.addActionListener(getSettingsButtonListener());
+		buttonList.add(settingsButton);
+	}
+
+	private ActionListener getSettingsButtonListener() {
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("\nSettings button is clicked!");
+			}
+		};
+	}
 }

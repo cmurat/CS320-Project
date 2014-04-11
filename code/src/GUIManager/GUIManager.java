@@ -25,9 +25,9 @@ public class GUIManager {
 	public void pinEntered() {
 		try {
 			if (dataRequestManager.checkPIN(gui.getPIN())) {
-					gui.printMainPanel(dataRequestManager.getTimeline());
+				gui.printMainPanel(dataRequestManager.getTimeline());
 			} else {
-				// if pin is not true
+				System.out.println("\nEntered pin returned false at checkPIN!");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
