@@ -4,13 +4,13 @@ import java.io.IOException;
 import DataRequester.AccountHandler;
 import GUIManager.GUIManager;
 
-public class AuthenticationRequests {
+public class AuthenticationRequester {
 	
 	AccountHandler accountHandler;
 	GUIManager guiManager;
 	DataRequestManager dataRequestManager;
 	
-	public AuthenticationRequests(AccountHandler accountHandler, GUIManager guiManager,DataRequestManager dataReqManager ){
+	public AuthenticationRequester(AccountHandler accountHandler, GUIManager guiManager,DataRequestManager dataReqManager ){
 		this.accountHandler=accountHandler;
 		this.guiManager=guiManager;
 		this.dataRequestManager=dataReqManager;

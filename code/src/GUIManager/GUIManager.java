@@ -13,7 +13,7 @@ import GUI.GUI;
 public class GUIManager {
 
 	private GUI gui;
-	private String loginURL = "https://api.twitter.com/oauth/authorize?";
+	private String loginURL = "https://api.twitter.com/oauth/authorize";
 	private DataRequestManager dataRequestManager;
 
 	public GUIManager(DataRequestManager dataRequestManager) {

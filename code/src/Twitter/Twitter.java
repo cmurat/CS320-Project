@@ -12,16 +12,16 @@ public class Twitter {
 	public Twitter() throws TwitterException {
 		dataRequestManager = new DataRequestManager(guiManager);
 		guiManager = new GUIManager(dataRequestManager);
-		if (dataRequestManager.isAuthExists()) {
+		if (!dataRequestManager.isAuthExists()) {
 			guiManager.printMainFrame();
-			
 		} else {
 			guiManager.printLoginPage();
 		}
 	}
 
 	public static void main(String args[]) throws TwitterException {
-		Twitter twitter = new Twitter();
+		new Twitter();
+
 	}
 
 }

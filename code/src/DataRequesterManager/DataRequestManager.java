@@ -18,7 +18,7 @@ public class DataRequestManager {
 
 	
 	
-	public AuthenticationRequests authenticationRequests;
+	public AuthenticationRequester authenticationRequests;
 	public DirectMessageRequests directMessagesRequests;
 	public ProfileRequests profileRequests;
 	public SearchRequests searchRequests;
@@ -29,7 +29,7 @@ public class DataRequestManager {
 	public DataRequestManager(GUIManager guiManager2) {
 		Twitter twitter = TwitterFactory.getSingleton();
 		//this.navigationHandler = new NavigationHandler(twitter);
-		this.authenticationRequests=new AuthenticationRequests(new AccountHandler(twitter),guiManager,this);
+		this.authenticationRequests=new AuthenticationRequester(new AccountHandler(twitter),guiManager,this);
 		this.directMessagesRequests=new DirectMessageRequests(new DMessageHandler(twitter));
 		this.tweetStreamRequests=new TweetStreamRequests(this,new NavigationHandler(twitter) );
 		 
