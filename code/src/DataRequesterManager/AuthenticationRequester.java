@@ -26,6 +26,7 @@ public class AuthenticationRequester {
 		try {
 			result = accountHandler.loginTwitterFromStorage();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
