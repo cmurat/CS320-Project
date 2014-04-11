@@ -47,11 +47,10 @@ public class GUI {
 	public void printLoginPage(String webAddress) {
 		loginPage = new LoginPage(this, webAddress);
 		loginPage.printLoginPage();
-		printLoginButton();
 	}
 	
 	public void printLoginButton() {
-		loginPage.addLoginButton();
+		loginPage.addLoginPanel();
 	}
 	
 	public void pinEntered() {
