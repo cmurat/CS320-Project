@@ -31,7 +31,10 @@ public class AccountHandler {
 	}
 
 	public boolean loginTwitterFromStorage() throws IOException {
+		
 		AccessToken accessToken = loadAccessToken();
+		if(accessToken ==null)
+			return false;
 		twitter.setOAuthAccessToken(accessToken);
 		return true;
 	}
