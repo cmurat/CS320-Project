@@ -27,8 +27,8 @@ public class MainPanel extends JPanel {
 	}
 	
 	public void printTimeline(ArrayList<Tweet> tweets) {
-		System.out.println("\nSay it is printed..");
-//		mainContent = new TweetStream();
+//		System.out.println("\nSay it is printed..");
+		mainContent = new TweetStream(this);
 //		TweetStream tweetStream = (TweetStream) mainContent;
 //		tweetStream.addTweets(tweets);
 	}

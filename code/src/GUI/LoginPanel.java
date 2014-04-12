@@ -2,10 +2,13 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -107,7 +110,24 @@ public class LoginPanel extends JPanel {
 		pinInputField = new JTextField();
 		pinInputField.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
 		pinInputField.setHorizontalAlignment(JTextField.CENTER);
+		pinInputField.addKeyListener(getEnterKeyAdapter());
 		pinInputPanel.add(pinInputField, BorderLayout.CENTER);
+	}
+
+	private KeyAdapter getEnterKeyAdapter() {
+		return new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER)
+					pinEntered();
+			}
+		};
+	}
+	
+	private void pinEntered() {
+		pinInputField.setEnabled(false);
+		setCursor(new Cursor(Cursor.WAIT_CURSOR));
+		gui.pinEntered();
 	}
 
 	private void addButtonPanelTo(JPanel pinInputPanel) {
@@ -127,7 +147,7 @@ public class LoginPanel extends JPanel {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				gui.pinEntered();
+				pinEntered();
 			}
 		};
 	}
