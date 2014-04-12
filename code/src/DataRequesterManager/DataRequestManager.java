@@ -33,6 +33,7 @@ public class DataRequestManager {
 		//TODO continue with constructor 
 		
 	}
+	
 	public boolean checkPIN(String pin) throws IOException{
 		return authenticationRequests.checkPIN(pin);
 	}
@@ -46,5 +47,10 @@ public class DataRequestManager {
 	
 	public String createRequestTokenURL(){
 		return authenticationRequests.createRequestTokenURL();
+	}
+
+	public DetailedAccount getDetailedAccount() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

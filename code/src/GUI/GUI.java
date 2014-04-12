@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import DataRequester.Account;
+import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
 import GUIManager.GUIManager;
 
@@ -108,6 +110,14 @@ public class GUI extends JFrame {
 
 	public String getTweet() {
 		return mainPanel.getTweet();
+	}
+
+	public void meButtonClicked() {
+		guiManager.meButtonClicked();
+	}
+
+	public void printProfile(DetailedAccount account) {
+		mainPanel.printProfile(account);
 	}
 
 }

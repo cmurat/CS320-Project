@@ -93,6 +93,7 @@ public class NavigationBar extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("\nMe button is clicked!");
+				mainPanel.meButtonClicked();
 			}
 		};
 	}

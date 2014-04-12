@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import DataRequester.Account;
+import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
 
 @SuppressWarnings("serial")
@@ -39,6 +41,16 @@ public class MainPanel extends JPanel {
 
 	public String getTweet() {
 		return tweetBox.getTweet();
+	}
+
+	public void meButtonClicked() {
+		gui.meButtonClicked();
+	}
+
+	public void printProfile(DetailedAccount account) {
+		mainContent = new ProfilePanel(this, account);
+		ProfilePanel profilePanel = (ProfilePanel) mainContent;
+		profilePanel.printProfilePanel();
 	}
 
 }

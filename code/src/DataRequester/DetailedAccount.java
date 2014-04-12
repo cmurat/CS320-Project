@@ -31,11 +31,11 @@ public class DetailedAccount extends Account {
 		return tweets;
 	}
 
-	public int getFollowers() {
+	public int getFollowersAmount() {
 		return followers;
 	}
 
-	public int getFollowings() {
+	public int getFollowingsAmount() {
 		return followings;
 	}
 

@@ -6,7 +6,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import twitter4j.TwitterException;
-
+import DataRequester.Account;
+import DataRequester.AccountHandler;
+import DataRequester.DetailedAccount;
 import DataRequesterManager.*;
 import GUI.GUI;
 
@@ -32,7 +34,6 @@ public class GUIManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void favoriteClicked() {
@@ -42,7 +43,6 @@ public class GUIManager {
 	public void loginButtonClicked() {
 		openWebPage();
 		gui.printPINInputPanel();
-
 	}
 
 	private void openWebPage() {
@@ -64,17 +64,16 @@ public class GUIManager {
 
 	public void printLoginPanel() {
 		gui.printLoginPanel();
-
-	}
-
-	public void postTweetClicked() {
-		// get tweet content from view
-		// dataRequestManager.tweetRequests.postTweet(String tweet, String
-		// imageLocation);
 	}
 
 	public void tweetEntered() {
 		String tweet = gui.getTweet();
 		System.out.println("\nAssume it is sent: " + tweet);
+	}
+
+	public void meButtonClicked() {
+		System.out.println("\nSay user profile is printed.");
+		// TODO this is for test
+		gui.printProfile(dataRequestManager.getDetailedAccount());
 	}
 }
