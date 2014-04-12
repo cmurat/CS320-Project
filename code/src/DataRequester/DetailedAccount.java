@@ -2,29 +2,22 @@ package DataRequester;
 
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
+import twitter4j.User;
 
 public class DetailedAccount extends Account {
 	private ArrayList<Tweet> tweets;
-	private int followers;
-	private int followings;
-	private int numberOfTweets;
 	private boolean followStatus;
 	private boolean followRequestSent;
 	private boolean accountProtected;
 
-	public DetailedAccount(ImageIcon profilePicture, String userName,
-			long userId, ArrayList<Tweet> tweets, int followers,
-			int followings, int numberOfTweets) {
-		super(userName, userId, profilePicture);
+	public DetailedAccount(User user, long userId, ArrayList<Tweet> tweets) {
+		super(user);
+		this.user = user;
 		this.tweets = tweets;
-		this.followers = followers;
-		this.followings = followings;
-		this.numberOfTweets = numberOfTweets;
 	}
 
 	public int getNumberOfTweets() {
-		return numberOfTweets;
+		return user.getStatusesCount();
 	}
 
 	public ArrayList<Tweet> getTweets() {
@@ -32,11 +25,11 @@ public class DetailedAccount extends Account {
 	}
 
 	public int getFollowersAmount() {
-		return followers;
+		return user.getFollowersCount();
 	}
 
 	public int getFollowingsAmount() {
-		return followings;
+		return user.getFriendsCount();
 	}
 
 	public boolean isAccountProtected() {

@@ -1,32 +1,28 @@
 package DataRequester;
 
-import javax.swing.ImageIcon;
+import twitter4j.User;
 
 public class Account {
-	private ImageIcon profilePicture;
-	private String userName;
-	private long userId;
+	protected User user;
 
-	public Account(String userName, long userId, ImageIcon profileImage) {
-		this.profilePicture = profileImage;
-		this.userName = userName;
-		this.userId = userId;
+	public Account(User user) {
+		this.user = user;
 	}
 
-	public ImageIcon getProfilePicture() {
-		return profilePicture;
+	public String getProfilePicture() {
+		return user.getProfileImageURL();
 	}
 
 	public String getUserName() {
-		return userName;
+		return user.getName();
 	}
 
 	public long getUserID() {
-		return userId;
+		return user.getId();
 	}
 
 	public String toString() {
-		String s = userName + " " + userId;
+		String s = getUserName() + " " + getUserID();
 		return s;
 
 	}

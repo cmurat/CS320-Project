@@ -10,10 +10,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import javax.swing.ImageIcon;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -25,6 +22,7 @@ import twitter4j.auth.RequestToken;
 public class AccountHandler {
 	Twitter twitter;
 	private RequestToken requestToken;
+	private AccessToken accessToken;
 
 	public AccountHandler(Twitter twitter) {
 		this.twitter = twitter;
@@ -32,7 +30,7 @@ public class AccountHandler {
 
 	public boolean loginTwitterFromStorage() throws IOException {
 
-		AccessToken accessToken = loadAccessToken();
+		accessToken = loadAccessToken();
 		if (accessToken == null)
 			return false;
 		twitter.setOAuthAccessToken(accessToken);
@@ -40,16 +38,19 @@ public class AccountHandler {
 	}
 
 	public boolean loginTwitterNewUser(String Pin) throws IOException {
-		AccessToken accessToken;
 		try {
 			accessToken = createAccessToken(Pin);
-
 		} catch (TwitterException e) {
 			return false;
 		}
 		twitter.setOAuthAccessToken(accessToken);
 		storeAccessToken(accessToken);
 		return true;
+	}
+
+	private AccessToken createAccessToken(String Pin) throws TwitterException {
+		AccessToken access = twitter.getOAuthAccessToken(requestToken, Pin);
+		return access;
 	}
 
 	public String createRequestTokenURL() {
@@ -59,11 +60,6 @@ public class AccountHandler {
 			e.printStackTrace();
 		}
 		return requestToken.getAuthenticationURL();
-	}
-
-	private AccessToken createAccessToken(String Pin) throws TwitterException {
-		AccessToken access = twitter.getOAuthAccessToken(requestToken, Pin);
-		return access;
 	}
 
 	private void storeAccessToken(AccessToken accessToken) throws IOException {
@@ -92,15 +88,9 @@ public class AccountHandler {
 	public DetailedAccount getAccount(long userId) throws TwitterException,
 			MalformedURLException, IOException {
 		User user = twitter.showUser(userId);
-		String userName = user.getName();
-		ImageIcon profilePicture = new ImageIcon(user.getProfileImageURL());
-		int followers = user.getFollowersCount();
-		int followings = user.getFriendsCount();
-		int numberOfTweets = user.getStatusesCount();
-		ArrayList<Tweet> tweets = createTweetList(userId, userName,
-				profilePicture);
-		DetailedAccount account = new DetailedAccount(profilePicture, userName,
-				userId, tweets, followers, followings, numberOfTweets);
+		long userID = user.getId();
+		ArrayList<Tweet> tweets = createTweetList(userId);
+		DetailedAccount account = new DetailedAccount(user, userID, tweets);
 
 		boolean followStatus = twitter.showFriendship(twitter.getId(),
 				user.getId()).isTargetFollowedBySource();
@@ -113,17 +103,12 @@ public class AccountHandler {
 
 	}
 
-	private ArrayList<Tweet> createTweetList(long userId, String userName,
-			ImageIcon profilePicture) throws TwitterException {
+	private ArrayList<Tweet> createTweetList(long userId) throws TwitterException {
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 		List<Status> statuses = twitter.getUserTimeline(userId);
 
 		for (Status status : statuses) {
-			long tweetId = status.getId();
-			String content = status.getText();
-			Date createTime = status.getCreatedAt();
-			Tweet currentTweet = new Tweet(userId, tweetId, userName, content,
-					createTime, profilePicture);
+			Tweet currentTweet = new Tweet(status);
 			tweets.add(currentTweet);
 		}
 		return tweets;

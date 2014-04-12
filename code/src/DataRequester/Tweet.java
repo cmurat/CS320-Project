@@ -2,53 +2,44 @@ package DataRequester;
 
 import java.util.Date;
 
-import javax.swing.ImageIcon;
+import twitter4j.Status;
+import twitter4j.User;
 
 public class Tweet {
-	private String content;
-	private Date date;
-	private String userName;
-	private long userId;
-	private long tweetId;
-	private ImageIcon userImage;
+	private User user;
+	private Status status; 
 
-	public Tweet(long userId, long tweetId, String userName, String content,
-			Date date, ImageIcon userImage) {
-		// TODO Neden profile picture? Neden bu kadar parametre?
-		this.content = content;
-		this.userId = userId;
-		this.tweetId = tweetId;
-		this.userName = userName;
-		this.date = date;
-		this.userImage = userImage;
+	public Tweet(Status status) {
+		this.status = status;
+		this.user = status.getUser();
 	}
 
-	public ImageIcon getUserImage() {
-		return userImage;
+	public String getUserImage() {
+		return user.getProfileImageURL();
 	}
 
 	public String getContent() {
-		return content;
+		return status.getText();
 	}
 
 	public Date getDate() {
-		return date;
+		return status.getCreatedAt();
 	}
 
 	public String getUserName() {
-		return userName;
+		return user.getName();
 	}
 
 	public long getUserId() {
-		return userId;
+		return status.getId();
 	}
 
 	public long getTweetId() {
-		return tweetId;
+		return status.getId();
 	}
 
 	public String toString() {
-		String s = userName + "\n" + content;
+		String s = getUserName() + "\n" + getContent();
 		return s;
 	}
 
