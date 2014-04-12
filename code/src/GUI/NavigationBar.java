@@ -17,7 +17,7 @@ public class NavigationBar extends JPanel {
 	public NavigationBar(MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
 		buttonList = new ArrayList<JButton>();
-		calculateBounds(mainPanel);
+		calculateBounds();
 		setLayout(new FlowLayout());
 		addButtonToButtonList();
 		printbuttonList();
@@ -45,7 +45,7 @@ public class NavigationBar extends JPanel {
 		addSettingsButton();
 	}
 
-	private void calculateBounds(MainPanel mainPanel) {
+	private void calculateBounds() {
 		setBounds(mainPanel.getBounds().x,
 				mainPanel.getBounds().y,
 				mainPanel.getBounds().width,

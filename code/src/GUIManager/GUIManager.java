@@ -72,4 +72,9 @@ public class GUIManager {
 		// dataRequestManager.tweetRequests.postTweet(String tweet, String
 		// imageLocation);
 	}
+
+	public void tweetEntered() {
+		String tweet = gui.getTweet();
+		System.out.println("\nAssume it is sent: " + tweet);
+	}
 }

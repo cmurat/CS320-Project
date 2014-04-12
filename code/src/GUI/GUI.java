@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class GUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Twitter Desktop Streamer");
 		calculateBounds();
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setLayout(new GridBagLayout());
 		getContentPane().setBackground(Color.WHITE);
 		setResizable(false);
@@ -39,10 +41,16 @@ public class GUI extends JFrame {
 	private void calculateBounds() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) (screenSize.getWidth() / 4);
-		int height = (int) screenSize.getHeight();
+		int height = (int) screenSize.getHeight() - getTaskBarHeight();
 		int yPos = 0;
 		int xPos = (int) (screenSize.getWidth() - width);
 		setBounds(xPos, yPos, width, height);
+	}
+
+	private int getTaskBarHeight() {
+		int taskBarHeight = Toolkit.getDefaultToolkit().getScreenInsets(
+				getGraphicsConfiguration()).bottom;
+		return taskBarHeight;
 	}
 
 	public void loginButtonClicked() {
@@ -92,6 +100,14 @@ public class GUI extends JFrame {
 
 	public void printTimeline(ArrayList<Tweet> tweets) {
 		mainPanel.printTimeline(tweets);
+	}
+
+	public void tweetEntered() {
+		guiManager.tweetEntered();
+	}
+
+	public String getTweet() {
+		return mainPanel.getTweet();
 	}
 
 }
