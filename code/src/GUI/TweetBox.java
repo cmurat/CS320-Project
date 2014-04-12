@@ -5,6 +5,9 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -39,9 +42,22 @@ public class TweetBox extends JPanel {
 		tweetField.setText("Write a tweet, Press Enter..");
 		tweetField.addFocusListener(getFocusAdapter());
 		tweetField.addKeyListener(getEnterKeyAdapter());
+
+
+		tweetField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (tweetField.getText().length() >= 140) {
+					tweetField.setText(tweetField.getText().substring(0, 140));
+				}
+			}
+		});
+		
+
 		add(tweetField);
 	}
 
+	
 	private FocusAdapter getFocusAdapter() {
 		return new FocusAdapter() {
 			@Override
