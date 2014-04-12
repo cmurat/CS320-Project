@@ -3,8 +3,11 @@ package GUIManager;
 import java.awt.Desktop;
 import java.net.URL;
 
+import twitter4j.DirectMessage;
+import twitter4j.ResponseList;
 import twitter4j.TwitterException;
 import DataRequesterManager.DataRequestManager;
+import DataRequesterManager.DirectMessageRequests;
 import GUI.GUI;
 
 public class GUIManager {
@@ -67,5 +70,9 @@ public class GUIManager {
 
 	public void meButtonClicked() {
 		gui.printProfile(dataRequestManager.getCurrentUserAccount());
+	}
+
+	public ResponseList<DirectMessage> getDirectMessages() {
+		return dataRequestManager.getDirectMessages();
 	}
 }

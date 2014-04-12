@@ -3,6 +3,8 @@ package DataRequesterManager;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import twitter4j.DirectMessage;
+import twitter4j.ResponseList;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -76,5 +78,9 @@ public class DataRequestManager {
 	
 	public DetailedAccount getCurrentUserAccount() {
 		return accountHandler.getCurrentUserDetailedAccount();
+	}
+	
+	public ResponseList<DirectMessage> getDirectMessages(){
+		return dMessageHandler.getDirectMessages();
 	}
 }

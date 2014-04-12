@@ -1,5 +1,7 @@
 package DataRequester;
 
+import twitter4j.DirectMessage;
+import twitter4j.ResponseList;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
@@ -15,8 +17,13 @@ public class DMessageHandler {
 		twitter.sendDirectMessage(userId, message);
 	}
 
-	public void getDirectMessages() throws TwitterException {
-		twitter.getDirectMessages();
+	public ResponseList<DirectMessage> getDirectMessages() {
+		try {
+			return twitter.getDirectMessages();
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
