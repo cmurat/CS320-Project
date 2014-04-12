@@ -12,11 +12,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class TweetBox extends JPanel{
 	
 	private MainPanel mainPanel;
-	private TextField tweetField;
+	private JTextArea tweetField;
 	
 	public TweetBox(MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
@@ -33,8 +34,11 @@ public class TweetBox extends JPanel{
 		setBounds(xPos, yPos, width, height);
 	}
 	
-	private void addTweetField() {
-		tweetField = new TextField();
+	private void addTweetField() {		
+		tweetField = new JTextArea();
+		tweetField.setColumns(140);
+		tweetField.setLineWrap(true);
+		tweetField.setWrapStyleWord(false);
 		tweetField.setText("Write a tweet, Press Enter..");
 		tweetField.addFocusListener(getFocusAdapter());
 		tweetField.addKeyListener(getEnterKeyAdapter());
