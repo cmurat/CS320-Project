@@ -85,28 +85,43 @@ public class AccountHandler {
 
 	}
 
-	public DetailedAccount getAccount(long userId) throws TwitterException,
-			MalformedURLException, IOException {
-		User user = twitter.showUser(userId);
-		long userID = user.getId();
-		ArrayList<Tweet> tweets = createTweetList(userId);
-		DetailedAccount account = new DetailedAccount(user, userID, tweets);
-
-		boolean followStatus = twitter.showFriendship(twitter.getId(),
-				user.getId()).isTargetFollowedBySource();
-		boolean followRequestSent = user.isFollowRequestSent();
-		boolean accountProtected = user.isProtected();
-		account.setAccountProtected(accountProtected);
-		account.setFollowRequestSent(followRequestSent);
-		account.setFollowStatus(followStatus);
+	public DetailedAccount getDetailedAccount(long userId){
+		User user = null; 
+		ArrayList<Tweet> tweets = null;
+		
+		try {
+			user = twitter.showUser(userId);
+			tweets = createTweetList(user.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		DetailedAccount account = new DetailedAccount(user, tweets);
+		setupAccount(account, user);
 		return account;
 
+	}
+	
+	private void setupAccount(DetailedAccount account, User user) {
+		boolean followStatus = false;
+		try {
+			followStatus = twitter.showFriendship(twitter.getId(),
+					user.getId()).isTargetFollowedBySource();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		account.setAccountProtected(user.isProtected());
+		account.setFollowRequestSent(user.isFollowRequestSent());
+		account.setFollowStatus(followStatus);
+	}
+	
+	public DetailedAccount getCurrentUserDetailedAccount() {
+		return getDetailedAccount(accessToken.getUserId());
 	}
 
 	private ArrayList<Tweet> createTweetList(long userId) throws TwitterException {
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 		List<Status> statuses = twitter.getUserTimeline(userId);
-
 		for (Status status : statuses) {
 			Tweet currentTweet = new Tweet(status);
 			tweets.add(currentTweet);

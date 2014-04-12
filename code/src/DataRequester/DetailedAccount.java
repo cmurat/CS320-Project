@@ -6,11 +6,11 @@ import twitter4j.User;
 
 public class DetailedAccount extends Account {
 	private ArrayList<Tweet> tweets;
-	private boolean followStatus;
+	private boolean isFollowed;
 	private boolean followRequestSent;
 	private boolean accountProtected;
 
-	public DetailedAccount(User user, long userId, ArrayList<Tweet> tweets) {
+	public DetailedAccount(User user, ArrayList<Tweet> tweets) {
 		super(user);
 		this.user = user;
 		this.tweets = tweets;
@@ -40,12 +40,12 @@ public class DetailedAccount extends Account {
 		this.accountProtected = accountProtected;
 	}
 
-	public boolean isFollowStatus() {
-		return followStatus;
+	public boolean isFollowed() {
+		return isFollowed;
 	}
 
 	public void setFollowStatus(boolean followStatus) {
-		this.followStatus = followStatus;
+		this.isFollowed = followStatus;
 	}
 
 	public boolean isFollowRequestSent() {

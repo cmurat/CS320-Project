@@ -66,8 +66,6 @@ public class GUIManager {
 	}
 
 	public void meButtonClicked() {
-		System.out.println("\nSay user profile is printed.");
-		// TODO this is for test
-		gui.printProfile(dataRequestManager.getDetailedAccount());
+		gui.printProfile(dataRequestManager.getCurrentUserAccount());
 	}
 }

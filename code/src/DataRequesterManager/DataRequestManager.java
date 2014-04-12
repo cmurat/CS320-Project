@@ -70,8 +70,11 @@ public class DataRequestManager {
 		return authenticationRequests.createRequestTokenURL();
 	}
 
-	public DetailedAccount getDetailedAccount() {
-		
-		return null;
+	public DetailedAccount getDetailedAccount(long userId) {
+		return accountHandler.getDetailedAccount(userId);
+	}
+	
+	public DetailedAccount getCurrentUserAccount() {
+		return accountHandler.getCurrentUserDetailedAccount();
 	}
 }

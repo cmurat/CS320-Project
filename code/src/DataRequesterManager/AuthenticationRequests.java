@@ -30,7 +30,6 @@ public class AuthenticationRequests {
 		try {
 			result = accountHandler.loginTwitterFromStorage();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
