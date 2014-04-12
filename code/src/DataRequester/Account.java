@@ -9,7 +9,7 @@ public class Account {
 		this.user = user;
 	}
 
-	public String getProfilePicture() {
+	public String getProfilePictureURL() {
 		return user.getProfileImageURL();
 	}
 

@@ -57,7 +57,8 @@ public class ProfilePanel extends JPanel implements MainContent {
 	}
 
 	private void addProfilePicture() {
-		JLabel profilePicture = new JLabel(account.getProfilePicture());
+		//TODO Ugur: abi new JLabel() icindeki getProfilePictureURL in etrafina new ImageIcon cak bir tane
+		JLabel profilePicture = new JLabel(account.getProfilePictureURL());
 		labelList.add(profilePicture);
 	}
 
