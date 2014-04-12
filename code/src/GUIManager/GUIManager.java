@@ -59,7 +59,7 @@ public class GUIManager {
 	}
 
 	public void backToLoginButtonClicked() {
-		gui.printLoginButton();
+		gui.printLoginPanel();
 	}
 
 	public void printLoginPanel() {

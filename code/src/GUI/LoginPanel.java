@@ -29,14 +29,19 @@ public class LoginPanel extends JPanel {
 
 	public void printLoginPanel() {
 		removeAll();
+		if (loginPanel == null)
+			createLoginPanel();
+		add(loginPanel);
+	}
+
+	private void createLoginPanel() {
 		loginPanel = new JPanel();
 		loginPanel.setLayout(new BorderLayout());
+		loginPanel.setBackground(Color.white);
 		JButton loginButton = getIconButton("icon/loginIcon.png",
 				getWidth() / 5, getLoginButtonListener());
-		loginPanel.setBackground(Color.white);
 		loginPanel.add(getGreetingNote(), BorderLayout.NORTH);
 		loginPanel.add(loginButton, BorderLayout.SOUTH);
-		add(loginPanel);
 	}
 
 	private ActionListener getLoginButtonListener() {

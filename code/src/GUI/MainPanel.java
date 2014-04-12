@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -17,9 +18,10 @@ public class MainPanel extends JPanel {
 	public MainPanel(GUI gui) {
 		this.gui = gui;
 		setBounds(gui.getBounds());
+		setLayout(new BorderLayout());
 		setOpaque(false);
 		navigationBar = new NavigationBar(this);
-		add(navigationBar);
+		add(navigationBar, BorderLayout.NORTH);
 //		tweetBox = new TweetBox();
 	}
 	

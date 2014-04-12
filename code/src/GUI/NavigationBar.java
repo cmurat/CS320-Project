@@ -53,7 +53,7 @@ public class NavigationBar extends JPanel {
 	}
 	
 	private void addHomeButton() {
-		JButton homeButton = new JButton("Home");
+		JButton homeButton = new JButton("^");
 		homeButton.addActionListener(getHomeButtonListener());
 		buttonList.add(homeButton);
 	}
@@ -68,7 +68,7 @@ public class NavigationBar extends JPanel {
 	}
 	
 	private void addNotificationsButton(){
-		JButton notificationsButton = new JButton("Notifications");
+		JButton notificationsButton = new JButton("#");
 		notificationsButton.addActionListener(getNotificationsButtonListener());
 		buttonList.add(notificationsButton);
 	}
@@ -98,7 +98,7 @@ public class NavigationBar extends JPanel {
 	}
 	
 	private void addSearchButton() {
-		JButton searchButton = new JButton("Search");
+		JButton searchButton = new JButton("?");
 		searchButton.addActionListener(getSearchButtonListener());
 		buttonList.add(searchButton);
 	}
@@ -113,7 +113,7 @@ public class NavigationBar extends JPanel {
 	}
 	
 	private void addDMessageButton() {
-		JButton dMessageButton = new JButton("DMessage");
+		JButton dMessageButton = new JButton("DM");
 		dMessageButton.addActionListener(getDMessageButtonListener());
 		buttonList.add(dMessageButton);
 	}
@@ -128,7 +128,7 @@ public class NavigationBar extends JPanel {
 	}
 	
 	private void addSettingsButton() {
-		JButton settingsButton = new JButton("Settings");
+		JButton settingsButton = new JButton("S");
 		settingsButton.addActionListener(getSettingsButtonListener());
 		buttonList.add(settingsButton);
 	}

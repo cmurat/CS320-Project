@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
@@ -54,11 +55,8 @@ public class GUI extends JFrame {
 			loginPanel = new LoginPanel(this);
 		loginPanel.printLoginPanel();
 		add(loginPanel);
+		getContentPane().repaint();
 		getContentPane().validate();
-	}
-
-	public void printLoginButton() {
-		printLoginPanel();
 	}
 
 	public void pinEntered() {
@@ -74,7 +72,7 @@ public class GUI extends JFrame {
 	}
 
 	public void backToLoginButtonClicked() {
-		loginPanel.printLoginPanel();
+		guiManager.backToLoginButtonClicked();
 	}
 
 	public String getPIN() {
@@ -83,9 +81,10 @@ public class GUI extends JFrame {
 
 	public void printMainPanel(ArrayList<Tweet> tweets) {
 		getContentPane().removeAll();
+		setLayout(new BorderLayout());
 		if (mainPanel == null)
 			mainPanel = new MainPanel(this);
-		add(mainPanel);
+		add(mainPanel, BorderLayout.CENTER);
 		getContentPane().repaint();
 		getContentPane().validate();
 		printTimeline(tweets);
