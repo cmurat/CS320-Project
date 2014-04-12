@@ -50,7 +50,6 @@ public class GUIManager {
 
 	public void printMainPanel() throws TwitterException {
 		gui.printMainPanel(dataRequestManager.getTimeline());
-
 	}
 
 	public void backToLoginButtonClicked() {

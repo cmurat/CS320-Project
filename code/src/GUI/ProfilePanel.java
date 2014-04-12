@@ -3,6 +3,7 @@ package GUI;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -57,8 +58,7 @@ public class ProfilePanel extends JPanel implements MainContent {
 	}
 
 	private void addProfilePicture() {
-		//TODO Ugur: abi new JLabel() icindeki getProfilePictureURL in etrafina new ImageIcon cak bir tane
-		JLabel profilePicture = new JLabel(account.getProfilePictureURL());
+		JLabel profilePicture = new JLabel(new ImageIcon(account.getProfilePictureURL()));
 		labelList.add(profilePicture);
 	}
 

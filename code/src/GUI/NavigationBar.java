@@ -10,10 +10,10 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class NavigationBar extends JPanel {
-	
+
 	private MainPanel mainPanel;
 	private ArrayList<JButton> buttonList;
-	
+
 	public NavigationBar(MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
 		buttonList = new ArrayList<JButton>();
@@ -46,18 +46,16 @@ public class NavigationBar extends JPanel {
 	}
 
 	private void calculateBounds() {
-		setBounds(mainPanel.getBounds().x,
-				mainPanel.getBounds().y,
-				mainPanel.getBounds().width,
-				mainPanel.getBounds().height/10);
+		setBounds(mainPanel.getBounds().x, mainPanel.getBounds().y,
+				mainPanel.getBounds().width, mainPanel.getBounds().height / 10);
 	}
-	
+
 	private void addHomeButton() {
 		JButton homeButton = new JButton("^");
 		homeButton.addActionListener(getHomeButtonListener());
 		buttonList.add(homeButton);
 	}
-	
+
 	private ActionListener getHomeButtonListener() {
 		return new ActionListener() {
 			@Override
@@ -66,8 +64,8 @@ public class NavigationBar extends JPanel {
 			}
 		};
 	}
-	
-	private void addNotificationsButton(){
+
+	private void addNotificationsButton() {
 		JButton notificationsButton = new JButton("#");
 		notificationsButton.addActionListener(getNotificationsButtonListener());
 		buttonList.add(notificationsButton);
@@ -81,7 +79,7 @@ public class NavigationBar extends JPanel {
 			}
 		};
 	}
-	
+
 	private void addMeButton() {
 		JButton meButton = new JButton("Me");
 		meButton.addActionListener(getMeButtonListener());
@@ -97,7 +95,7 @@ public class NavigationBar extends JPanel {
 			}
 		};
 	}
-	
+
 	private void addSearchButton() {
 		JButton searchButton = new JButton("?");
 		searchButton.addActionListener(getSearchButtonListener());
@@ -112,7 +110,7 @@ public class NavigationBar extends JPanel {
 			}
 		};
 	}
-	
+
 	private void addDMessageButton() {
 		JButton dMessageButton = new JButton("DM");
 		dMessageButton.addActionListener(getDMessageButtonListener());
@@ -127,7 +125,7 @@ public class NavigationBar extends JPanel {
 			}
 		};
 	}
-	
+
 	private void addSettingsButton() {
 		JButton settingsButton = new JButton("S");
 		settingsButton.addActionListener(getSettingsButtonListener());
