@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import DataRequester.Account;
 
+@SuppressWarnings("serial")
 public class ProfileView extends JPanel implements MainContent {
 	
 	private MainPanel mainPanel;
@@ -77,19 +78,19 @@ public class ProfileView extends JPanel implements MainContent {
 	}
 	
 	private void addTweetNumberLabel(){
-		JLabel tweetNumber = new JLabel("" + account.getTweetNumber());
-		labelList.add(tweetNumber);
+		//JLabel tweetNumber = new JLabel("" + account.getTweetNumber());
+		//labelList.add(tweetNumber);
 	}
 	
 	// will create method to get numbers
 	private void addFollowingNumberLabel(){
-		JLabel followingNumber = new JLabel("" + account.getTweetNumber());
-		labelList.add(followingNumber);
+		//JLabel followingNumber = new JLabel("" + account.getTweetNumber());
+		//labelList.add(followingNumber);
 	}
 	
 	private void addFollowerNumberLabel(){
-		JLabel followerNumber = new JLabel("" + account.getTweetNumber());
-		labelList.add(followerNumber);
+		//JLabel followerNumber = new JLabel("" + account.getTweetNumber());
+		//labelList.add(followerNumber);
 	}
 	 
 	
