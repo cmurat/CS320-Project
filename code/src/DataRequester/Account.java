@@ -6,11 +6,13 @@ public class Account {
 	private ImageIcon profilePicture;
 	private String userName;
 	private long userId;
+	private int tweetNumber;
 
-	public Account(String userName, long userId, ImageIcon profileImage) {
+	public Account(String userName, long userId, ImageIcon profileImage, int tweetNumber) {
 		this.profilePicture = profileImage;
 		this.userName = userName;
 		this.userId = userId;
+		this.tweetNumber = tweetNumber;
 	}
 
 	public ImageIcon getProfilePicture() {
@@ -21,8 +23,12 @@ public class Account {
 		return userName;
 	}
 
-	public long getUserId() {
+	public long getUserID() {
 		return userId;
+	}
+	
+	public int getTweetNumber(){
+		return tweetNumber;
 	}
 
 	public String toString() {
