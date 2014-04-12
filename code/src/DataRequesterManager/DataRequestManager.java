@@ -28,8 +28,8 @@ public class DataRequestManager {
 		//this.navigationHandler = new NavigationHandler(twitter);
 		this.authenticationRequests=new AuthenticationRequests(new AccountHandler(twitter),guiManager,this);
 		this.directMessagesRequests=new DirectMessageRequests(new DMessageHandler(twitter));
-		this.tweetStreamRequests=new TweetStreamRequests(this,new NavigationHandler(twitter) );
-		 
+		this.tweetStreamRequests=new TweetStreamRequests(new NavigationHandler(twitter),this);
+		this.tweetRequests=new TweetRequests(new TweetHandler(twitter),this);
 		//TODO continue with constructor 
 		
 	}
