@@ -1,7 +1,5 @@
 package DataRequesterManager;
 
-import javax.naming.directory.InvalidAttributesException;
-
 import twitter4j.TwitterException;
 import DataRequester.TweetHandler;
 

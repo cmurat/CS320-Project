@@ -1,8 +1,6 @@
 package DataRequester;
 
 import java.io.File;
-import java.io.InputStreamReader;
-import java.util.Scanner;
 
 import javax.naming.directory.InvalidAttributesException;
 

@@ -1,15 +1,10 @@
 package GUIManager;
 
 import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 import twitter4j.TwitterException;
-import DataRequester.Account;
-import DataRequester.AccountHandler;
-import DataRequester.DetailedAccount;
-import DataRequesterManager.*;
+import DataRequesterManager.DataRequestManager;
 import GUI.GUI;
 
 public class GUIManager {

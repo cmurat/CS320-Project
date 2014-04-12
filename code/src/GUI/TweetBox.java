@@ -1,44 +1,41 @@
 package GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.TextField;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class TweetBox extends JPanel{
-	
+@SuppressWarnings("serial")
+public class TweetBox extends JPanel {
+
 	private MainPanel mainPanel;
 	private JTextArea tweetField;
-	
+
 	public TweetBox(MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
 		setLayout(new BorderLayout());
 		calculateBounds();
 		addTweetField();
 	}
-	
+
 	private void calculateBounds() {
 		int width = mainPanel.getBounds().width;
-		int height = mainPanel.getBounds().height/10;
+		int height = mainPanel.getBounds().height / 10;
 		int xPos = mainPanel.getBounds().x;
 		int yPos = mainPanel.getBounds().height - height;
 		setBounds(xPos, yPos, width, height);
 	}
-	
-	private void addTweetField() {		
+
+	private void addTweetField() {
 		tweetField = new JTextArea();
 		tweetField.setColumns(140);
 		tweetField.setLineWrap(true);
 		tweetField.setWrapStyleWord(false);
+		tweetField.setOpaque(false);
 		tweetField.setText("Write a tweet, Press Enter..");
 		tweetField.addFocusListener(getFocusAdapter());
 		tweetField.addKeyListener(getEnterKeyAdapter());
@@ -57,7 +54,6 @@ public class TweetBox extends JPanel{
 
 	private KeyAdapter getEnterKeyAdapter() {
 		return new KeyAdapter() {
-			@SuppressWarnings("deprecation")
 			@Override
 			public void keyReleased(KeyEvent event) {
 				if (event.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -72,5 +68,5 @@ public class TweetBox extends JPanel{
 	public String getTweet() {
 		return tweetField.getText();
 	}
-	
+
 }

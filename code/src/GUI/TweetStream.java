@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import DataRequester.Tweet;
 
+@SuppressWarnings("serial")
 public class TweetStream extends JPanel implements MainContent {
 	
 	private MainPanel mainPanel;

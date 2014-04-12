@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import DataRequester.Account;
 import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
 
