@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import javax.swing.JPanel;
 
 import DataRequester.Account;
 
-public class ProfileView implements MainContent {
+public class ProfileView extends JPanel implements MainContent {
 	
 	private MainPanel mainPanel;
 	private ArrayList<JLabel> labelList;
@@ -23,9 +24,29 @@ public class ProfileView implements MainContent {
 		this.mainPanel = mainPanel;
 		this.account = account;
 		labelList = new ArrayList<JLabel>();
+		this.setLayout(new GridLayout(3, 3));
+		addLabels();
+		printLabels();
+		
+	}
+
+	private void printLabels() {
+		
+	}
+
+	private void addLabels() {
+		addProfilePicture();
+		addProfileName();
+		addUserID();
+		addTweetsLabel();
+		addFollowingsLabel();
+		addFollowersLabel();
+		addTweetNumberLabel();
+		addFollowingNumberLabel();
+		addFollowerNumberLabel();
 	}
 	
-	private void addProfilePicture() throws IOException{
+	private void addProfilePicture(){
 		JLabel profilePicture = new JLabel(account.getProfilePicture());
 		labelList.add(profilePicture);
 	}
@@ -33,6 +54,11 @@ public class ProfileView implements MainContent {
 	private void addProfileName(){
 		JLabel profileName = new JLabel(account.getUserName());
 		labelList.add(profileName);
+	}
+	
+	private void addUserID(){
+		JLabel userID = new JLabel(""+account.getUserID());
+		labelList.add(userID);
 	}
 	
 	private void addTweetsLabel(){
@@ -55,16 +81,17 @@ public class ProfileView implements MainContent {
 		labelList.add(tweetNumber);
 	}
 	
-	/*private void addFollowingNumberLabel(){
+	// will create method to get numbers
+	private void addFollowingNumberLabel(){
 		JLabel followingNumber = new JLabel("" + account.getTweetNumber());
 		labelList.add(followingNumber);
 	}
 	
-	private void addTFollowerNumberLabel(){
+	private void addFollowerNumberLabel(){
 		JLabel followerNumber = new JLabel("" + account.getTweetNumber());
 		labelList.add(followerNumber);
 	}
-	*/ // will create method to get numbers
+	 
 	
 	
 	
