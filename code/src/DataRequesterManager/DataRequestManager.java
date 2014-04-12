@@ -16,19 +16,19 @@ public class DataRequestManager {
 	public GUIManager guiManager;
 	public TweetHandler tweetHandler;
 	public AuthenticationRequests authenticationRequester;
-	public DirectMessageRequester directMessagesRequester;
+	public DirectMessageRequests directMessagesRequester;
 	public ProfileRequests profileRequests;
 	public SearchRequests searchRequests;
 	public TweetRequests tweetRequests;
 	public UserRequests userRequests;
-	public TweetStreamRequester tweetStreamRequester;
+	public TweetStreamRequests tweetStreamRequester;
 	
 	public DataRequestManager(GUIManager guiManager2) {
 		Twitter twitter = TwitterFactory.getSingleton();
 		//this.navigationHandler = new NavigationHandler(twitter);
 		this.authenticationRequester=new AuthenticationRequests(new AccountHandler(twitter),guiManager,this);
-		this.directMessagesRequester=new DirectMessageRequester(new DMessageHandler(twitter));
-		this.tweetStreamRequester=new TweetStreamRequester(this,new NavigationHandler(twitter) );
+		this.directMessagesRequester=new DirectMessageRequests(new DMessageHandler(twitter));
+		this.tweetStreamRequester=new TweetStreamRequests(this,new NavigationHandler(twitter) );
 		 
 		//TODO continue with constructor 
 		

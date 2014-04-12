@@ -8,11 +8,11 @@ import DataRequester.NavigationHandler;
 import DataRequester.Tweet;
 import DataRequester.TweetHandler;
 
-public class TweetStreamRequester {
+public class TweetStreamRequests {
 	DataRequestManager dataRequestManager;
 	NavigationHandler navigationHandler;
 	
-	public TweetStreamRequester(DataRequestManager dataRequestManager, NavigationHandler navigationHandler) {
+	public TweetStreamRequests(DataRequestManager dataRequestManager, NavigationHandler navigationHandler) {
 		this.dataRequestManager=dataRequestManager;
 		this.navigationHandler=navigationHandler;
 	}

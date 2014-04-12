@@ -2,10 +2,10 @@ package DataRequesterManager;
 
 import DataRequester.DMessageHandler;
 
-public class DirectMessageRequester {
+public class DirectMessageRequests {
 	DMessageHandler dMessageHandler;
 
-	public DirectMessageRequester(DMessageHandler dMessageHandler) {
+	public DirectMessageRequests(DMessageHandler dMessageHandler) {
 		this.dMessageHandler=dMessageHandler;
 	}
 
