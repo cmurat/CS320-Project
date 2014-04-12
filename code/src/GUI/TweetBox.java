@@ -5,16 +5,13 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
 public class TweetBox extends JPanel {
-
+	private final int MAX_CHAR_LIMIT = 140;
 	private MainPanel mainPanel;
 	private JTextArea tweetField;
 
@@ -35,29 +32,19 @@ public class TweetBox extends JPanel {
 
 	private void addTweetField() {
 		tweetField = new JTextArea();
-		tweetField.setColumns(140);
+		tweetField.setColumns(MAX_CHAR_LIMIT);
 		tweetField.setLineWrap(true);
 		tweetField.setWrapStyleWord(false);
 		tweetField.setOpaque(false);
 		tweetField.setText("Write a tweet, Press Enter..");
+
 		tweetField.addFocusListener(getFocusAdapter());
 		tweetField.addKeyListener(getEnterKeyAdapter());
-
-
-		tweetField.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (tweetField.getText().length() >= 140) {
-					tweetField.setText(tweetField.getText().substring(0, 140));
-				}
-			}
-		});
-		
+		tweetField.addKeyListener(checkMaxCharLimit());
 
 		add(tweetField);
 	}
 
-	
 	private FocusAdapter getFocusAdapter() {
 		return new FocusAdapter() {
 			@Override
@@ -76,6 +63,16 @@ public class TweetBox extends JPanel {
 					mainPanel.tweetEntered();
 					tweetField.setText("Write a tweet, Press Enter..");
 					tweetField.transferFocusUpCycle();
+				}
+			}
+		};
+	}
+
+	private KeyAdapter checkMaxCharLimit() {
+		return new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (tweetField.getText().length() >= MAX_CHAR_LIMIT) {
+					tweetField.setText(tweetField.getText().substring(0, MAX_CHAR_LIMIT));
 				}
 			}
 		};
