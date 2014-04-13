@@ -140,7 +140,7 @@ public class LoginPanel extends JPanel {
 	private void addOkButtonTo(JPanel buttonPanel) {
 		JButton okButton = getIconButton("icon/ok.png", getWidth() / 5,
 				getOkButtonListener());
-		buttonPanel.add(okButton, BorderLayout.WEST);
+		buttonPanel.add(okButton, BorderLayout.EAST);
 	}
 
 	private ActionListener getOkButtonListener() {
@@ -155,7 +155,7 @@ public class LoginPanel extends JPanel {
 	private void addBackButtonTo(JPanel buttonPanel) {
 		JButton backButton = getIconButton("icon/back.png", getWidth() / 5,
 				getBackButtonListener());
-		buttonPanel.add(backButton, BorderLayout.EAST);
+		buttonPanel.add(backButton, BorderLayout.WEST);
 	}
 
 	private ActionListener getBackButtonListener() {

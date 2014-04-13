@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import twitter4j.DirectMessage;
+import twitter4j.ResponseList;
 import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
 
@@ -50,6 +52,14 @@ public class MainPanel extends JPanel {
 		mainContent = new ProfilePanel(this, account);
 		ProfilePanel profilePanel = (ProfilePanel) mainContent;
 		profilePanel.printProfilePanel();
+	}
+	
+	public ResponseList<DirectMessage> getDirectMessages(){
+		return gui.getDirectMessages();
+	}
+	
+	public void revalidateGUI() {
+		gui.revalidate();
 	}
 
 }

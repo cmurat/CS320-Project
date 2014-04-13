@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.GridLayout;
+import java.awt.MediaTracker;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -23,6 +24,7 @@ public class ProfilePanel extends JPanel implements MainContent {
 		this.tweetStream = new TweetStream(mainPanel);
 		labelList = new ArrayList<JLabel>();
 
+		mainPanel.add(this);
 		calculateBounds();
 		setLayout(new GridLayout(0, 3));
 		addLabels();
@@ -104,6 +106,7 @@ public class ProfilePanel extends JPanel implements MainContent {
 
 	public void printProfilePanel() {
 		System.out.println("\nAssume profile panel is painted.");
+		mainPanel.revalidateGUI();
 	}
 
 }

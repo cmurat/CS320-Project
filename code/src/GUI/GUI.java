@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import twitter4j.DirectMessage;
+import twitter4j.ResponseList;
 import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
 import GUIManager.GUIManager;
@@ -116,6 +118,10 @@ public class GUI extends JFrame {
 
 	public void printProfile(DetailedAccount account) {
 		mainPanel.printProfile(account);
+	}
+	
+	public ResponseList<DirectMessage> getDirectMessages(){
+		return guiManager.getDirectMessages();
 	}
 
 }

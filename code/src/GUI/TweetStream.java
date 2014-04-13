@@ -18,6 +18,7 @@ public class TweetStream extends JPanel implements MainContent {
 	public TweetStream(MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
 		tweets = new ArrayList<Tweet>();
+		mainPanel.add(this);
 		calculateBounds();
 		setLayout(new FlowLayout());
 	}
@@ -33,6 +34,8 @@ public class TweetStream extends JPanel implements MainContent {
 	public void printTweetStream(ArrayList<Tweet> tweets) {
 		addTweets(tweets);
 		printTweets();
+		System.out.println("\nAssume TweetStream is painted.");
+		mainPanel.revalidateGUI();
 	}
 
 	private void addTweets(ArrayList<Tweet> tweets) {
