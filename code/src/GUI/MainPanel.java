@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -12,12 +13,13 @@ import DataRequester.Tweet;
 
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel {
-	
+
 	private GUI gui;
 	private NavigationBar navigationBar;
 	private TweetBox tweetBox;
 	private MainContent mainContent;
-	
+	private TweetStream tweetStream;
+
 	public MainPanel(GUI gui) {
 		this.gui = gui;
 		setBounds(gui.getBounds());
@@ -28,12 +30,15 @@ public class MainPanel extends JPanel {
 		tweetBox = new TweetBox(this);
 		add(tweetBox, BorderLayout.SOUTH);
 	}
-	
+
 	public void printTimeline(ArrayList<Tweet> tweets) {
-//		System.out.println("\nSay it is printed..");
-		mainContent = new TweetStream(this);
-//		TweetStream tweetStream = (TweetStream) mainContent;
-//		tweetStream.addTweets(tweets);
+		System.out.println("\nSay timeline is printed..");
+		tweetStream = new TweetStream(this);
+		add(tweetStream.printTweetStream(tweets));
+	}
+
+	public void addComponent(Component component) {
+		add(component);
 	}
 
 	public void tweetEntered() {
@@ -53,13 +58,17 @@ public class MainPanel extends JPanel {
 		ProfilePanel profilePanel = (ProfilePanel) mainContent;
 		profilePanel.printProfilePanel();
 	}
-	
-	public ResponseList<DirectMessage> getDirectMessages(){
+
+	public ResponseList<DirectMessage> getDirectMessages() {
 		return gui.getDirectMessages();
 	}
-	
+
 	public void revalidateGUI() {
 		gui.revalidate();
+	}
+
+	public void pack() {
+		gui.pack();
 	}
 
 }

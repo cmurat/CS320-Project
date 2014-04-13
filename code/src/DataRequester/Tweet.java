@@ -1,5 +1,6 @@
 package DataRequester;
 
+import java.net.URL;
 import java.util.Date;
 
 import twitter4j.Status;
@@ -14,8 +15,9 @@ public class Tweet {
 		this.user = status.getUser();
 	}
 
-	public String getUserImage() {
-		return user.getProfileImageURL();
+	public URL getUserImage() {
+		return user.getProfileImageUrlHttps();
+				//getProfileImageURL();
 	}
 
 	public String getContent() {
