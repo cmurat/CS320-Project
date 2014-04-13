@@ -63,7 +63,6 @@ public class GUIManager {
 	public void printLoginPanel() {
 		gui.printLoginPanel();
 	}
-	
 
 	public void postTweet() {//renamed from tweetEntered to postTweet
 		String tweet = gui.getTweet();
@@ -93,7 +92,6 @@ public class GUIManager {
 			tweetListenerHandler.delete(tweetID);	
 	}
 
-
 	public void meButtonClicked() {
 		gui.printProfile(dataRequestManager.getCurrentUserAccount());
 	}
@@ -101,4 +99,12 @@ public class GUIManager {
 	public ResponseList<DirectMessage> getDirectMessages() {
 		return dataRequestManager.getDirectMessages();
 	}
+	
+	public void sendMessageClicked(){
+		long userId;//TODO long userId, String message needed to derived from gui Burak and Ugur
+		String message;
+		
+	}
+	
+	
 }
