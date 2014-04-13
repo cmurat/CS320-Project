@@ -2,7 +2,6 @@ package GUI;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -11,7 +10,6 @@ import javax.swing.JPanel;
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
 import twitter4j.User;
-import DataRequester.DetailedAccount;
 
 @SuppressWarnings("serial")
 public class DMessageView extends JPanel implements MainContent {

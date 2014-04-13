@@ -1,11 +1,8 @@
 package GUI;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.MediaTracker;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import DataRequester.DetailedAccount;
-import DataRequester.Tweet;
 
 @SuppressWarnings("serial")
 public class ProfilePanel extends JPanel implements MainContent {
@@ -67,7 +63,6 @@ public class ProfilePanel extends JPanel implements MainContent {
 	private void createLabels() {
 		createProfilePictureLabel();
 		createProfileNameLabel();
-		//createUserIDLabel();
 		createTweetsLabel();
 		createFollowingsLabel();
 		createFollowersLabel();
@@ -100,16 +95,6 @@ public class ProfilePanel extends JPanel implements MainContent {
 		cons.gridy = 0;
 		gridBagLayout.setConstraints(profileName, cons);
 		add(profileName);
-	}
-
-	private void createUserIDLabel() {
-		JLabel userID = new JLabel("" + account.getUserID());
-		cons.fill = GridBagConstraints.HORIZONTAL;
-		cons.weightx = 1.0;
-		cons.gridx = 2;
-		cons.gridy = 0;
-		gridBagLayout.setConstraints(userID, cons);
-		add(userID);
 	}
 
 	private void createTweetsLabel() {

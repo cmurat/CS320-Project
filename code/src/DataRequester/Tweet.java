@@ -15,9 +15,9 @@ public class Tweet {
 		this.user = status.getUser();
 	}
 
+	@SuppressWarnings("deprecation")
 	public URL getUserImage() {
 		return user.getProfileImageUrlHttps();
-				//getProfileImageURL();
 	}
 
 	public String getContent() {
