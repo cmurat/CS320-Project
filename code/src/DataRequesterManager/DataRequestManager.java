@@ -21,12 +21,9 @@ public class DataRequestManager {
 	public GUIManager guiManager;
 
 	// DataRequesterManager classes
-	public AuthenticationRequests authenticationRequests;
+	public AccountRequests accountRequests;
 	public DirectMessageRequests directMessagesRequests;
-	public ProfileRequests profileRequests;
-	public SearchRequests searchRequests;
 	public TweetRequests tweetRequests;
-	public UserRequests userRequests;
 	public TweetStreamRequests tweetStreamRequests;
 
 	// Model Classes
@@ -50,36 +47,38 @@ public class DataRequestManager {
 	}
 
 	private void initDataRequesterManagerClasses() {
-		this.authenticationRequests = new AuthenticationRequests(accountHandler, guiManager, this);
+		this.accountRequests = new AccountRequests(accountHandler, guiManager, this);
 		this.directMessagesRequests = new DirectMessageRequests(dMessageHandler);
 		this.tweetStreamRequests = new TweetStreamRequests(navigationHandler, this);
 		this.tweetRequests = new TweetRequests(tweetHandler, this);
 	}
 
+	public String createRequestTokenURL() {
+		return accountRequests.createRequestTokenURL();
+	}
+
 	public boolean checkPIN(String pin) throws IOException {
-		return authenticationRequests.checkPIN(pin);
+		return accountRequests.checkPIN(pin);
+	}
+
+	public boolean isAuthExists() {
+		return accountRequests.isAuthExists();
+	}
+
+	public DetailedAccount getDetailedAccount(long userId) {
+		return accountRequests.getDetailedAccount(userId);
+	}
+
+	public DetailedAccount getCurrentUserAccount() {
+		return accountRequests.getCurrentUserDetailedAccount();
 	}
 
 	public ArrayList<Tweet> getTimeline() throws TwitterException {
 		return tweetStreamRequests.getTimeline();
 	}
 
-	public boolean isAuthExists() {
-		return authenticationRequests.isAuthExists();
-	}
 
-	public String createRequestTokenURL() {
-		return authenticationRequests.createRequestTokenURL();
-	}
 
-	public DetailedAccount getDetailedAccount(long userId) {
-		return accountHandler.getDetailedAccount(userId);
-	}
-	
-	public DetailedAccount getCurrentUserAccount() {
-		return accountHandler.getCurrentUserDetailedAccount();
-	}
-	
 	public ResponseList<DirectMessage> getDirectMessages(){
 		return dMessageHandler.getDirectMessages();
 	}
