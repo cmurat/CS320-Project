@@ -8,14 +8,10 @@ import GUIManager.GUIManager;
 public class AccountRequests {
 
 	AccountHandler accountHandler;
-	GUIManager guiManager;
-	DataRequestManager dataRequestManager;
-
-	public AccountRequests(AccountHandler accountHandler, GUIManager guiManager,DataRequestManager dataReqManager ){
+	
+	public AccountRequests(AccountHandler accountHandler ){
 		this.accountHandler=accountHandler;
-		this.guiManager=guiManager;
-		this.dataRequestManager=dataReqManager;
-	}
+		}
 
 
 	public boolean checkPIN(String pin) throws IOException {		

@@ -22,7 +22,6 @@ public class DataRequestManager {
 
 	// DataRequesterManager classes
 	public AccountRequests accountRequests;
-	public DirectMessageRequests directMessagesRequests;
 	public TweetRequests tweetRequests;
 	public TweetStreamRequests tweetStreamRequests;
 
@@ -47,9 +46,8 @@ public class DataRequestManager {
 	}
 
 	private void initDataRequesterManagerClasses() {
-		this.accountRequests = new AccountRequests(accountHandler, guiManager, this);
-		this.directMessagesRequests = new DirectMessageRequests(dMessageHandler);
-		this.tweetStreamRequests = new TweetStreamRequests(navigationHandler, this);
+		this.accountRequests = new AccountRequests(accountHandler);
+		this.tweetStreamRequests = new TweetStreamRequests(navigationHandler);
 		this.tweetRequests = new TweetRequests(tweetHandler, this);
 	}
 

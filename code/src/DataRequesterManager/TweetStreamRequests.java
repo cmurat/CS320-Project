@@ -10,8 +10,7 @@ public class TweetStreamRequests {
 	DataRequestManager dataRequestManager;
 	NavigationHandler navigationHandler;
 	
-	public TweetStreamRequests(NavigationHandler navigationHandler, DataRequestManager dataRequestManager) {
-		this.dataRequestManager=dataRequestManager;
+	public TweetStreamRequests(NavigationHandler navigationHandler) {
 		this.navigationHandler=navigationHandler;
 	}
 	

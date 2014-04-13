@@ -7,7 +7,6 @@ import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
 import twitter4j.TwitterException;
 import DataRequesterManager.DataRequestManager;
-import DataRequesterManager.DirectMessageRequests;
 import GUI.GUI;
 
 public class GUIManager {
