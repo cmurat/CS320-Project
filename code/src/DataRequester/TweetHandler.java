@@ -34,7 +34,7 @@ public class TweetHandler {
 		return true;
 	}
 
-	public void deleteTweet(long tweetID) throws TwitterException {
+	public void delete(long tweetID) throws TwitterException {
 		twitter.destroyStatus(tweetID);
 	}
 

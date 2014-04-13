@@ -55,7 +55,7 @@ public class TweetRequests {
 
 	public void deleteTweet(long tweetID){
 		try {
-			tweetHandler.deleteTweet(tweetID);
+			tweetHandler.delete(tweetID);
 		} catch (TwitterException e) {
 			System.out.println("Exception at deleting tweet");
 			e.printStackTrace();

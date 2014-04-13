@@ -105,7 +105,7 @@ public class GUI extends JFrame {
 	}
 
 	public void tweetEntered() {
-		guiManager.tweetEntered();
+		guiManager.postTweet();
 	}
 
 	public String getTweet() {
