@@ -101,9 +101,27 @@ public class GUIManager {
 	}
 	
 	public void sendMessageClicked(){
-		long userId;//TODO long userId, String message needed to derived from gui Burak and Ugur
-		String message;
-		
+		long userId = 0;//TODO long userId, String message needed to derived from gui Burak and Ugur
+		String message = null;
+		dataRequestManager.sendMessage(userId, message);
+		}
+	
+	public void followClicked(){
+		long userToFollowId = 0;//TODO userToFollowID needed
+		try {
+			dataRequestManager.navigationHandler.follow(userToFollowId);
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void unFollowClicked(){
+		long userToUnFollowId = 0;//TODO userToUnFollowID needed
+		try {
+			dataRequestManager.navigationHandler.unFollow(userToUnFollowId);
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

@@ -77,8 +77,13 @@ public class DataRequestManager {
 		return tweetStreamRequests.getTimeline();
 	}
 
-
-
+	public void sendMessage(long userId, String message){
+		try {
+			dMessageHandler.sendDirectMessage(userId, message);
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+	}
 	public ResponseList<DirectMessage> getDirectMessages(){
 		return dMessageHandler.getDirectMessages();
 	}
