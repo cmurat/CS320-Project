@@ -1,12 +1,15 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,61 +20,62 @@ import DataRequester.DetailedAccount;
 public class ProfilePanel extends JPanel implements MainContent {
 
 	private MainPanel mainPanel;
-	private ArrayList<JLabel> labelList;
 	private DetailedAccount account;
 	private TweetStream tweetStream;
-	private GridBagLayout gridBagLayout = new GridBagLayout();
-	private GridBagConstraints cons = new GridBagConstraints();
 
 	public ProfilePanel(MainPanel mainPanel, DetailedAccount account) {
 		this.mainPanel = mainPanel;
 		this.account = account;
 		this.tweetStream = new TweetStream(mainPanel);
-		labelList = new ArrayList<JLabel>();
 		calculateBounds();
-		setLayout(gridBagLayout);
-		createLabels();
-		printLabels();
-		printTweetStream();
+		setLayout(new BorderLayout());
+		JPanel userInfoPanel = new JPanel();
+		userInfoPanel.setLayout(new BorderLayout());
+		JPanel tweetStreamPanel = new JPanel();
+		tweetStreamPanel.setLayout(new GridLayout(1,1));
+		addTweetStreamTo(tweetStreamPanel);
+		addUserInfoTo(userInfoPanel);
+
+		add(userInfoPanel, BorderLayout.NORTH);
+		add(tweetStreamPanel, BorderLayout.CENTER);
 	}
 
-	private void printTweetStream() {
+	private void addUserInfoTo(JPanel userInfoPanel) {
+		JPanel picturePanel = new JPanel();
+		picturePanel
+				.setLayout(new BoxLayout(picturePanel, BoxLayout.Y_AXIS));
+		createProfilePictureLabel(picturePanel);
+		createProfileNameLabel(picturePanel);
+		userInfoPanel.add(picturePanel, BorderLayout.NORTH);
+
+		JPanel infoPanel = new JPanel();
+		infoPanel.setLayout(new GridLayout(2,3));
+		createLabels(infoPanel);
+		userInfoPanel.add(infoPanel, BorderLayout.CENTER);
+
+	}
+
+	private void addTweetStreamTo(JPanel tweetStreamPanel) {
 		Component stream = tweetStream.printTweetStream(account.getTweets());
-		cons.fill = GridBagConstraints.HORIZONTAL;
-		cons.ipady = mainPanel.getBounds().width;
-		cons.weightx = 0.0;
-		cons.gridx = 0;
-		cons.gridy = 3;
-		cons.gridwidth = 3;
-		gridBagLayout.setConstraints(stream, cons);
-		add(stream);
+		tweetStreamPanel.add(stream);
 	}
 
 	private void calculateBounds() {
-		setBounds(mainPanel.getBounds().x, 
-				mainPanel.getBounds().y,
-				mainPanel.getBounds().width, 
-				mainPanel.getBounds().height);
+		setBounds(mainPanel.getBounds().x, mainPanel.getBounds().y,
+				mainPanel.getBounds().width, mainPanel.getBounds().height);
 	}
 
-	private void printLabels() {
-		for (JLabel label : labelList) {
-			add(label);
-		}
+	private void createLabels(JPanel userInfoPanel) {
+
+		createFollowingsLabel(userInfoPanel);
+		createFollowersLabel(userInfoPanel);
+		createTweetsLabel(userInfoPanel);
+		createFollowingsAmountLabel(userInfoPanel);
+		createFollowersAmountLabel(userInfoPanel);
+		createTweetsAmountLabel(userInfoPanel);
 	}
 
-	private void createLabels() {
-		createProfilePictureLabel();
-		createProfileNameLabel();
-		createTweetsLabel();
-		createFollowingsLabel();
-		createFollowersLabel();
-		createTweetsAmountLabel();
-		createFollowingsAmountLabel();
-		createFollowersAmountLabel();
-	}
-
-	private void createProfilePictureLabel() {
+	private void createProfilePictureLabel(JPanel picturePanel) {
 		URL imageURL = null;
 		try {
 			imageURL = new URL(account.getProfilePictureURL());
@@ -79,88 +83,57 @@ public class ProfilePanel extends JPanel implements MainContent {
 			System.err.println("couldn't locate image");
 		}
 		JLabel profilePicture = new JLabel(new ImageIcon(imageURL));
-		cons.fill = GridBagConstraints.HORIZONTAL;
-		cons.weightx = 1.0;
-		cons.gridx = 0;
-		cons.gridy = 0;
-		gridBagLayout.setConstraints(profilePicture, cons);
-		add(profilePicture);
+		profilePicture.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		picturePanel.add(profilePicture);
 	}
 
-	private void createProfileNameLabel() {
+	private void createProfileNameLabel(JPanel picturePanel) {
 		JLabel profileName = new JLabel(account.getUserName());
-		cons.fill = GridBagConstraints.HORIZONTAL;
-		cons.weightx = 1.0;
-		cons.gridx = 1;
-		cons.gridy = 0;
-		gridBagLayout.setConstraints(profileName, cons);
-		add(profileName);
+		profileName.setHorizontalAlignment(JLabel.CENTER);
+		profileName.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		picturePanel.add(profileName);
 	}
 
-	private void createTweetsLabel() {
+	private void createTweetsLabel(JPanel userInfoPanel) {
 		JLabel tweets = new JLabel("Tweets");
-		cons.fill = GridBagConstraints.HORIZONTAL;
-		cons.gridx = 0;
-		cons.gridy = 1;
-		gridBagLayout.setConstraints(tweets, cons);
-		add(tweets);
+		tweets.setHorizontalAlignment(JLabel.CENTER);
+		userInfoPanel.add(tweets);
 	}
 
-	private void createFollowingsLabel() {
+	private void createFollowingsLabel(JPanel userInfoPanel) {
 		JLabel followings = new JLabel("Followings");
-		cons.fill = GridBagConstraints.HORIZONTAL;
-		cons.weightx = 1.0;
-		cons.gridx = 1;
-		cons.gridy = 1;
-		gridBagLayout.setConstraints(followings, cons);
-		add(followings);
+		followings.setHorizontalAlignment(JLabel.CENTER);
+		userInfoPanel.add(followings);
 	}
 
-	private void createFollowersLabel() {
+	private void createFollowersLabel(JPanel userInfoPanel) {
 		JLabel followers = new JLabel("Followers");
-		cons.fill = GridBagConstraints.HORIZONTAL;
-		cons.weightx = 1.0;
-		cons.gridx = 2;
-		cons.gridy = 1;
-		gridBagLayout.setConstraints(followers, cons);
-		labelList.add(followers);
+		followers.setHorizontalAlignment(JLabel.CENTER);
+		userInfoPanel.add(followers);
 	}
 
-	private void createTweetsAmountLabel() {
+	private void createTweetsAmountLabel(JPanel userInfoPanel) {
 		JLabel tweetNumber = new JLabel("" + account.getTweets().size());
-		cons.fill = GridBagConstraints.HORIZONTAL;
-		cons.weightx = 1.0;
-		cons.gridx = 0;
-		cons.gridy = 2;
-		gridBagLayout.setConstraints(tweetNumber, cons);
-		add(tweetNumber);
+		tweetNumber.setHorizontalAlignment(JLabel.CENTER);
+		userInfoPanel.add(tweetNumber);
 	}
 
-	private void createFollowingsAmountLabel() {
+	private void createFollowingsAmountLabel(JPanel userInfoPanel) {
 		JLabel followingNumber = new JLabel("" + account.getFollowingsAmount());
-		cons.fill = GridBagConstraints.HORIZONTAL;
-		cons.weightx = 1.0;
-		cons.gridx = 1;
-		cons.gridy = 2;
-		gridBagLayout.setConstraints(followingNumber, cons);
-		add(followingNumber);
+		followingNumber.setHorizontalAlignment(JLabel.CENTER);
+		userInfoPanel.add(followingNumber);
 	}
 
-	private void createFollowersAmountLabel() {
+	private void createFollowersAmountLabel(JPanel userInfoPanel) {
 		JLabel followerNumber = new JLabel("" + account.getFollowersAmount());
-		cons.fill = GridBagConstraints.HORIZONTAL;
-		cons.weightx = 1.0;
-		cons.gridx = 2;
-		cons.gridy = 2;
-		gridBagLayout.setConstraints(followerNumber, cons);
-		add(followerNumber);
+		followerNumber.setHorizontalAlignment(JLabel.CENTER);
+		userInfoPanel.add(followerNumber);
 	}
 
 	public void printProfilePanel() {
 		System.out.println("\nAssume profile panel is painted.");
-		
 		mainPanel.addComponent(this);
-		
+
 	}
 
 }

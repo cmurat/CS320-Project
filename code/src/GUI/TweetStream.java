@@ -23,8 +23,6 @@ public class TweetStream extends JPanel implements MainContent {
 
 	private MainPanel mainPanel;
 	private ArrayList<Tweet> tweets;
-	private GridBagConstraints gbc;
-	private GridBagLayout gridBagLayout;
 
 	public TweetStream(MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
@@ -77,7 +75,6 @@ public class TweetStream extends JPanel implements MainContent {
 
 	private void addUserName(Tweet tweet, JPanel contentPanel) {
 		JLabel userName = new JLabel("" + tweet.getUserName());
-//		userName.setHorizontalAlignment(JLabel.LEFT);
 		contentPanel.add(userName);
 	}
 
@@ -88,7 +85,6 @@ public class TweetStream extends JPanel implements MainContent {
 
 	private void addTweetContent(Tweet tweet, JPanel contentPanel) {
 		JLabel tweetContent = new JLabel(tweet.getContent());
-//		tweetContent.setHorizontalAlignment(JLabel.LEFT);
 		contentPanel.add(tweetContent);
 	}
 
