@@ -134,6 +134,12 @@ public class GUIManager {
 		gui.printProfile(dataRequestManager.getDetailedAccount(userId));
 		
 	}
+
+
+	public void exitButtonClicked() {
+		dataRequestManager.exitAndLogOut();
+		
+	}
 	
 	
 }
