@@ -34,12 +34,12 @@ public class AccountRequests {
 
 
 	public DetailedAccount getDetailedAccount(long userId) {
-		return accountHandler.getHomeAccount();
+		return accountHandler.getDetailedAccount(userId);
 	}
 
 
 	public DetailedAccount getCurrentUserDetailedAccount() {
-		return accountHandler.getCurrentUserDetailedAccount();
+		return accountHandler.getHomeAccount();
 	}
 
 

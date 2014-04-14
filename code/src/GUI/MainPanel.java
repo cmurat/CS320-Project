@@ -69,8 +69,5 @@ public class MainPanel extends JPanel {
 		gui.revalidate();
 	}
 
-	public void pack() {
-		gui.pack();
-	}
 
 }

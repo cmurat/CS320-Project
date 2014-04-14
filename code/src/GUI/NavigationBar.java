@@ -2,10 +2,13 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -20,41 +23,52 @@ public class NavigationBar extends JPanel {
 		buttonList = new ArrayList<JButton>();
 		calculateBounds();
 		setOpaque(true);
-		setLayout(new FlowLayout());
+		setLayout(new GridLayout(1,6));
 		addButtonToButtonList();
 		printbuttonList();
 	}
 
 	private void printbuttonList() {
-		int widthOfButtons = getWidth() / buttonList.size();
-		for (int buttonIndex = 0; buttonIndex < buttonList.size(); ++buttonIndex) {
-			JButton button = buttonList.get(buttonIndex);
-			int xPos = getBounds().x + buttonIndex * widthOfButtons;
-			int yPos = getBounds().y;
-			int width = widthOfButtons;
-			int height = getBounds().height;
-			button.setBounds(xPos, yPos, width, height);
+		for (JButton button : buttonList) {
 			add(button);
 		}
 	}
 
 	private void addButtonToButtonList() {
-		addHomeButton();
-		addNotificationsButton();
-		addMeButton();
-		addSearchButton();
-		addDMessageButton();
-		addSettingsButton();
+		int dimension = getWidth()/8;
+		addHomeButton(dimension);
+		addNotificationsButton(dimension);
+		addMeButton(dimension);
+		addSearchButton(dimension);
+		addDMessageButton(dimension);
+		addSettingsButton(dimension);
+	}
+
+
+	private ImageIcon getImageIcon(String iconPath, int dimension) {
+		Image img = new ImageIcon(iconPath).getImage();
+		img = img.getScaledInstance(dimension, dimension, Image.SCALE_SMOOTH);
+		return new ImageIcon(img);
+	}
+
+	private JButton getIconButton(String iconLocation, int size,
+			ActionListener listener) {
+		JButton button = new JButton();
+		button.setBorderPainted(false);
+		button.setFocusable(false);
+		button.setContentAreaFilled(false);
+		button.setIcon(getImageIcon(iconLocation, size));
+		button.addActionListener(listener);
+		return button;
 	}
 
 	private void calculateBounds() {
-		setBounds(0, 0,
-				gui.getWidth(), gui.getHeight() / 10);
+		setBounds(0, 0, gui.getWidth(), gui.getHeight() / 8);
 	}
 
-	private void addHomeButton() {
-		JButton homeButton = new JButton("^");
-		homeButton.addActionListener(getHomeButtonListener());
+	private void addHomeButton(int dimension) {
+		JButton homeButton = getIconButton("icon/home.png", dimension,
+				getHomeButtonListener());
 		buttonList.add(homeButton);
 	}
 
@@ -67,9 +81,9 @@ public class NavigationBar extends JPanel {
 		};
 	}
 
-	private void addNotificationsButton() {
-		JButton notificationsButton = new JButton("#");
-		notificationsButton.addActionListener(getNotificationsButtonListener());
+	private void addNotificationsButton(int dimension) {
+		JButton notificationsButton = getIconButton("icon/mail2.png", dimension,
+				getNotificationsButtonListener());
 		buttonList.add(notificationsButton);
 	}
 
@@ -82,9 +96,9 @@ public class NavigationBar extends JPanel {
 		};
 	}
 
-	private void addMeButton() {
-		JButton meButton = new JButton("Me");
-		meButton.addActionListener(getMeButtonListener());
+	private void addMeButton(int dimension) {
+		JButton meButton = getIconButton("icon/profile-icon.png", dimension,
+				getMeButtonListener());
 		buttonList.add(meButton);
 	}
 
@@ -98,9 +112,9 @@ public class NavigationBar extends JPanel {
 		};
 	}
 
-	private void addSearchButton() {
-		JButton searchButton = new JButton("?");
-		searchButton.addActionListener(getSearchButtonListener());
+	private void addSearchButton(int dimension) {
+		JButton searchButton = getIconButton("icon/search.png", dimension,
+				getSearchButtonListener());
 		buttonList.add(searchButton);
 	}
 
@@ -113,9 +127,9 @@ public class NavigationBar extends JPanel {
 		};
 	}
 
-	private void addDMessageButton() {
-		JButton dMessageButton = new JButton("DM");
-		dMessageButton.addActionListener(getDMessageButtonListener());
+	private void addDMessageButton(int dimension) {
+		JButton dMessageButton = getIconButton("icon/mail3.png", dimension,
+				getDMessageButtonListener());
 		buttonList.add(dMessageButton);
 	}
 
@@ -128,9 +142,9 @@ public class NavigationBar extends JPanel {
 		};
 	}
 
-	private void addSettingsButton() {
-		JButton settingsButton = new JButton("S");
-		settingsButton.addActionListener(getSettingsButtonListener());
+	private void addSettingsButton(int dimension) {
+		JButton settingsButton = getIconButton("icon/settings.png", dimension,
+				getSettingsButtonListener());
 		buttonList.add(settingsButton);
 	}
 

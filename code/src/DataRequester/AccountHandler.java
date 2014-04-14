@@ -128,10 +128,6 @@ public class AccountHandler {
 		account.setFollowStatus(followStatus);
 	}
 	
-	public DetailedAccount getCurrentUserDetailedAccount() {
-		return getDetailedAccount(accessToken.getUserId());
-	}
-
 	private ArrayList<Tweet> createTweetList(long userId) throws TwitterException {
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 		List<Status> statuses = twitter.getUserTimeline(userId);
