@@ -12,7 +12,7 @@ public class Twitter {
 	public Twitter() throws TwitterException {
 		dataRequestManager = new DataRequestManager(guiManager);
 		guiManager = new GUIManager(dataRequestManager);
-		if (!dataRequestManager.isAuthExists()) {
+		if (dataRequestManager.isAuthExists()) {
 			guiManager.printMainPanel();
 		} else {
 			guiManager.printLoginPanel();
