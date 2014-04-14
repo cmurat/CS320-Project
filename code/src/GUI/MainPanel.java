@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 
@@ -15,18 +16,15 @@ import DataRequester.Tweet;
 public class MainPanel extends JPanel {
 
 	private GUI gui;
-	private NavigationBar navigationBar;
 	private TweetBox tweetBox;
 	private MainContent mainContent;
 	private TweetStream tweetStream;
 
 	public MainPanel(GUI gui) {
 		this.gui = gui;
-		setBounds(gui.getBounds());
+		setBounds(0, gui.getHeight()/10, gui.getWidth(), gui.getHeight());
 		setLayout(new BorderLayout());
-		setOpaque(false);
-		navigationBar = new NavigationBar(this);
-		add(navigationBar, BorderLayout.NORTH);
+		setOpaque(true);
 		tweetBox = new TweetBox(this);
 		add(tweetBox, BorderLayout.SOUTH);
 	}
@@ -54,9 +52,13 @@ public class MainPanel extends JPanel {
 	}
 
 	public void printProfile(DetailedAccount account) {
+		removeAll();
 		mainContent = new ProfilePanel(this, account);
 		ProfilePanel profilePanel = (ProfilePanel) mainContent;
 		profilePanel.printProfilePanel();
+		revalidate();
+		repaint();
+		
 	}
 
 	public ResponseList<DirectMessage> getDirectMessages() {

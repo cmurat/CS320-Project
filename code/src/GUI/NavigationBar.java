@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,13 +12,14 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class NavigationBar extends JPanel {
 
-	private MainPanel mainPanel;
+	private GUI gui;
 	private ArrayList<JButton> buttonList;
 
-	public NavigationBar(MainPanel mainPanel) {
-		this.mainPanel = mainPanel;
+	public NavigationBar(GUI gui) {
+		this.gui = gui;
 		buttonList = new ArrayList<JButton>();
 		calculateBounds();
+		setOpaque(true);
 		setLayout(new FlowLayout());
 		addButtonToButtonList();
 		printbuttonList();
@@ -46,8 +48,8 @@ public class NavigationBar extends JPanel {
 	}
 
 	private void calculateBounds() {
-		setBounds(mainPanel.getBounds().x, mainPanel.getBounds().y,
-				mainPanel.getBounds().width, mainPanel.getBounds().height / 10);
+		setBounds(0, 0,
+				gui.getWidth(), gui.getHeight() / 10);
 	}
 
 	private void addHomeButton() {
@@ -91,7 +93,7 @@ public class NavigationBar extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("\nMe button is clicked!");
-				mainPanel.meButtonClicked();
+				gui.meButtonClicked();
 			}
 		};
 	}

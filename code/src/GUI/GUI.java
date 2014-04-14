@@ -21,11 +21,13 @@ public class GUI extends JFrame {
 	private GUIManager guiManager;
 	private MainPanel mainPanel;
 	private LoginPanel loginPanel;
+	private NavigationBar navigationBar;
 
 	public GUI(GUIManager guiManager) {
 		this.guiManager = guiManager;
 		mainPanel = null;
 		loginPanel = null;
+		navigationBar = null;
 		initFrame();
 	}
 
@@ -91,13 +93,18 @@ public class GUI extends JFrame {
 
 	public void printMainPanel(ArrayList<Tweet> tweets) {
 		getContentPane().removeAll();
-		setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
+		if (navigationBar == null)
+			navigationBar = new NavigationBar(this);
 		if (mainPanel == null)
 			mainPanel = new MainPanel(this);
-		add(mainPanel, BorderLayout.CENTER);
+		
+		
+		getContentPane().add(navigationBar, BorderLayout.NORTH);
+		getContentPane().add(mainPanel, BorderLayout.CENTER);
+		printTimeline(tweets);
 		getContentPane().repaint();
 		getContentPane().validate();
-		printTimeline(tweets);
 	}
 
 	public void printTimeline(ArrayList<Tweet> tweets) {
@@ -118,9 +125,10 @@ public class GUI extends JFrame {
 
 	public void printProfile(DetailedAccount account) {
 		mainPanel.printProfile(account);
+
 	}
-	
-	public ResponseList<DirectMessage> getDirectMessages(){
+
+	public ResponseList<DirectMessage> getDirectMessages() {
 		return guiManager.getDirectMessages();
 	}
 

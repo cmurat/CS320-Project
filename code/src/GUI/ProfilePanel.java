@@ -158,10 +158,9 @@ public class ProfilePanel extends JPanel implements MainContent {
 
 	public void printProfilePanel() {
 		System.out.println("\nAssume profile panel is painted.");
+		
 		mainPanel.addComponent(this);
 		
-		//mainPanel.pack();
-		mainPanel.revalidateGUI();
 	}
 
 }
