@@ -1,6 +1,7 @@
 package DataRequesterManager;
 
 import java.io.IOException;
+
 import DataRequester.AccountHandler;
 import DataRequester.DetailedAccount;
 import GUIManager.GUIManager;

@@ -128,6 +128,12 @@ public class GUIManager {
 			e.printStackTrace();
 		}
 	}
+
+
+	public void userNameClicked(long userId) {
+		gui.printProfile(dataRequestManager.getDetailedAccount(userId));
+		
+	}
 	
 	
 }

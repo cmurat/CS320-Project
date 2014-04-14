@@ -3,13 +3,20 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -74,7 +81,13 @@ public class TweetStream extends JPanel implements MainContent {
 	}
 
 	private void addUserName(Tweet tweet, JPanel contentPanel) {
-		JLabel userName = new JLabel("" + tweet.getUserName());
+		JButton userName = new JButton("" + tweet.getUserName());
+		userName.setBorderPainted(false);
+		userName.setFocusable(false);
+		userName.setContentAreaFilled(false);
+		userName.setHorizontalAlignment(JButton.LEFT);
+		userName.addActionListener(userNameListener(tweet.getUserId(),userName));
+		userName.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		contentPanel.add(userName);
 	}
 
@@ -87,5 +100,19 @@ public class TweetStream extends JPanel implements MainContent {
 		JLabel tweetContent = new JLabel(tweet.getContent());
 		contentPanel.add(tweetContent);
 	}
+	private ActionListener userNameListener(final long userId, final JButton userName){
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("\n User Name is clicked!");
+				System.out.println(userId);
+				userName.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				mainPanel.userNameClicked(userId);
+				userName.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+		};
+		
+	}
+		
 
 }

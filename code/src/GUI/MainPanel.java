@@ -79,6 +79,9 @@ public class MainPanel extends JPanel {
 	public void revalidateGUI() {
 		gui.revalidate();
 	}
+	public void userNameClicked(long userId){
+		gui.userNameClicked(userId);
+	}
 
 
 }

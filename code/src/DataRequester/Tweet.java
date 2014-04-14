@@ -33,7 +33,7 @@ public class Tweet {
 	}
 
 	public long getUserId() {
-		return status.getId();
+		return status.getUser().getId();
 	}
 
 	public long getTweetId() {

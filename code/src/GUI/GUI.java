@@ -147,4 +147,9 @@ public class GUI extends JFrame {
 		
 	}
 
+	public void userNameClicked(long userId) {
+		guiManager.userNameClicked(userId);
+		
+	}
+
 }
