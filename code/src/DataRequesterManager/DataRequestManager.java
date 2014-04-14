@@ -85,4 +85,8 @@ public class DataRequestManager {
 	public ResponseList<DirectMessage> getDirectMessages(){
 		return dMessageHandler.getDirectMessages();
 	}
+
+	public ArrayList<Tweet> getMentions() throws TwitterException {
+		return navigationHandler.getMentions();
+	}
 }

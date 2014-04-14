@@ -39,7 +39,11 @@ public class MainPanel extends JPanel {
 	public void addComponent(Component component) {
 		add(component);
 	}
-
+	public void printMentions(ArrayList<Tweet> tweets) {
+		System.out.println("\nSay mentions is printed..");
+		tweetStream = new TweetStream(this);
+		add(tweetStream.printTweetStream(tweets));
+	}
 	public void tweetEntered() {
 		gui.tweetEntered();
 	}

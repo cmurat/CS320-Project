@@ -94,6 +94,12 @@ public class GUIManager {
 	public void meButtonClicked() {
 		gui.printProfile(dataRequestManager.getCurrentUserAccount());
 	}
+	public void homeButtonClicked() throws TwitterException {
+		gui.printTimeline(dataRequestManager.getTimeline());
+	}
+	public void mentionButtonClicked() throws TwitterException {
+		gui.printTimeline(dataRequestManager.getMentions());
+	}
 
 	public ResponseList<DirectMessage> getDirectMessages() {
 		return dataRequestManager.getDirectMessages();

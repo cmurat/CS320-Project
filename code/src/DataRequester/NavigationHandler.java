@@ -17,8 +17,14 @@ public class NavigationHandler {
 		this.twitter = twitter;
 	}
 
-	public ArrayList<Tweet> getTimeline() throws TwitterException {
-		List<Status> statuses = twitter.getHomeTimeline();
+	public ArrayList<Tweet> getTimeline()  {
+		List<Status> statuses = null;
+		try {
+			statuses = twitter.getHomeTimeline();
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Tweet> tweets = getTweets(statuses);
 		return tweets;
 	}

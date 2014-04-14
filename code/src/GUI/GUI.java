@@ -114,6 +114,9 @@ public class GUI extends JFrame {
 	public void tweetEntered() {
 		guiManager.postTweet();
 	}
+	public void printMentions(ArrayList<Tweet> tweets) {
+		mainPanel.printMentions(tweets);
+	}
 
 	public String getTweet() {
 		return mainPanel.getTweet();
