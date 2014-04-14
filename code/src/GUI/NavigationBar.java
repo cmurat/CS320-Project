@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -81,7 +82,10 @@ public class NavigationBar extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					System.out.println("\n Home Button button is clicked!");
+					setCursor(new Cursor(Cursor.WAIT_CURSOR));
 					gui.homeButtonClicked();
+					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+					
 				} catch (TwitterException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -101,7 +105,10 @@ public class NavigationBar extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					setCursor(new Cursor(Cursor.WAIT_CURSOR));
 					gui.mentionsButtonClicked();
+					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+					
 				} catch (TwitterException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -122,7 +129,9 @@ public class NavigationBar extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("\nMe button is clicked!");
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
 				gui.meButtonClicked();
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			}
 		};
 	}

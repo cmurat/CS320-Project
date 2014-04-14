@@ -31,18 +31,24 @@ public class MainPanel extends JPanel {
 	}
 
 	public void printTimeline(ArrayList<Tweet> tweets) {
+		removeAll();
 		System.out.println("\nSay timeline is printed..");
 		tweetStream = new TweetStream(this);
 		add(tweetStream.printTweetStream(tweets));
+		revalidate();
+		repaint();
 	}
 
 	public void addComponent(Component component) {
 		add(component);
 	}
 	public void printMentions(ArrayList<Tweet> tweets) {
+		removeAll();
 		System.out.println("\nSay mentions is printed..");
 		tweetStream = new TweetStream(this);
 		add(tweetStream.printTweetStream(tweets));
+		revalidate();
+		repaint();
 	}
 	public void tweetEntered() {
 		gui.tweetEntered();
