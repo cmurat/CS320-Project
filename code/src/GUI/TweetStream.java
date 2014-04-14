@@ -4,24 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.GridBagConstraints;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import DataRequester.Tweet;
 
@@ -61,6 +57,7 @@ public class TweetStream extends JPanel implements MainContent {
 			JPanel imagePanel = new JPanel();
 			imagePanel.setBackground(Color.WHITE);
 			imagePanel.setOpaque(true);
+			imagePanel.setLayout(new GridBagLayout());
 			JPanel contentPanel = new JPanel();
 			contentPanel.setBackground(Color.WHITE);
 			contentPanel.setOpaque(true);
@@ -69,6 +66,7 @@ public class TweetStream extends JPanel implements MainContent {
 			addUserImage(tweet, imagePanel);
 			addUserName(tweet, contentPanel);
 			addTweetContent(tweet, contentPanel);
+			tweetPanel.setBorder(new LineBorder(Color.black));
 			tweetPanel.add(imagePanel,BorderLayout.WEST);
 			tweetPanel.add(contentPanel,BorderLayout.CENTER);
 			add(tweetPanel);
@@ -77,6 +75,7 @@ public class TweetStream extends JPanel implements MainContent {
 
 	private void addUserImage(Tweet tweet, JPanel imagePanel) {
 		JLabel userImage = new JLabel(new ImageIcon(tweet.getUserImage()));
+		userImage.setBorder(new LineBorder(Color.black));
 		imagePanel.add(userImage);
 	}
 
@@ -92,14 +91,20 @@ public class TweetStream extends JPanel implements MainContent {
 	}
 
 	private void addDate(Tweet tweet, JPanel tweetPanel) {
+		
 		JLabel date = new JLabel("" + tweet.getDate());
 		tweetPanel.add(date);
 	}
 
 	private void addTweetContent(Tweet tweet, JPanel contentPanel) {
-		JLabel tweetContent = new JLabel(tweet.getContent());
+		JTextArea tweetContent = new JTextArea(tweet.getContent());
+		tweetContent.setEditable(false);
+		tweetContent.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,12));
+		tweetContent.setLineWrap(true);
+		tweetContent.setOpaque(false);
 		contentPanel.add(tweetContent);
 	}
+
 	private ActionListener userNameListener(final long userId, final JButton userName){
 		return new ActionListener() {
 			@Override
