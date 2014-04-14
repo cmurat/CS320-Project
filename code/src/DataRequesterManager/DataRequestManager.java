@@ -89,4 +89,10 @@ public class DataRequestManager {
 	public ArrayList<Tweet> getMentions(){
 		return navigationHandler.getMentions();
 	}
+
+	public void exitAndLogOut() {
+		accountHandler.logout();
+		
+		
+	}
 }
