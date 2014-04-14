@@ -12,6 +12,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import twitter4j.TwitterException;
+
 @SuppressWarnings("serial")
 public class NavigationBar extends JPanel {
 
@@ -77,7 +79,13 @@ public class NavigationBar extends JPanel {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("\nHome button is clicked!");
+				try {
+					System.out.println("\n Home Button button is clicked!");
+					gui.homeButtonClicked();
+				} catch (TwitterException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		};
 	}
@@ -92,6 +100,12 @@ public class NavigationBar extends JPanel {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					gui.mentionsButtonClicked();
+				} catch (TwitterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				System.out.println("\nNotifications button is clicked!");
 			}
 		};

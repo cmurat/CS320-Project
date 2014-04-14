@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
+import twitter4j.TwitterException;
 import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
 import GUIManager.GUIManager;
@@ -111,6 +112,7 @@ public class GUI extends JFrame {
 		mainPanel.printTimeline(tweets);
 	}
 
+
 	public void tweetEntered() {
 		guiManager.postTweet();
 	}
@@ -133,6 +135,16 @@ public class GUI extends JFrame {
 
 	public ResponseList<DirectMessage> getDirectMessages() {
 		return guiManager.getDirectMessages();
+	}
+
+	public void homeButtonClicked() throws TwitterException {
+		guiManager.homeButtonClicked();
+		
+	}
+
+	public void mentionsButtonClicked() throws TwitterException {
+		guiManager.mentionButtonClicked();
+		
 	}
 
 }
