@@ -83,6 +83,20 @@ public class AccountHandler {
 		}
 
 	}
+	public DetailedAccount getHomeAccount(){
+		User user = null; 
+		ArrayList<Tweet> tweets = null;
+		
+		try {
+			user = twitter.showUser(twitter.getId());
+			tweets = createTweetList(user.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		DetailedAccount account = new DetailedAccount(user, tweets);
+		return account;
+	}
 
 	public DetailedAccount getDetailedAccount(long userId){
 		User user = null; 
