@@ -46,7 +46,7 @@ public class GUI extends JFrame {
 	private void calculateBounds() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) (screenSize.getWidth() / 4);
-		int height = (int) screenSize.getHeight() - getTaskBarHeight();
+		int height = (int) screenSize.getHeight() - getTaskBarHeight()-20;
 		int yPos = 0;
 		int xPos = (int) (screenSize.getWidth() - width);
 		setBounds(xPos, yPos, width, height);
@@ -149,6 +149,11 @@ public class GUI extends JFrame {
 
 	public void userNameClicked(long userId) {
 		guiManager.userNameClicked(userId);
+		
+	}
+
+	public void exitButtonClicked() {
+		guiManager.exitButtonClicked();
 		
 	}
 
