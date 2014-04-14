@@ -24,6 +24,7 @@ public class NavigationBar extends JPanel {
 		calculateBounds();
 		setOpaque(true);
 		setLayout(new GridLayout(1,6));
+		setBackground(Color.WHITE);
 		addButtonToButtonList();
 		printbuttonList();
 	}

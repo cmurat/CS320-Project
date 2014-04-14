@@ -25,6 +25,7 @@ public class MainPanel extends JPanel {
 		setBounds(0, gui.getHeight()/10, gui.getWidth(), gui.getHeight());
 		setLayout(new BorderLayout());
 		setOpaque(true);
+		setBackground(Color.WHITE);
 		tweetBox = new TweetBox(this);
 		add(tweetBox, BorderLayout.SOUTH);
 	}

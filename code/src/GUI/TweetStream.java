@@ -1,5 +1,7 @@
 package GUI;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
 
 import DataRequester.Tweet;
 
@@ -27,6 +30,8 @@ public class TweetStream extends JPanel implements MainContent {
 		this.mainPanel = mainPanel;
 		tweets = new ArrayList<Tweet>();
 		setLayout(new GridLayout(0, 1));
+		
+		setBackground(Color.white);
 	}
 
 	public Component printTweetStream(ArrayList<Tweet> tweets) {
@@ -34,6 +39,8 @@ public class TweetStream extends JPanel implements MainContent {
 		printTweets();
 		System.out.println("\nAssume TweetStream is painted.");
 		JScrollPane thePane = new JScrollPane(this);
+		thePane.setOpaque(true);
+		thePane.getVerticalScrollBar().setUnitIncrement(16);
 		thePane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		thePane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		return thePane;
@@ -45,68 +52,44 @@ public class TweetStream extends JPanel implements MainContent {
 
 	private void printTweets() {
 		for (Tweet tweet : tweets) {
-			gridBagLayout = new GridBagLayout();
-			gbc = new GridBagConstraints();
-			
 			JPanel tweetPanel = new JPanel();
-			tweetPanel.setLayout(gridBagLayout);
-			addUserImage(tweet, tweetPanel);
-			addUserName(tweet, tweetPanel);
-			addDate(tweet, tweetPanel);
-			addTweetContent(tweet, tweetPanel);
-			
+			JPanel imagePanel = new JPanel();
+			imagePanel.setBackground(Color.WHITE);
+			imagePanel.setOpaque(true);
+			JPanel contentPanel = new JPanel();
+			contentPanel.setBackground(Color.WHITE);
+			contentPanel.setOpaque(true);
+			contentPanel.setLayout(new GridLayout(2,1));
+			tweetPanel.setLayout(new BorderLayout());
+			addUserImage(tweet, imagePanel);
+			addUserName(tweet, contentPanel);
+			addTweetContent(tweet, contentPanel);
+			tweetPanel.add(imagePanel,BorderLayout.WEST);
+			tweetPanel.add(contentPanel,BorderLayout.CENTER);
 			add(tweetPanel);
 		}
 	}
 
-	private void addUserImage(Tweet tweet, JPanel tweetPanel) {
+	private void addUserImage(Tweet tweet, JPanel imagePanel) {
 		JLabel userImage = new JLabel(new ImageIcon(tweet.getUserImage()));
-		gbc.weightx = 1.0;
-		gbc.gridx = 0;
-		gbc.gridheight = 2;
-		gbc.gridy = 0;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.anchor = GridBagConstraints.EAST;
-		gbc.insets = new Insets(5, 5, 5, 2);
-		gridBagLayout.setConstraints(userImage, gbc);
-		tweetPanel.add(userImage);
+		imagePanel.add(userImage);
 	}
 
-	private void addUserName(Tweet tweet, JPanel tweetPanel) {
+	private void addUserName(Tweet tweet, JPanel contentPanel) {
 		JLabel userName = new JLabel("" + tweet.getUserName());
-		gbc.weightx = 1.0;
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-		gbc.insets = new Insets(5, 2, 0, 2);
-		gridBagLayout.setConstraints(userName, gbc);
-		tweetPanel.add(userName);
+//		userName.setHorizontalAlignment(JLabel.LEFT);
+		contentPanel.add(userName);
 	}
 
 	private void addDate(Tweet tweet, JPanel tweetPanel) {
 		JLabel date = new JLabel("" + tweet.getDate());
-		gbc.weightx = 1.0;
-		gbc.gridx = 2;
-		gbc.gridy = 0;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-		gbc.insets = new Insets(5, 2, 0, 5);
-		gridBagLayout.setConstraints(date, gbc);
 		tweetPanel.add(date);
 	}
 
-	private void addTweetContent(Tweet tweet, JPanel tweetPanel) {
+	private void addTweetContent(Tweet tweet, JPanel contentPanel) {
 		JLabel tweetContent = new JLabel(tweet.getContent());
-		gbc.weightx = 1.0;
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		gbc.gridwidth = 2;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.anchor = GridBagConstraints.LINE_START;
-		gbc.insets = new Insets(0, 2, 5, 5);
-		gridBagLayout.setConstraints(tweetContent, gbc);
-		tweetPanel.add(tweetContent);
+//		tweetContent.setHorizontalAlignment(JLabel.LEFT);
+		contentPanel.add(tweetContent);
 	}
 
 }
