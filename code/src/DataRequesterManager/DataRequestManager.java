@@ -71,7 +71,7 @@ public class DataRequestManager {
 		return accountRequests.getCurrentUserDetailedAccount();
 	}
 
-	public ArrayList<Tweet> getTimeline() throws TwitterException {
+	public ArrayList<Tweet> getTimeline(){
 		return tweetStreamRequests.getTimeline();
 	}
 
@@ -86,7 +86,7 @@ public class DataRequestManager {
 		return dMessageHandler.getDirectMessages();
 	}
 
-	public ArrayList<Tweet> getMentions() throws TwitterException {
+	public ArrayList<Tweet> getMentions(){
 		return navigationHandler.getMentions();
 	}
 }

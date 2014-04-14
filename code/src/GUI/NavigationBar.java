@@ -80,16 +80,10 @@ public class NavigationBar extends JPanel {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					System.out.println("\n Home Button button is clicked!");
-					setCursor(new Cursor(Cursor.WAIT_CURSOR));
-					gui.homeButtonClicked();
-					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-					
-				} catch (TwitterException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				System.out.println("\n Home Button button is clicked!");
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				gui.homeButtonClicked();
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			}
 		};
 	}
@@ -104,15 +98,9 @@ public class NavigationBar extends JPanel {
 		return new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					setCursor(new Cursor(Cursor.WAIT_CURSOR));
-					gui.mentionsButtonClicked();
-					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-					
-				} catch (TwitterException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				gui.mentionsButtonClicked();
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				System.out.println("\nNotifications button is clicked!");
 			}
 		};

@@ -94,10 +94,10 @@ public class GUIManager {
 	public void meButtonClicked() {
 		gui.printProfile(dataRequestManager.getCurrentUserAccount());
 	}
-	public void homeButtonClicked() throws TwitterException {
+	public void homeButtonClicked() {
 		gui.printTimeline(dataRequestManager.getTimeline());
 	}
-	public void mentionButtonClicked() throws TwitterException {
+	public void mentionButtonClicked(){
 		gui.printTimeline(dataRequestManager.getMentions());
 	}
 

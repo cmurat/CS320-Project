@@ -137,12 +137,12 @@ public class GUI extends JFrame {
 		return guiManager.getDirectMessages();
 	}
 
-	public void homeButtonClicked() throws TwitterException {
+	public void homeButtonClicked() {
 		guiManager.homeButtonClicked();
 		
 	}
 
-	public void mentionsButtonClicked() throws TwitterException {
+	public void mentionsButtonClicked() {
 		guiManager.mentionButtonClicked();
 		
 	}

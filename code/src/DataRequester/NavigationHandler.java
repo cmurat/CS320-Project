@@ -29,9 +29,15 @@ public class NavigationHandler {
 		return tweets;
 	}
 
-	public ArrayList<Tweet> getMentions() throws TwitterException {
+	public ArrayList<Tweet> getMentions(){
 		@SuppressWarnings("deprecation")
-		List<Status> statuses = twitter.getMentions();
+		List<Status> statuses =null;
+		try {
+			statuses = twitter.getMentions();
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Tweet> mentions = getTweets(statuses);
 		return mentions;
 	}

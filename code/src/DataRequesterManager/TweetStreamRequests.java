@@ -14,7 +14,7 @@ public class TweetStreamRequests {
 		this.navigationHandler=navigationHandler;
 	}
 	
-	public ArrayList<Tweet> getTimeline() throws TwitterException{
+	public ArrayList<Tweet> getTimeline(){
 		return navigationHandler.getTimeline();	
 	};
 
