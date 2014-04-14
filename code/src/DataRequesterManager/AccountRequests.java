@@ -34,7 +34,7 @@ public class AccountRequests {
 
 
 	public DetailedAccount getDetailedAccount(long userId) {
-		return accountHandler.getDetailedAccount(userId);
+		return accountHandler.getHomeAccount();
 	}
 
 
