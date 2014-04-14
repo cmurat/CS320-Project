@@ -108,20 +108,10 @@ public class NavigationBar extends JPanel {
 
 	private void addSettingsButton(int dimension) {
 		JButton settingsButton = getIconButton("icon/settings.png", dimension);
-		settingsButton.addActionListener(new SettingsButtonListener(settingsButton));
+		settingsButton.addActionListener(new SettingsButtonListener(settingsButton,gui));
 		settingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(settingsButton);
 	}
 
-	private ActionListener getSettingsButtonListener(final JButton settingsButton) {
-		return new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				settingsButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				System.out.println("\nSettings button is clicked!");
-				gui.exitButtonClicked();
-				settingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));	
-			}
-		};
-	}
+
 }
