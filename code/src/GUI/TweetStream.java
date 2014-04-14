@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import DataRequester.Tweet;
 
@@ -75,7 +77,7 @@ public class TweetStream extends JPanel implements MainContent {
 
 	private void addUserImage(Tweet tweet, JPanel imagePanel) {
 		JLabel userImage = new JLabel(new ImageIcon(tweet.getUserImage()));
-		userImage.setBorder(new LineBorder(Color.black));
+		userImage.setBorder(new LineBorder(Color.black,1,true));
 		imagePanel.add(userImage);
 	}
 
