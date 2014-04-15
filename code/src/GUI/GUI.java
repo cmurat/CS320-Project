@@ -46,7 +46,7 @@ public class GUI extends JFrame {
 	private void calculateBounds() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) (screenSize.getWidth() / 4);
-		int height = (int) screenSize.getHeight() - getTaskBarHeight()-20;
+		int height = (int) screenSize.getHeight() - getTaskBarHeight();
 		int yPos = 0;
 		int xPos = (int) (screenSize.getWidth() - width);
 		setBounds(xPos, yPos, width, height);
@@ -99,8 +99,7 @@ public class GUI extends JFrame {
 			navigationBar = new NavigationBar(this);
 		if (mainPanel == null)
 			mainPanel = new MainPanel(this);
-		
-		
+
 		getContentPane().add(navigationBar, BorderLayout.NORTH);
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 		printTimeline(tweets);
@@ -112,12 +111,16 @@ public class GUI extends JFrame {
 		mainPanel.printTimeline(tweets);
 	}
 
-
 	public void tweetEntered() {
 		guiManager.postTweet();
 	}
+
 	public void printMentions(ArrayList<Tweet> tweets) {
 		mainPanel.printMentions(tweets);
+	}
+
+	public void printDMessages() {
+		mainPanel.printDMessages();
 	}
 
 	public String getTweet() {
@@ -139,22 +142,21 @@ public class GUI extends JFrame {
 
 	public void homeButtonClicked() {
 		guiManager.homeButtonClicked();
-		
+
 	}
 
 	public void mentionsButtonClicked() {
 		guiManager.mentionButtonClicked();
-		
+
 	}
 
 	public void userNameClicked(long userId) {
 		guiManager.userNameClicked(userId);
-		
+
 	}
 
-	public void exitButtonClicked() {
-		guiManager.exitButtonClicked();
-		
+	public void dMessageButtonClicked() {
+		guiManager.dMessageButtonClicked();
 	}
 
 }

@@ -10,7 +10,9 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;import GUI.listeners.DMessageListener;
+import javax.swing.JPanel;
+
+import GUI.listeners.DMessageListener;
 import GUI.listeners.HomeButtonListener;
 import GUI.listeners.MeButtonListener;
 import GUI.listeners.NotificationsButtonListener;
@@ -101,17 +103,15 @@ public class NavigationBar extends JPanel {
 
 	private void addDMessageButton(int dimension) {
 		JButton dMessageButton = getIconButton("icon/mail3.png", dimension);
-		dMessageButton.addActionListener(new DMessageListener(dMessageButton));
+		dMessageButton.addActionListener(new DMessageListener(dMessageButton, gui));
 		dMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(dMessageButton);
 	}
 
 	private void addSettingsButton(int dimension) {
 		JButton settingsButton = getIconButton("icon/settings.png", dimension);
-		settingsButton.addActionListener(new SettingsButtonListener(settingsButton,gui));
+		settingsButton.addActionListener(new SettingsButtonListener(settingsButton, gui));
 		settingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(settingsButton);
 	}
-
-
 }

@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import DataRequester.DetailedAccount;
 
 @SuppressWarnings("serial")
-public class ProfilePanel extends JPanel implements MainContent {
+public class ProfilePanel extends JPanel {
 
 	private MainPanel mainPanel;
 	private DetailedAccount account;
@@ -26,27 +26,31 @@ public class ProfilePanel extends JPanel implements MainContent {
 		this.tweetStream = new TweetStream(mainPanel);
 		calculateBounds();
 		setLayout(new BorderLayout());
+
 		JPanel userInfoPanel = new JPanel();
 		userInfoPanel.setLayout(new BorderLayout());
-		JPanel tweetStreamPanel = new JPanel();
-		tweetStreamPanel.setLayout(new GridLayout(1,1));
-		addTweetStreamTo(tweetStreamPanel);
-		addUserInfoTo(userInfoPanel);
 
+		JPanel tweetStreamPanel = new JPanel();
+		tweetStreamPanel.setLayout(new GridLayout(1, 1));
+		
+		
 		add(userInfoPanel, BorderLayout.NORTH);
 		add(tweetStreamPanel, BorderLayout.CENTER);
+		
+		addTweetStreamTo(tweetStreamPanel);
+		addUserInfoTo(userInfoPanel);
+		
 	}
-
+	
 	private void addUserInfoTo(JPanel userInfoPanel) {
 		JPanel picturePanel = new JPanel();
-		picturePanel
-				.setLayout(new BoxLayout(picturePanel, BoxLayout.Y_AXIS));
+		picturePanel.setLayout(new BoxLayout(picturePanel, BoxLayout.Y_AXIS));
 		createProfilePictureLabel(picturePanel);
 		createProfileNameLabel(picturePanel);
 		userInfoPanel.add(picturePanel, BorderLayout.NORTH);
 
 		JPanel infoPanel = new JPanel();
-		infoPanel.setLayout(new GridLayout(2,3));
+		infoPanel.setLayout(new GridLayout(2, 3));
 		createLabels(infoPanel);
 		userInfoPanel.add(infoPanel, BorderLayout.CENTER);
 

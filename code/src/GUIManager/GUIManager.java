@@ -20,15 +20,14 @@ public class GUIManager {
 		this.dataRequestManager = dataRequestManager;
 		this.loginURL = dataRequestManager.createRequestTokenURL();
 		this.gui = new GUI(this);
-		this.tweetListenerHandler=new TweetListenerHandler(this,dataRequestManager);
+		this.tweetListenerHandler = new TweetListenerHandler(this,
+				dataRequestManager);
 	}
-
 
 	public void loginButtonClicked() {
 		openWebPage();
 		gui.printPINInputPanel();
 	}
-	
 
 	private void openWebPage() {
 		try {
@@ -37,7 +36,7 @@ public class GUIManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void pinEntered() {
 		try {
 			if (dataRequestManager.checkPIN(gui.getPIN())) {
@@ -50,7 +49,6 @@ public class GUIManager {
 		}
 	}
 
-	
 	public void printMainPanel() throws TwitterException {
 		gui.printMainPanel(dataRequestManager.getTimeline());
 	}
@@ -63,65 +61,72 @@ public class GUIManager {
 		gui.printLoginPanel();
 	}
 
-	public void postTweet() {//renamed from tweetEntered to postTweet
+	public void postTweet() {
 		String tweet = gui.getTweet();
-		String imageLocation = null;//TODO for Burak and Ugur Manager need and imageLocation;
-		tweetListenerHandler.postTweet(tweet,imageLocation);
+		String imageLocation = "";// TODO for Burak and Ugur Manager need and
+									// imageLocation;
+		tweetListenerHandler.postTweet(tweet, imageLocation);
 		System.out.println("\nAssume it is sent: " + tweet);
 	}
-	
 
 	public void favoriteClicked() {
-			long tweetID = 0;//TODO for Burak and Ugur Manager needs long tweetID
-			tweetListenerHandler.favorite(tweetID);
-		}
-	
-	public void unFavoriteClicked(){		
-			long tweetID = 0;//TODO for Burak and Ugur Manager needs long tweetID
-			tweetListenerHandler.unFavorite(tweetID);			
+		long tweetID = 0;// TODO for Burak and Ugur Manager needs long tweetID
+		tweetListenerHandler.favorite(tweetID);
 	}
-	
-	public void retweetClicked(){		
-			long tweetID = 0;//TODO for Burak and Ugur Manager needs long tweetID
-			tweetListenerHandler.retweet(tweetID);			
+
+	public void unFavoriteClicked() {
+		long tweetID = 0;// TODO for Burak and Ugur Manager needs long tweetID
+		tweetListenerHandler.unFavorite(tweetID);
 	}
-	
-	public void deleteClicked(){		
-			long tweetID = 0;//TODO for Burak and Ugur Manager needs long tweetID
-			tweetListenerHandler.delete(tweetID);	
+
+	public void retweetClicked() {
+		long tweetID = 0;// TODO for Burak and Ugur Manager needs long tweetID
+		tweetListenerHandler.retweet(tweetID);
+	}
+
+	public void deleteClicked() {
+		long tweetID = 0;// TODO for Burak and Ugur Manager needs long tweetID
+		tweetListenerHandler.delete(tweetID);
 	}
 
 	public void meButtonClicked() {
 		gui.printProfile(dataRequestManager.getCurrentUserAccount());
 	}
+
 	public void homeButtonClicked() {
 		gui.printTimeline(dataRequestManager.getTimeline());
 	}
-	public void mentionButtonClicked(){
+
+	public void mentionButtonClicked() {
 		gui.printTimeline(dataRequestManager.getMentions());
+	}
+	
+	public void dMessageButtonClicked() {
+		gui.printDMessages();
 	}
 
 	public ResponseList<DirectMessage> getDirectMessages() {
 		return dataRequestManager.getDirectMessages();
 	}
-	
-	public void sendMessageClicked(){
-		long userId = 0;//TODO long userId, String message needed to derived from gui Burak and Ugur
+
+	public void sendMessageClicked() {
+		long userId = 0;// TODO long userId, String message needed to derived
+						// from gui Burak and Ugur
 		String message = null;
 		dataRequestManager.sendMessage(userId, message);
-		}
-	
-	public void followClicked(){
-		long userToFollowId = 0;//TODO userToFollowID needed
+	}
+
+	public void followClicked() {
+		long userToFollowId = 0;// TODO userToFollowID needed
 		try {
 			dataRequestManager.navigationHandler.follow(userToFollowId);
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void unFollowClicked(){
-		long userToUnFollowId = 0;//TODO userToUnFollowID needed
+
+	public void unFollowClicked() {
+		long userToUnFollowId = 0;// TODO userToUnFollowID needed
 		try {
 			dataRequestManager.navigationHandler.unFollow(userToUnFollowId);
 		} catch (TwitterException e) {
@@ -129,17 +134,8 @@ public class GUIManager {
 		}
 	}
 
-
 	public void userNameClicked(long userId) {
 		gui.printProfile(dataRequestManager.getDetailedAccount(userId));
-		
 	}
 
-
-	public void exitButtonClicked() {
-		dataRequestManager.exitAndLogOut();
-		
-	}
-	
-	
 }

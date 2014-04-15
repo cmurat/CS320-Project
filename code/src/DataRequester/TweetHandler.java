@@ -17,12 +17,17 @@ public class TweetHandler {
 		this.twitter = twitter;
 	}
 
-	public void postTweet(String tweet, String imageLocation)
-			throws TwitterException, InvalidAttributesException {
+	public void postTweet(String tweet, String imageLocation) {
 		StatusUpdate status = new StatusUpdate(tweet);
 		if (!imageLocation.equals(""))
 			status.media(new File(imageLocation));
-		twitter.updateStatus(status);
+		
+		try {
+			twitter.updateStatus(status);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public boolean checkTweetValid(String tweet, String imageLocation) {

@@ -12,7 +12,7 @@ import twitter4j.ResponseList;
 import twitter4j.User;
 
 @SuppressWarnings("serial")
-public class DMessageView extends JPanel implements MainContent {
+public class DMessageView extends JPanel {
 	private MainPanel mainPanel;
 	private ResponseList<DirectMessage> directMessages;
 	
@@ -21,8 +21,6 @@ public class DMessageView extends JPanel implements MainContent {
 		directMessages = getDirectMessages();
 		mainPanel.add(this);
 		calculateBounds();
-		
-		//mainPanel.revalidateGUI();
 	}
 	
 	private void calculateBounds() {
@@ -66,7 +64,7 @@ public class DMessageView extends JPanel implements MainContent {
 	}
 	
 	public void printDirectMessageView() {
-		System.out.println("\nAssume DMessage is painted.");
+		printDirectMessages();
 		mainPanel.revalidateGUI();
 	}
 }

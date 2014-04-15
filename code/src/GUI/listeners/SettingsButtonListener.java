@@ -8,21 +8,17 @@ import javax.swing.JButton;
 
 import GUI.GUI;
 
-public class SettingsButtonListener implements ActionListener {
+public class SettingsButtonListener implements ActionListener{
 	private JButton settingsButton;
 	private GUI gui;
-
 	public SettingsButtonListener(JButton settingsButton, GUI gui) {
 		this.settingsButton = settingsButton;
 		this.gui = gui;
 	}
-
+	
 	public void actionPerformed(ActionEvent e) {
-
 		settingsButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		System.out.println("\nSettings button is clicked!");
-		gui.exitButtonClicked();
-		settingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
+		settingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));	
 	}
 }

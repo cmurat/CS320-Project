@@ -3,6 +3,8 @@ package DataRequesterManager;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.naming.directory.InvalidAttributesException;
+
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
 import twitter4j.Twitter;
@@ -71,28 +73,27 @@ public class DataRequestManager {
 		return accountRequests.getCurrentUserDetailedAccount();
 	}
 
-	public ArrayList<Tweet> getTimeline(){
+	public ArrayList<Tweet> getTimeline() {
 		return tweetStreamRequests.getTimeline();
 	}
 
-	public void sendMessage(long userId, String message){
+	public void sendMessage(long userId, String message) {
 		try {
 			dMessageHandler.sendDirectMessage(userId, message);
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
 	}
-	public ResponseList<DirectMessage> getDirectMessages(){
+
+	public ResponseList<DirectMessage> getDirectMessages() {
 		return dMessageHandler.getDirectMessages();
 	}
 
-	public ArrayList<Tweet> getMentions(){
+	public ArrayList<Tweet> getMentions() {
 		return navigationHandler.getMentions();
 	}
 
-	public void exitAndLogOut() {
-		accountHandler.logout();
-		
-		
+	public void postTweet(String tweet, String imageLocation) {
+		tweetHandler.postTweet(tweet, imageLocation);
 	}
 }

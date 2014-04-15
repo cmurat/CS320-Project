@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
@@ -17,8 +18,10 @@ public class MainPanel extends JPanel {
 
 	private GUI gui;
 	private TweetBox tweetBox;
-	private MainContent mainContent;
+	private ProfilePanel profilePanel;
 	private TweetStream tweetStream;
+	private JScrollPane tweetPane;
+	private DMessageView dMessageView;
 
 	public MainPanel(GUI gui) {
 		this.gui = gui;
@@ -35,6 +38,7 @@ public class MainPanel extends JPanel {
 		System.out.println("\nSay timeline is printed..");
 		tweetStream = new TweetStream(this);
 		add(tweetStream.printTweetStream(tweets));
+		add(tweetBox, BorderLayout.SOUTH);
 		revalidate();
 		repaint();
 	}
@@ -46,7 +50,9 @@ public class MainPanel extends JPanel {
 		removeAll();
 		System.out.println("\nSay mentions is printed..");
 		tweetStream = new TweetStream(this);
-		add(tweetStream.printTweetStream(tweets));
+		tweetPane = tweetStream.printTweetStream(tweets);
+		add(tweetBox, BorderLayout.SOUTH);
+		add(tweetPane);
 		revalidate();
 		repaint();
 	}
@@ -64,14 +70,23 @@ public class MainPanel extends JPanel {
 
 	public void printProfile(DetailedAccount account) {
 		removeAll();
-		mainContent = new ProfilePanel(this, account);
-		ProfilePanel profilePanel = (ProfilePanel) mainContent;
+		profilePanel = new ProfilePanel(this, account);
 		profilePanel.printProfilePanel();
+		add(tweetBox, BorderLayout.SOUTH);
 		revalidate();
 		repaint();
 		
 	}
-
+	
+	public void printDMessages() {
+		removeAll();
+		dMessageView = new DMessageView(this);
+		dMessageView.printDirectMessageView();
+		add(tweetBox, BorderLayout.SOUTH);
+		revalidate();
+		repaint();
+	}
+	
 	public ResponseList<DirectMessage> getDirectMessages() {
 		return gui.getDirectMessages();
 	}

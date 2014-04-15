@@ -4,11 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -16,15 +20,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
+import javax.swing.border.Border;
 
 import DataRequester.Tweet;
 
 @SuppressWarnings("serial")
-public class TweetStream extends JPanel implements MainContent {
+public class TweetStream extends JPanel {
 
 	private MainPanel mainPanel;
 	private ArrayList<Tweet> tweets;
@@ -37,16 +39,16 @@ public class TweetStream extends JPanel implements MainContent {
 		setBackground(Color.white);
 	}
 
-	public Component printTweetStream(ArrayList<Tweet> tweets) {
+	public JScrollPane printTweetStream(ArrayList<Tweet> tweets) {
 		addTweets(tweets);
 		printTweets();
 		System.out.println("\nAssume TweetStream is painted.");
-		JScrollPane thePane = new JScrollPane(this);
-		thePane.setOpaque(true);
-		thePane.getVerticalScrollBar().setUnitIncrement(16);
-		thePane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		thePane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		return thePane;
+		JScrollPane tweetPane = new JScrollPane(this);
+		tweetPane.setOpaque(true);
+		tweetPane.getVerticalScrollBar().setUnitIncrement(16);
+		tweetPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		tweetPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		return tweetPane;
 	}
 
 	private void addTweets(ArrayList<Tweet> tweets) {
@@ -59,7 +61,6 @@ public class TweetStream extends JPanel implements MainContent {
 			JPanel imagePanel = new JPanel();
 			imagePanel.setBackground(Color.WHITE);
 			imagePanel.setOpaque(true);
-			imagePanel.setLayout(new GridBagLayout());
 			JPanel contentPanel = new JPanel();
 			contentPanel.setBackground(Color.WHITE);
 			contentPanel.setOpaque(true);
@@ -68,7 +69,6 @@ public class TweetStream extends JPanel implements MainContent {
 			addUserImage(tweet, imagePanel);
 			addUserName(tweet, contentPanel);
 			addTweetContent(tweet, contentPanel);
-			tweetPanel.setBorder(new LineBorder(Color.black));
 			tweetPanel.add(imagePanel,BorderLayout.WEST);
 			tweetPanel.add(contentPanel,BorderLayout.CENTER);
 			add(tweetPanel);
@@ -77,7 +77,6 @@ public class TweetStream extends JPanel implements MainContent {
 
 	private void addUserImage(Tweet tweet, JPanel imagePanel) {
 		JLabel userImage = new JLabel(new ImageIcon(tweet.getUserImage()));
-		userImage.setBorder(new LineBorder(Color.black,1,true));
 		imagePanel.add(userImage);
 	}
 
@@ -93,20 +92,14 @@ public class TweetStream extends JPanel implements MainContent {
 	}
 
 	private void addDate(Tweet tweet, JPanel tweetPanel) {
-		
 		JLabel date = new JLabel("" + tweet.getDate());
 		tweetPanel.add(date);
 	}
 
 	private void addTweetContent(Tweet tweet, JPanel contentPanel) {
-		JTextArea tweetContent = new JTextArea(tweet.getContent());
-		tweetContent.setEditable(false);
-		tweetContent.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,12));
-		tweetContent.setLineWrap(true);
-		tweetContent.setOpaque(false);
+		JLabel tweetContent = new JLabel(tweet.getContent());
 		contentPanel.add(tweetContent);
 	}
-
 	private ActionListener userNameListener(final long userId, final JButton userName){
 		return new ActionListener() {
 			@Override

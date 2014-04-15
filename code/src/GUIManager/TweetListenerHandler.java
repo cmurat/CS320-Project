@@ -14,7 +14,7 @@ public class TweetListenerHandler {
 	}
 
 	public void postTweet(String tweet, String imageLocation) {
-		dataRequestManager.tweetRequests.postTweet(tweet, imageLocation);
+		dataRequestManager.postTweet(tweet, imageLocation);
 		
 	}
 

@@ -18,7 +18,7 @@ public class HomeButtonListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent arg0) {
 		homeButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-		gui.mentionsButtonClicked();
+		gui.homeButtonClicked();
 		homeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		System.out.println("\nNotifications button is clicked!");
 	}
