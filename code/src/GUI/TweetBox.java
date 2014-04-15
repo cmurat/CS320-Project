@@ -24,7 +24,7 @@ public class TweetBox extends JPanel {
 
 	private void calculateBounds() {
 		int width = mainPanel.getBounds().width;
-		int height = mainPanel.getBounds().height / 10;
+		int height = mainPanel.getBounds().height / 8;
 		int xPos = mainPanel.getBounds().x;
 		int yPos = mainPanel.getBounds().height - height;
 		setBounds(xPos, yPos, width, height);

@@ -82,12 +82,17 @@ public class NavigationHandler {
 
 	public ArrayList<Account> getFollowings(long userId) {
 		List<User> users = null;
-		try {
-			users = twitter.getFriendsList(userId, -1);
-		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+			try {
+				users = twitter.getFriendsList(userId, -1);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (TwitterException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 		ArrayList<Account> accounts = getAccounts(users);
 		return accounts;
 	}
