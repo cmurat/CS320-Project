@@ -51,7 +51,7 @@ public class DMessageView extends JPanel {
 			messageContentPanel.add(messageHeaderPanel, -1);
 			messageContentPanel.add(messageContent, -1);
 
-			JPanel messagePanel = new JPanel(new GridLayout(1, 2));
+			JPanel messagePanel = new JPanel(new FlowLayout());
 			messagePanel.add(userImage, -1);
 			messagePanel.add(messageContentPanel, -1);
 
