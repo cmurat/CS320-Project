@@ -162,17 +162,43 @@ public class GUI extends JFrame {
 
 	public void followingClicked(long userId) {
 		guiManager.followingClicked(userId);
-		
+
 	}
 
 	public void printAccounts(ArrayList<Account> followers) {
 		mainPanel.printAccounts(followers);
-		
+
 	}
 
 	public void followersClicked(long userId) {
 		guiManager.followersClicked(userId);
+
+	}
+
+	public void searchEntered() {
+		guiManager.getSearch();
+
+	}
+
+	public String getSearch() {
+		return mainPanel.getSearch();
+
+	}
+
+	public void searchButtonClicked() {
+		guiManager.searchButtonClicked();
+
+	}
+
+	public void printSearchScreen() {
+		mainPanel.printSearchScreen();
+
+	}
+
+	public void printSearchScreenResults(ArrayList<Tweet> searchResults) {
+		mainPanel.printSearchScreenResult(searchResults);
 		
 	}
+
 
 }

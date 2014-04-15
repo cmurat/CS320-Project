@@ -18,6 +18,7 @@ public class SearchButtonListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		searchButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+		gui.searchButtonClicked();
 		System.out.println("Search button is clicked!");
 		searchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}

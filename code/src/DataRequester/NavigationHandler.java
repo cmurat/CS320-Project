@@ -48,10 +48,15 @@ public class NavigationHandler {
 		return favorites;
 	}
 
-	public ArrayList<Tweet> searchTweets(String toBeSearched)
-			throws TwitterException {
+	public ArrayList<Tweet> searchTweets(String toBeSearched) {
 		Query query = new Query(toBeSearched);
-		QueryResult result = twitter.search(query);
+		QueryResult result = null;
+		try {
+			result = twitter.search(query);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Tweet> queryResult = getTweets(result.getTweets());
 		return queryResult;
 	}

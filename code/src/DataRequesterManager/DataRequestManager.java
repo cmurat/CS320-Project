@@ -105,4 +105,8 @@ public class DataRequestManager {
 	public ArrayList<Account> getFollowings(long userId) {
 		return navigationHandler.getFollowings(userId);
 	}
+
+	public ArrayList<Tweet> getSearchResults(String search) {
+		return navigationHandler.searchTweets(search);
+	}
 }

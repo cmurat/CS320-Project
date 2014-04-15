@@ -148,4 +148,14 @@ public class GUIManager {
 		
 	}
 
+	public void getSearch() {
+		String search = gui.getSearch();
+		gui.printSearchScreenResults(dataRequestManager.getSearchResults(search));
+	}
+
+	public void searchButtonClicked() {
+		gui.printSearchScreen();
+		
+	}
+
 }

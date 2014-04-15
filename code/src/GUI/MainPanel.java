@@ -25,6 +25,7 @@ public class MainPanel extends JPanel {
 	private JScrollPane tweetPane;
 	private JScrollPane accountPane;
 	private DMessageView dMessageView;
+	private SearchScreen searchScreen;
 
 	public MainPanel(GUI gui) {
 		this.gui = gui;
@@ -80,6 +81,19 @@ public class MainPanel extends JPanel {
 		repaint();
 		
 	}
+	public void printSearchScreen(){
+		removeAll();
+		searchScreen = new SearchScreen(this);
+		add(searchScreen);
+		revalidate();
+		repaint();
+	}
+	public void printSearchScreenResult(ArrayList<Tweet> searchResults){
+		TweetStream tweetStream = new TweetStream(this);
+		searchScreen.printStream(tweetStream.printTweetStream(searchResults));
+		revalidate();
+		repaint();
+	}
 	
 	public void printDMessages() {
 		removeAll();
@@ -120,6 +134,15 @@ public class MainPanel extends JPanel {
 	public void followersClicked(long userId) {
 		gui.followersClicked(userId);
 		
+	}
+
+	public void searchEntered() {
+		gui.searchEntered();
+		
+	}
+
+	public String getSearch() {
+		return searchScreen.getSearch();
 	}
 
 }
