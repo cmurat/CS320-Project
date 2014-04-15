@@ -104,8 +104,6 @@ public class GUI extends JFrame {
 		getContentPane().add(navigationBar, BorderLayout.NORTH);
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 		printTimeline(tweets);
-		getContentPane().repaint();
-		getContentPane().validate();
 	}
 
 	public void printTimeline(ArrayList<Tweet> tweets) {

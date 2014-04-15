@@ -9,17 +9,16 @@ import GUIManager.GUIManager;
 public class AccountRequests {
 
 	AccountHandler accountHandler;
-	
-	public AccountRequests(AccountHandler accountHandler ){
-		this.accountHandler=accountHandler;
-		}
 
+	public AccountRequests(AccountHandler accountHandler) {
+		this.accountHandler = accountHandler;
+	}
 
-	public boolean checkPIN(String pin) throws IOException {		
+	public boolean checkPIN(String pin) throws IOException {
 		return accountHandler.loginTwitterNewUser(pin);
 	}
 
-	public String createRequestTokenURL(){
+	public String createRequestTokenURL() {
 		return accountHandler.createRequestTokenURL();
 	}
 
@@ -33,15 +32,12 @@ public class AccountRequests {
 		return result;
 	}
 
-
 	public DetailedAccount getDetailedAccount(long userId) {
 		return accountHandler.getDetailedAccount(userId);
 	}
 
-
 	public DetailedAccount getCurrentUserDetailedAccount() {
 		return accountHandler.getHomeAccount();
 	}
-
 
 }

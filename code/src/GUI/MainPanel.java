@@ -29,7 +29,7 @@ public class MainPanel extends JPanel {
 
 	public MainPanel(GUI gui) {
 		this.gui = gui;
-		setBounds(0, gui.getHeight()/10, gui.getWidth(), gui.getHeight());
+		setBounds(0, gui.getHeight() / 10, gui.getWidth(), gui.getHeight());
 		setLayout(new BorderLayout());
 		setOpaque(true);
 		setBackground(Color.WHITE);
@@ -39,10 +39,23 @@ public class MainPanel extends JPanel {
 
 	public void printTimeline(ArrayList<Tweet> tweets) {
 		removeAll();
-		System.out.println("\nSay timeline is printed..");
 		tweetStream = new TweetStream(this);
 		add(tweetStream.printTweetStream(tweets));
+		tweetStream.startRefreshTimer();
 		add(tweetBox, BorderLayout.SOUTH);
+		refresh();
+	}
+	
+	private void stopTimelineTimer() {
+		if (tweetStream != null)
+			tweetStream.stopRefreshTimer();
+	}
+	
+	public void refreshTimeline() {
+		gui.homeButtonClicked();
+	}
+
+	public void refresh() {
 		revalidate();
 		repaint();
 	}
@@ -50,16 +63,17 @@ public class MainPanel extends JPanel {
 	public void addComponent(Component component) {
 		add(component);
 	}
+
 	public void printMentions(ArrayList<Tweet> tweets) {
 		removeAll();
-		System.out.println("\nSay mentions is printed..");
+		stopTimelineTimer();
 		tweetStream = new TweetStream(this);
 		tweetPane = tweetStream.printTweetStream(tweets);
 		add(tweetBox, BorderLayout.SOUTH);
 		add(tweetPane);
-		revalidate();
-		repaint();
+		refresh();
 	}
+
 	public void tweetEntered() {
 		gui.tweetEntered();
 	}
@@ -74,36 +88,36 @@ public class MainPanel extends JPanel {
 
 	public void printProfile(DetailedAccount account) {
 		removeAll();
+		stopTimelineTimer();
 		profilePanel = new ProfilePanel(this, account);
 		profilePanel.printProfilePanel();
 		add(tweetBox, BorderLayout.SOUTH);
-		revalidate();
-		repaint();
-		
+		refresh();
 	}
-	public void printSearchScreen(){
+
+	public void printSearchScreen() {
 		removeAll();
+		stopTimelineTimer();
 		searchScreen = new SearchScreen(this);
 		add(searchScreen);
-		revalidate();
-		repaint();
+		refresh();
 	}
-	public void printSearchScreenResult(ArrayList<Tweet> searchResults){
+
+	public void printSearchScreenResult(ArrayList<Tweet> searchResults) {
 		TweetStream tweetStream = new TweetStream(this);
 		searchScreen.printStream(tweetStream.printTweetStream(searchResults));
-		revalidate();
-		repaint();
+		refresh();
 	}
-	
+
 	public void printDMessages() {
 		removeAll();
+		stopTimelineTimer();
 		dMessageView = new DMessageView(this);
 		dMessageView.printDirectMessageView();
 		add(tweetBox, BorderLayout.SOUTH);
-		revalidate();
-		repaint();
+		refresh();
 	}
-	
+
 	public ResponseList<DirectMessage> getDirectMessages() {
 		return gui.getDirectMessages();
 	}
@@ -111,34 +125,33 @@ public class MainPanel extends JPanel {
 	public void revalidateGUI() {
 		gui.validate();
 	}
-	public void userNameClicked(long userId){
+
+	public void userNameClicked(long userId) {
 		gui.userNameClicked(userId);
 	}
 
 	public void followingClicked(long userId) {
 		gui.followingClicked(userId);
-		
+
 	}
 
 	public void printAccounts(ArrayList<Account> accounts) {
 		removeAll();
-		System.out.println("\nSay followings is printed..");
+		stopTimelineTimer();
 		accountStream = new AccountStream(this);
 		accountPane = accountStream.printAccounttream(accounts);
 		add(accountPane);
-		revalidate();
-		repaint();
-		
+		refresh();
 	}
 
 	public void followersClicked(long userId) {
 		gui.followersClicked(userId);
-		
+
 	}
 
 	public void searchEntered() {
 		gui.searchEntered();
-		
+
 	}
 
 	public String getSearch() {

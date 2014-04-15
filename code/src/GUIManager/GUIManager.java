@@ -49,7 +49,7 @@ public class GUIManager {
 		}
 	}
 
-	public void printMainPanel() throws TwitterException {
+	public void printMainPanel() {
 		gui.printMainPanel(dataRequestManager.getTimeline());
 	}
 

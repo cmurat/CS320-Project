@@ -15,7 +15,6 @@ public class TweetListenerHandler {
 
 	public void postTweet(String tweet, String imageLocation) {
 		dataRequestManager.postTweet(tweet, imageLocation);
-		
 	}
 
 	public void favorite(long tweetID) {
