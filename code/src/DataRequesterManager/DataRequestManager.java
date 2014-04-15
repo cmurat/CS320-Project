@@ -10,6 +10,7 @@ import twitter4j.ResponseList;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import DataRequester.Account;
 import DataRequester.AccountHandler;
 import DataRequester.DMessageHandler;
 import DataRequester.DetailedAccount;
@@ -95,5 +96,13 @@ public class DataRequestManager {
 
 	public void postTweet(String tweet, String imageLocation) {
 		tweetHandler.postTweet(tweet, imageLocation);
+	}
+
+	public ArrayList<Account> getFollowers(long userId) {
+		return navigationHandler.getFollowers(userId);
+	}
+
+	public ArrayList<Account> getFollowings(long userId) {
+		return navigationHandler.getFollowings(userId);
 	}
 }

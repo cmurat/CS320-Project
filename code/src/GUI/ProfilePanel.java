@@ -2,16 +2,20 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import DataRequester.DetailedAccount;
+import GUI.listeners.FollowersListener;
+import GUI.listeners.FollowingsListener;
 
 @SuppressWarnings("serial")
 public class ProfilePanel extends JPanel {
@@ -102,14 +106,26 @@ public class ProfilePanel extends JPanel {
 	}
 
 	private void createFollowingsLabel(JPanel userInfoPanel) {
-		JLabel followings = new JLabel("Followings");
-		followings.setHorizontalAlignment(JLabel.CENTER);
+		JButton followings = new JButton("Followings");
+		followings.setHorizontalAlignment(JButton.CENTER);
+		followings.setBorderPainted(false);
+		followings.setFocusable(false);
+		followings.setContentAreaFilled(false);
+		followings.setHorizontalAlignment(JButton.LEFT);
+		followings.addActionListener(new FollowingsListener(account.getUserID(),followings, mainPanel));
+		followings.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		userInfoPanel.add(followings);
 	}
 
 	private void createFollowersLabel(JPanel userInfoPanel) {
-		JLabel followers = new JLabel("Followers");
-		followers.setHorizontalAlignment(JLabel.CENTER);
+		JButton followers = new JButton("Followers");
+		followers.setHorizontalAlignment(JButton.CENTER);
+		followers.setBorderPainted(false);
+		followers.setFocusable(false);
+		followers.setContentAreaFilled(false);
+		followers.setHorizontalAlignment(JButton.LEFT);
+		followers.addActionListener(new FollowersListener(account.getUserID(),followers, mainPanel));
+		followers.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		userInfoPanel.add(followers);
 	}
 

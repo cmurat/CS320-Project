@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
 import twitter4j.TwitterException;
+import DataRequester.Account;
 import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
 import GUIManager.GUIManager;
@@ -157,6 +158,21 @@ public class GUI extends JFrame {
 
 	public void dMessageButtonClicked() {
 		guiManager.dMessageButtonClicked();
+	}
+
+	public void followingClicked(long userId) {
+		guiManager.followingClicked(userId);
+		
+	}
+
+	public void printAccounts(ArrayList<Account> followers) {
+		mainPanel.printAccounts(followers);
+		
+	}
+
+	public void followersClicked(long userId) {
+		guiManager.followersClicked(userId);
+		
 	}
 
 }

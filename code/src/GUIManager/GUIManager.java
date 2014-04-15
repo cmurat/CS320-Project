@@ -138,4 +138,14 @@ public class GUIManager {
 		gui.printProfile(dataRequestManager.getDetailedAccount(userId));
 	}
 
+	public void followingClicked(long userId) {
+		gui.printAccounts(dataRequestManager.getFollowings(userId));
+		
+	}
+
+	public void followersClicked(long userId) {
+		gui.printAccounts(dataRequestManager.getFollowers(userId));
+		
+	}
+
 }

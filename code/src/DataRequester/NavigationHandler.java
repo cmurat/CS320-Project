@@ -65,14 +65,29 @@ public class NavigationHandler {
 		return tweets;
 	}
 
-	public ArrayList<Account> getFollowers() throws TwitterException {
-		List<User> users = twitter.getFollowersList(twitter.getId(), -1);
+	public ArrayList<Account> getFollowers(long userId){
+		List<User> users = null;
+		try {
+			users = twitter.getFollowersList(userId, -1);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Account> accounts = getAccounts(users);
 		return accounts;
 	}
 
-	public ArrayList<Account> getFollowings() throws TwitterException {
-		List<User> users = twitter.getFriendsList(twitter.getId(), -1);
+	public ArrayList<Account> getFollowings(long userId) {
+		List<User> users = null;
+		try {
+			users = twitter.getFriendsList(userId, -1);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Account> accounts = getAccounts(users);
 		return accounts;
 	}

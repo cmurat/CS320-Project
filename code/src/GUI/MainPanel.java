@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
+import DataRequester.Account;
 import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
 
@@ -20,7 +21,9 @@ public class MainPanel extends JPanel {
 	private TweetBox tweetBox;
 	private ProfilePanel profilePanel;
 	private TweetStream tweetStream;
+	private AccountStream accountStream;
 	private JScrollPane tweetPane;
+	private JScrollPane accountPane;
 	private DMessageView dMessageView;
 
 	public MainPanel(GUI gui) {
@@ -96,6 +99,27 @@ public class MainPanel extends JPanel {
 	}
 	public void userNameClicked(long userId){
 		gui.userNameClicked(userId);
+	}
+
+	public void followingClicked(long userId) {
+		gui.followingClicked(userId);
+		
+	}
+
+	public void printAccounts(ArrayList<Account> accounts) {
+		removeAll();
+		System.out.println("\nSay followings is printed..");
+		accountStream = new AccountStream(this);
+		accountPane = accountStream.printAccounttream(accounts);
+		add(accountPane);
+		revalidate();
+		repaint();
+		
+	}
+
+	public void followersClicked(long userId) {
+		gui.followersClicked(userId);
+		
 	}
 
 }
