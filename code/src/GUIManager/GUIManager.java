@@ -159,4 +159,8 @@ public class GUIManager {
 		
 	}
 
+	public void settingsButtonClicked() {
+		gui.printSettingsScreen();
+	}
+
 }

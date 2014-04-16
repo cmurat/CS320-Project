@@ -16,9 +16,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import DataRequester.Account;
-import DataRequester.Tweet;
 import GUI.listeners.UserNameListener;
 
+@SuppressWarnings("serial")
 public class AccountStream extends JPanel {
 	private MainPanel mainPanel;
 	public AccountStream(MainPanel mainPanel) {
@@ -38,18 +38,21 @@ public class AccountStream extends JPanel {
 		return tweetPane;
 	}
 	private void printAccounts(ArrayList<Account> accounts) {
-		for (Account account : accounts) {
-			JPanel tweetPanel = new JPanel();
+		for (Account account : accounts) {			
 			JPanel imagePanel = new JPanel();
 			imagePanel.setBackground(Color.WHITE);
 			imagePanel.setOpaque(true);
+			
 			JPanel contentPanel = new JPanel();
 			contentPanel.setBackground(Color.WHITE);
 			contentPanel.setOpaque(true);
 			contentPanel.setLayout(new GridLayout(2,1));
-			tweetPanel.setLayout(new BorderLayout());
+			
 			addUserImage(account, imagePanel);
 			addUserName(account, contentPanel);
+
+			JPanel tweetPanel = new JPanel();
+			tweetPanel.setLayout(new BorderLayout());
 			tweetPanel.add(imagePanel,BorderLayout.WEST);
 			tweetPanel.add(contentPanel,BorderLayout.CENTER);
 			add(tweetPanel);

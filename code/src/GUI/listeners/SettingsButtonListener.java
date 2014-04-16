@@ -18,6 +18,7 @@ public class SettingsButtonListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		settingsButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+		gui.settingsButtonClicked();
 		System.out.println("\nSettings button is clicked!");
 		settingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));	
 	}

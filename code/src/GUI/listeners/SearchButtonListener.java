@@ -11,6 +11,7 @@ import GUI.GUI;
 public class SearchButtonListener implements ActionListener{
 	private JButton searchButton;
 	private GUI gui;
+	
 	public SearchButtonListener(JButton searchButton, GUI gui) {
 		this.searchButton = searchButton;
 		this.gui = gui;
