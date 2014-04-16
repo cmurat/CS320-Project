@@ -117,6 +117,15 @@ public class AccountHandler {
 	
 	private void setupAccount(DetailedAccount account, User user) {
 		boolean followStatus = false;
+		try {
+			followStatus = twitter.showFriendship(twitter.getId(), user.getId()).isSourceFollowingTarget();
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		account.setAccountProtected(user.isProtected());
 		account.setFollowRequestSent(user.isFollowRequestSent());
 		account.setFollowStatus(followStatus);

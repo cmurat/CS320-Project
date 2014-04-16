@@ -22,7 +22,9 @@ public class FollowersListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("\n Followers is clicked!");
+		System.out.println(userId);
 		followers.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+
 		mainPanel.followersClicked(userId);
 		followers.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 

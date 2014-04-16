@@ -112,7 +112,7 @@ public class NavigationHandler {
 	}
 
 	public void follow(long userToFollowId) throws TwitterException {
-		twitter.createFriendship(userToFollowId);
+		twitter.createFriendship(userToFollowId, true);
 	}
 
 	public void unFollow(long userToUnFollowId) throws TwitterException {

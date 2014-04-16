@@ -1,7 +1,5 @@
 package DataRequester;
 
-import java.awt.Component;
-
 import twitter4j.User;
 
 public class Account {
