@@ -197,5 +197,9 @@ public class GUI extends JFrame {
 		
 	}
 
+	public void startRefreshTimer() {
+		mainPanel.startRefreshTimer();
+	}
+
 
 }

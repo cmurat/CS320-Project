@@ -95,6 +95,7 @@ public class GUIManager {
 
 	public void homeButtonClicked() {
 		gui.printTimeline(dataRequestManager.getTimeline());
+		gui.startRefreshTimer();
 	}
 
 	public void mentionButtonClicked() {

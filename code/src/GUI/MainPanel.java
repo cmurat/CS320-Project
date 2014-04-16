@@ -41,7 +41,6 @@ public class MainPanel extends JPanel {
 		removeAll();
 		TweetStream tweetStream = new TweetStream(this);
 		add(tweetStream.printTweetStream(tweets));
-		tweetStream.startRefreshTimer();
 		add(tweetBox, BorderLayout.SOUTH);
 		refresh();
 	}
@@ -114,6 +113,7 @@ public class MainPanel extends JPanel {
 		stopTimelineTimer();
 		dMessageView = new DMessageView(this, responseList);
 		dMessageView.printDMessageView();
+		add(dMessageView);
 		add(tweetBox, BorderLayout.SOUTH);
 		refresh();
 	}
@@ -157,6 +157,11 @@ public class MainPanel extends JPanel {
 	public void followButtonPressed(long userID) {
 		gui.followButtonPressed(userID);
 		
+	}
+
+	public void startRefreshTimer() {
+		if (tweetStream != null)
+			tweetStream.startRefreshTimer();
 	}
 
 }

@@ -73,7 +73,7 @@ public class TweetStream extends JPanel {
 		try {
 			refreshTimer.cancel();
 		} catch (IllegalStateException e) {
-			// OK.
+//			e.printStackTrace(); OK..
 		}
 	}
 
