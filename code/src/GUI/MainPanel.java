@@ -39,7 +39,7 @@ public class MainPanel extends JPanel {
 
 	public void printTimeline(ArrayList<Tweet> tweets) {
 		removeAll();
-		tweetStream = new TweetStream(this);
+		TweetStream tweetStream = new TweetStream(this);
 		add(tweetStream.printTweetStream(tweets));
 		tweetStream.startRefreshTimer();
 		add(tweetBox, BorderLayout.SOUTH);
@@ -67,7 +67,7 @@ public class MainPanel extends JPanel {
 	public void printMentions(ArrayList<Tweet> tweets) {
 		removeAll();
 		stopTimelineTimer();
-		tweetStream = new TweetStream(this);
+		TweetStream tweetStream = new TweetStream(this);
 		tweetPane = tweetStream.printTweetStream(tweets);
 		add(tweetBox, BorderLayout.SOUTH);
 		add(tweetPane);
@@ -156,6 +156,11 @@ public class MainPanel extends JPanel {
 
 	public String getSearch() {
 		return searchScreen.getSearch();
+	}
+
+	public void followButtonPressed(long userID) {
+		gui.followButtonPressed(userID);
+		
 	}
 
 }
