@@ -198,5 +198,10 @@ public class GUI extends JFrame {
 		
 	}
 
+	public void followButtonPressed(long userID) {
+		guiManager.followClicked(userID);
+		
+	}
+
 
 }
