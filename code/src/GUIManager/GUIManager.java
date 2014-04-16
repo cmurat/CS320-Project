@@ -14,7 +14,7 @@ public class GUIManager {
 	private GUI gui;
 	private String loginURL;
 	private DataRequestManager dataRequestManager;
-	private TweetListenerHandler tweetListenerHandler;
+	public TweetListenerHandler tweetListenerHandler;
 
 	public GUIManager(DataRequestManager dataRequestManager) {
 		this.dataRequestManager = dataRequestManager;

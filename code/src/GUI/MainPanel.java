@@ -164,4 +164,12 @@ public class MainPanel extends JPanel {
 			tweetStream.startRefreshTimer();
 	}
 
+	public void favoriteButtonClicked(long tweetId) {
+		gui.favoriteButtonClicked(tweetId);
+	}
+
+	public void retweetButtonClicked(long tweetId) {
+		gui.retweetButtonClicked(tweetId);
+	}
+
 }

@@ -3,7 +3,9 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,6 +20,8 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 
 import DataRequester.Tweet;
+import GUI.listeners.FavouriteButtonListener;
+import GUI.listeners.RetweetButtonListener;
 import GUI.listeners.UserNameListener;
 
 @SuppressWarnings("serial")
@@ -82,6 +86,11 @@ public class TweetStream extends JPanel {
 			JPanel tweetPanel = new JPanel();
 			tweetPanel.setBorder(new LineBorder(Color.BLACK, 1, true));
 			JPanel imagePanel = new JPanel();
+			JPanel buttonPanel=new JPanel();
+			buttonPanel.setBackground(Color.WHITE);
+			buttonPanel.setOpaque(true);
+			buttonPanel.setLayout(new FlowLayout());
+			
 			imagePanel.setBackground(Color.WHITE);
 			imagePanel.setOpaque(true);
 			JPanel contentPanel = new JPanel();
@@ -94,8 +103,42 @@ public class TweetStream extends JPanel {
 			addTweetContent(tweet, contentPanel);
 			tweetPanel.add(imagePanel, BorderLayout.WEST);
 			tweetPanel.add(contentPanel, BorderLayout.CENTER);
+			addFavouriteButton(buttonPanel,tweet);
+			addRetweetButton(buttonPanel,tweet);
+			contentPanel.add(buttonPanel,BorderLayout.SOUTH);
 			add(tweetPanel);
 		}
+		
+	}
+	
+	private void addRetweetButton(JPanel contentPanel, Tweet tweet) {
+		JButton retweetButton = getIconButton("icon/RetweetIcon.png");
+		retweetButton.addActionListener( new RetweetButtonListener(tweet.getTweetId(), retweetButton, mainPanel));
+		contentPanel.add(retweetButton, BorderLayout.SOUTH);
+		System.out.println("retweet button eklendi");
+		
+		
+	}
+
+	private void addFavouriteButton(JPanel tweetPanel, Tweet tweet) {
+		JButton favouriteButton = getIconButton("icon/FavoriteIcon.png");
+		favouriteButton.addActionListener( new FavouriteButtonListener(tweet.getTweetId(), favouriteButton, mainPanel));
+		tweetPanel.add(favouriteButton, BorderLayout.PAGE_END);
+		System.out.println("favourite button eklendi");
+	}
+
+	private JButton getIconButton(String iconLocation) {
+		JButton button = new JButton();
+		button.setBorderPainted(false);
+		button.setFocusable(false);
+		button.setContentAreaFilled(false);
+		button.setIcon(getImageIcon(iconLocation));
+		return button;
+	}
+	private ImageIcon getImageIcon(String iconPath) {
+		Image img = new ImageIcon(iconPath).getImage();
+		img = img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		return new ImageIcon(img);
 	}
 
 	private void addUserImage(Tweet tweet, JPanel imagePanel) {

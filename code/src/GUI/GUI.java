@@ -201,5 +201,28 @@ public class GUI extends JFrame {
 		mainPanel.startRefreshTimer();
 	}
 
+	public void settingsButtonClicked() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void printSettingsScreen() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void favoriteButtonClicked(long tweetId) {
+		guiManager.tweetListenerHandler.favorite(tweetId);
+		
+	}
+
+	public void retweetButtonClicked(long tweetId) {
+		guiManager.tweetListenerHandler.retweet(tweetId);
+		
+	}
+
+	
+
+
 
 }
