@@ -118,8 +118,8 @@ public class GUI extends JFrame {
 		mainPanel.printMentions(tweets);
 	}
 
-	public void printDMessages() {
-		mainPanel.printDMessages();
+	public void printDMessages(ResponseList<DirectMessage> responseList) {
+		mainPanel.printDMessages(responseList);
 	}
 
 	public String getTweet() {
@@ -135,13 +135,8 @@ public class GUI extends JFrame {
 
 	}
 
-	public ResponseList<DirectMessage> getDirectMessages() {
-		return guiManager.getDirectMessages();
-	}
-
 	public void homeButtonClicked() {
 		guiManager.homeButtonClicked();
-
 	}
 
 	public void mentionsButtonClicked() {
@@ -151,7 +146,6 @@ public class GUI extends JFrame {
 
 	public void userNameClicked(long userId) {
 		guiManager.userNameClicked(userId);
-
 	}
 
 	public void dMessageButtonClicked() {

@@ -102,7 +102,7 @@ public class GUIManager {
 	}
 	
 	public void dMessageButtonClicked() {
-		gui.printDMessages();
+		gui.printDMessages(dataRequestManager.getDirectMessages());
 	}
 
 	public ResponseList<DirectMessage> getDirectMessages() {

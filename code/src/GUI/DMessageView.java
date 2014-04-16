@@ -16,9 +16,9 @@ public class DMessageView extends JPanel {
 	private MainPanel mainPanel;
 	private ResponseList<DirectMessage> directMessages;
 	
-	public DMessageView(MainPanel mainPanel){
+	public DMessageView(MainPanel mainPanel, ResponseList<DirectMessage> responseList){
 		this.mainPanel = mainPanel;
-		directMessages = getDirectMessages();
+		directMessages = responseList;
 		mainPanel.add(this);
 		calculateBounds();
 	}
@@ -31,40 +31,40 @@ public class DMessageView extends JPanel {
 		setBounds(xPos, yPos, width, height);
 	}
 
-	public void printDirectMessageStream(){
-		printDirectMessages();
-	}
+//	public void printDirectMessageStream(){
+//		printDirectMessages();
+//	}
 
-	private void printDirectMessages() {
-		for (DirectMessage directMessage : directMessages) {
-			User user = directMessage.getRecipient();
-			JLabel userImage = new JLabel(new ImageIcon(user.getProfileImageURL()));
-			JLabel userName = new JLabel("" + user.getName());
-			JLabel date = new JLabel("" + directMessage.getCreatedAt());
-			JLabel messageContent = new JLabel(directMessage.getText());
+//	private void printDirectMessages() {
+//		for (DirectMessage directMessage : directMessages) {
+//			User user = directMessage.getRecipient();
+//			JLabel userImage = new JLabel(new ImageIcon(user.getProfileImageURL()));
+//			JLabel userName = new JLabel("" + user.getName());
+//			JLabel date = new JLabel("" + directMessage.getCreatedAt());
+//			JLabel messageContent = new JLabel(directMessage.getText());
+//
+//			JPanel messageHeaderPanel = new JPanel(new FlowLayout());
+//			messageHeaderPanel.add(userName);
+//			messageHeaderPanel.add(date);
+//
+//			JPanel messageContentPanel = new JPanel(new GridLayout(2, 1));
+//			messageContentPanel.add(messageHeaderPanel, -1);
+//			messageContentPanel.add(messageContent, -1);
+//
+//			JPanel messagePanel = new JPanel(new FlowLayout());
+//			messagePanel.add(userImage, -1);
+//			messagePanel.add(messageContentPanel, -1);
+//
+//			add(messagePanel);
+//		}
+//	}
 
-			JPanel messageHeaderPanel = new JPanel(new FlowLayout());
-			messageHeaderPanel.add(userName);
-			messageHeaderPanel.add(date);
-
-			JPanel messageContentPanel = new JPanel(new GridLayout(2, 1));
-			messageContentPanel.add(messageHeaderPanel, -1);
-			messageContentPanel.add(messageContent, -1);
-
-			JPanel messagePanel = new JPanel(new FlowLayout());
-			messagePanel.add(userImage, -1);
-			messagePanel.add(messageContentPanel, -1);
-
-			add(messagePanel);
-		}
-	}
-
-	public ResponseList<DirectMessage> getDirectMessages(){
-		return mainPanel.getDirectMessages();
-	}
+//	public ResponseList<DirectMessage> getDirectMessages(){
+//		return mainPanel.getDirectMessages();
+//	}
 	
-	public void printDirectMessageView() {
-		printDirectMessages();
-		mainPanel.revalidateGUI();
+	public void printDMessageView() {
+//		mainPanel.refresh();
+//		mainPanel.revalidateGUI();
 	}
 }

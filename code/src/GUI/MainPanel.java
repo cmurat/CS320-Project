@@ -109,17 +109,13 @@ public class MainPanel extends JPanel {
 		refresh();
 	}
 
-	public void printDMessages() {
+	public void printDMessages(ResponseList<DirectMessage> responseList) {
 		removeAll();
 		stopTimelineTimer();
-		dMessageView = new DMessageView(this);
-		dMessageView.printDirectMessageView();
+		dMessageView = new DMessageView(this, responseList);
+		dMessageView.printDMessageView();
 		add(tweetBox, BorderLayout.SOUTH);
 		refresh();
-	}
-
-	public ResponseList<DirectMessage> getDirectMessages() {
-		return gui.getDirectMessages();
 	}
 
 	public void revalidateGUI() {
