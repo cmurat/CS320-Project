@@ -13,8 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import DataRequester.DetailedAccount;
+import GUI.listeners.FollowButtonListener;
 import GUI.listeners.FollowersListener;
 import GUI.listeners.FollowingsListener;
+import GUI.listeners.UnFollowButtonListener;
 
 public class AccountProfileScreen extends JPanel {
 	private static final long serialVersionUID = 5820507962378503935L;
@@ -42,10 +44,9 @@ public class AccountProfileScreen extends JPanel {
 	private void createLabels(JPanel userInfoPanel) {
 		createFollowingsLabel(userInfoPanel);
 		createFollowersLabel(userInfoPanel);
-		createTweetsLabel(userInfoPanel);
+		createFollowLabel(userInfoPanel);
 		createFollowingsAmountLabel(userInfoPanel);
 		createFollowersAmountLabel(userInfoPanel);
-		createTweetsAmountLabel(userInfoPanel);
 	}
 
 	private void createProfilePictureLabel(JPanel picturePanel) {
@@ -66,11 +67,19 @@ public class AccountProfileScreen extends JPanel {
 		picturePanel.add(profileName);
 	}
 
-	private void createTweetsLabel(JPanel userInfoPanel) {
-		JLabel tweets = new JLabel("Tweets");
-		tweets.setHorizontalAlignment(JLabel.CENTER);
-		tweets.setOpaque(true);
-		userInfoPanel.add(tweets);
+	private void createFollowLabel(JPanel userInfoPanel) {
+		JButton follow = null;
+		if(account.isFollowed()){
+			follow = new JButton("UnFollow");
+			follow.addActionListener(new UnFollowButtonListener(account.getUserID(),mainPanel));
+		}else{
+			follow = new JButton("Follow");
+			follow.addActionListener(new FollowButtonListener(account.getUserID(),mainPanel));
+			
+		}
+		follow.setHorizontalAlignment(JButton.CENTER);
+		follow.setOpaque(true);
+		userInfoPanel.add(follow);
 	}
 
 	private void createFollowingsLabel(JPanel userInfoPanel) {
@@ -82,6 +91,7 @@ public class AccountProfileScreen extends JPanel {
 
 	private void createFollowersLabel(JPanel userInfoPanel) {
 		JButton followers = buttonCreater("Followers");
+		System.out.println(account.getUserID());
 		followers.addActionListener(new FollowersListener(account.getUserID(), followers, mainPanel));
 		userInfoPanel.add(followers);
 	}
@@ -98,11 +108,6 @@ public class AccountProfileScreen extends JPanel {
 		return button;
 	}
 
-	private void createTweetsAmountLabel(JPanel userInfoPanel) {
-		JLabel tweetNumber = new JLabel("" + account.getTweets().size());
-		tweetNumber.setHorizontalAlignment(JLabel.CENTER);
-		userInfoPanel.add(tweetNumber);
-	}
 
 	private void createFollowingsAmountLabel(JPanel userInfoPanel) {
 		JLabel followingNumber = new JLabel("" + account.getFollowingsAmount());
