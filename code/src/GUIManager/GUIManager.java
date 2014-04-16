@@ -49,7 +49,7 @@ public class GUIManager {
 		}
 	}
 
-	public void printMainPanel() {
+	public void printMainPanel() throws TwitterException {
 		gui.printMainPanel(dataRequestManager.getTimeline());
 	}
 
@@ -116,7 +116,7 @@ public class GUIManager {
 		dataRequestManager.sendMessage(userId, message);
 	}
 
-	public void followClicked() {
+	public void followClicked(long userID) {
 		long userToFollowId = 0;// TODO userToFollowID needed
 		try {
 			dataRequestManager.navigationHandler.follow(userToFollowId);
