@@ -3,14 +3,21 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.event.ChangeListener;
 
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
@@ -51,8 +58,14 @@ public class DMessageView extends JPanel {
 		headerPanel.setBounds(getX(), getY(), getWidth(), getHeight() / 9);
 		headerPanel.setLocation(0, 0);
 		headerPanel.setLayout(new BorderLayout());
-		JTextField dMessageField = new JTextField("Direct Message");
+		JTextField dMessageField = new JTextField("  Direct Message");
+		dMessageField.setEditable(false);
+		dMessageField.setFocusable(false);
+		dMessageField.setBackground(null);
+		dMessageField.setBorder(null);
 		JButton newDMessageButton = new JButton("New Message");
+		newDMessageButton.setBorderPainted(false);
+		newDMessageButton.setFocusPainted(false);
 		headerPanel.add(dMessageField, BorderLayout.WEST);
 		headerPanel.add(newDMessageButton, BorderLayout.EAST);
 		messageListPanel.add(headerPanel);
