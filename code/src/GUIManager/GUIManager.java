@@ -144,7 +144,7 @@ public class GUIManager {
 	}
 
 	public void settingsButtonClicked() {
-		gui.printSettingsScreen(dataRequestManager.getCurrentUserAccount());
+		gui.printSettingsScreen();
 	}
 
 	public boolean logOutButtonClicked() {

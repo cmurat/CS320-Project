@@ -204,8 +204,8 @@ public class GUI extends JFrame {
 		guiManager.settingsButtonClicked();
 	}
 
-	public void printSettingsScreen(DetailedAccount account) {
-		mainPanel.printSettingsScreen(account);		
+	public void printSettingsScreen() {
+		mainPanel.printSettingsScreen();		
 	}
 	
 	public void favoriteButtonClicked(long tweetId) {

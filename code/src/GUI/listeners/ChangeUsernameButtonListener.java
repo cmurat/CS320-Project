@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import GUI.MainPanel;
 
@@ -22,10 +23,14 @@ public class ChangeUsernameButtonListener implements ActionListener {
 		System.out.println("\n change username is clicked!");
 		changeUsername.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		
-		//TODO
-		//mainPanel.changeUsernameClicked(screenName);
+		String newName = askNewName();
+		mainPanel.changeUsernameClicked(newName);
 		
 		changeUsername.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+	}
+
+	private String askNewName() {
+	     return JOptionPane.showInputDialog(mainPanel, "Enter new username");		
 	}
 
 }

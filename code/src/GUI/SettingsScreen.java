@@ -17,11 +17,9 @@ public class SettingsScreen extends JPanel {
 	
 	private final int NUMBER_OF_SETTINGS = 2;
 	private MainPanel mainPanel;
-	private DetailedAccount account;
 	
-	public SettingsScreen(MainPanel mainPanel, DetailedAccount account){
+	public SettingsScreen(MainPanel mainPanel){
 		this.mainPanel = mainPanel;
-		this.account = account;
 		setLayout(new BorderLayout());
 		calculateBounds();
 		
@@ -43,7 +41,7 @@ public class SettingsScreen extends JPanel {
 
 	private void addChangeUsernameButton(JPanel settingsPanel) {
 		JButton changeUsernameButton = createButton("Change User Name");
-		//changeUsernameButton.addActionListener(new ChangeUsernameButtonListener(account.getUserID(), changeUsernameButton, mainPanel));
+		changeUsernameButton.addActionListener(new ChangeUsernameButtonListener(changeUsernameButton, mainPanel));
 		settingsPanel.add(changeUsernameButton);
 	}
 
