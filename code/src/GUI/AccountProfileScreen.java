@@ -3,6 +3,7 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -95,6 +96,8 @@ public class AccountProfileScreen extends JPanel {
 		follow = chooseFollowButton();
 		follow.setHorizontalAlignment(JButton.CENTER);
 		follow.setOpaque(true);
+		follow.setContentAreaFilled(false);
+		follow.setFocusable(false);
 		userInfoPanel.add(follow);
 	}
 
@@ -112,6 +115,7 @@ public class AccountProfileScreen extends JPanel {
 		}
 		return follow;
 	}
+	
 
 	private void createFollowingsLabel(JPanel userInfoPanel) {
 		JButton followings = buttonCreater("Followings");

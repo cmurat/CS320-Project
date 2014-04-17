@@ -24,5 +24,13 @@ public class DMessageHandler {
 		}
 		return null;
 	}
+	public ResponseList<DirectMessage> getSentDirectMessages(){
+		try {
+			return twitter.getSentDirectMessages();
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
