@@ -11,22 +11,19 @@ import GUI.MainPanel;
 
 public class ChangeUsernameButtonListener implements ActionListener {
 	private MainPanel mainPanel;
-	private JButton changeUsername;
+	private JButton changeUsernameButton;
 	
 	public ChangeUsernameButtonListener(JButton changeUsernameButton, MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
-		this.changeUsername = changeUsernameButton;
+		this.changeUsernameButton = changeUsernameButton;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("\n change username is clicked!");
-		changeUsername.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-		
-		String newName = askNewName();
-		mainPanel.changeUsernameClicked(newName);
-		
-		changeUsername.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		changeUsernameButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+		mainPanel.changeUsernameClicked(askNewName());
+		changeUsernameButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 	private String askNewName() {

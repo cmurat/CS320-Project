@@ -1,5 +1,6 @@
 package DataRequesterManager;
 
+import java.io.File;
 import java.io.IOException;
 
 import DataRequester.AccountHandler;
@@ -47,6 +48,10 @@ public class AccountRequests {
 
 	public void changeUsername(String screenName) {
 		accountHandler.setProfileName(screenName);
+	}
+
+	public void changeProfilePicture(File image) {
+		accountHandler.setProfilePicture(image);
 	}
 
 }

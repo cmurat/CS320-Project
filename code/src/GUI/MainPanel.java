@@ -3,6 +3,7 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -193,6 +194,10 @@ public class MainPanel extends JPanel {
 
 	public void changeUsernameClicked(String screenName) {
 		gui.changeUsernameClicked(screenName);
+	}
+
+	public void changeProfilePictureClicked(File image) {
+		gui.changeProfilePictureClicked(image);
 	}
 
 }

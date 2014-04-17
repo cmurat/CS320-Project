@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="/Users/CMurat/Documents/workspace/TwitterDesktop/twitter4j-3.0.5/lib/twitter4j-async-3.0.5.jar"/>
-	<classpathentry kind="lib" path="/Users/CMurat/Documents/workspace/TwitterDesktop/twitter4j-3.0.5/lib/twitter4j-core-3.0.5.jar"/>
-	<classpathentry kind="lib" path="/Users/CMurat/Documents/workspace/TwitterDesktop/twitter4j-3.0.5/lib/twitter4j-examples-3.0.5.jar"/>
-	<classpathentry kind="lib" path="/Users/CMurat/Documents/workspace/TwitterDesktop/twitter4j-3.0.5/lib/twitter4j-media-support-3.0.5.jar"/>
-	<classpathentry kind="lib" path="/Users/CMurat/Documents/workspace/TwitterDesktop/twitter4j-3.0.5/lib/twitter4j-stream-3.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/bluew_000/Documents/2013-2014 Spring Term/CS320/Project 1/Resources/twitter4j-3.0.5/lib/twitter4j-async-3.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/bluew_000/Documents/2013-2014 Spring Term/CS320/Project 1/Resources/twitter4j-3.0.5/lib/twitter4j-core-3.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/bluew_000/Documents/2013-2014 Spring Term/CS320/Project 1/Resources/twitter4j-3.0.5/lib/twitter4j-examples-3.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/bluew_000/Documents/2013-2014 Spring Term/CS320/Project 1/Resources/twitter4j-3.0.5/lib/twitter4j-media-support-3.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/bluew_000/Documents/2013-2014 Spring Term/CS320/Project 1/Resources/twitter4j-3.0.5/lib/twitter4j-stream-3.0.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

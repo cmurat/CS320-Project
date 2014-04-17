@@ -1,6 +1,7 @@
 package GUIManager;
 
 import java.awt.Desktop;
+import java.io.File;
 import java.net.URL;
 
 import twitter4j.DirectMessage;
@@ -153,6 +154,10 @@ public class GUIManager {
 
 	public void changeUsernameClicked(String screenName) {
 		dataRequestManager.accountRequests.changeUsername(screenName);
+	}
+
+	public void changeProfilePictureClicked(File image) {
+		dataRequestManager.accountRequests.changeProfilePicture(image);
 	}
 
 	

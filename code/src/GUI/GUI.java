@@ -6,6 +6,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -236,6 +237,10 @@ public class GUI extends JFrame {
 
 	public void changeUsernameClicked(String screenName) {
 		guiManager.changeUsernameClicked(screenName);		
+	}
+
+	public void changeProfilePictureClicked(File image) {
+		guiManager.changeProfilePictureClicked(image);
 	}
 
 }

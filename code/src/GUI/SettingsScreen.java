@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import DataRequester.DetailedAccount;
+import GUI.listeners.ChangeProfilePictureButtonListener;
 import GUI.listeners.ChangeUsernameButtonListener;
 
 
@@ -27,16 +28,16 @@ public class SettingsScreen extends JPanel {
 		settingsPanel.setLayout(new GridLayout(NUMBER_OF_SETTINGS, 1));
 		settingsPanel.setBorder(new LineBorder(Color.BLACK, 1, true));
 		
-		addChangeImageButton(settingsPanel);
+		addChangeProfilePictureButton(settingsPanel);
 		addChangeUsernameButton(settingsPanel);
 		
 		add(settingsPanel, BorderLayout.NORTH);
 	}
 
-	private void addChangeImageButton(JPanel settingsPanel) {
-		JButton changeImageButton = createButton("Change Profile Image");
-		//changeImageButton.addActionListener(new ChangeImageButtonListener(changeImageButton));
-		settingsPanel.add(changeImageButton);
+	private void addChangeProfilePictureButton(JPanel settingsPanel) {
+		JButton changeProfilePictureButton = createButton("Change Profile Picture");
+		changeProfilePictureButton.addActionListener(new ChangeProfilePictureButtonListener(changeProfilePictureButton, mainPanel));
+		settingsPanel.add(changeProfilePictureButton);
 	}
 
 	private void addChangeUsernameButton(JPanel settingsPanel) {
