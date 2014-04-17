@@ -71,10 +71,10 @@ public class AccountProfileScreen extends JPanel {
 		JButton follow = null;
 		if(account.isFollowed()){
 			follow = new JButton("UnFollow");
-			follow.addActionListener(new UnFollowButtonListener(account.getUserID(),mainPanel));
+			follow.addActionListener(new UnFollowButtonListener(account.getUserID(),mainPanel,follow));
 		}else{
 			follow = new JButton("Follow");
-			follow.addActionListener(new FollowButtonListener(account.getUserID(),mainPanel));
+			follow.addActionListener(new FollowButtonListener(account.getUserID(),mainPanel,follow));
 			
 		}
 		follow.setHorizontalAlignment(JButton.CENTER);

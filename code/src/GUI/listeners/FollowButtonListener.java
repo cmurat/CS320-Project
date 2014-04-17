@@ -3,21 +3,29 @@ package GUI.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+
 import GUI.MainPanel;
 
 public class FollowButtonListener implements ActionListener {
 	private long userID;
 	private MainPanel mainPanel;
-	public FollowButtonListener(long userID, MainPanel mainPanel) {
+	private JButton button;
+	public FollowButtonListener(long userID, MainPanel mainPanel,JButton button) {
 		this.userID = userID;
 		this.mainPanel = mainPanel;
+		this.button = button;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("\nFollow Button pressed");
-		System.out.println(userID);
 		mainPanel.followButtonPressed(userID);
+		button.setText("UnFollow");
+		button.removeActionListener(this);
+		button.addActionListener(new UnFollowButtonListener(userID, mainPanel,button));
+		button.revalidate();
+		button.repaint();
 
 	}
 

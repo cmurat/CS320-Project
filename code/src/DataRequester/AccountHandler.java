@@ -69,6 +69,24 @@ public class AccountHandler {
 		output.close();
 
 	}
+	public void setProfilePicture(File image){
+		try {
+			twitter.updateProfileImage(image);
+		} catch (TwitterException e) {
+			System.out.println("\nProfile Picture couldnt set");
+			e.printStackTrace();
+		}
+		
+	}
+	public void setProfileName(String screenName){
+		try {
+			User user = twitter.verifyCredentials();
+			twitter.updateProfile(screenName, user.getURL(),user.getLocation(),user.getDescription());
+		} catch (TwitterException e) {
+			System.out.println("\nProfile name couldnt set");
+			e.printStackTrace();
+		}
+	}
 
 	private AccessToken loadAccessToken() throws IOException {
 		BufferedReader read;
