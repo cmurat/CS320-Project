@@ -144,12 +144,15 @@ public class GUIManager {
 	}
 
 	public void settingsButtonClicked() {
-		gui.printSettingsScreen();
+		gui.printSettingsScreen(dataRequestManager.getCurrentUserAccount());
 	}
 
 	public boolean logOutButtonClicked() {
 		return dataRequestManager.accountRequests.logOutClicked();
-		
+	}
+
+	public void changeUsernameClicked(String screenName) {
+		dataRequestManager.accountRequests.changeUsername(screenName);
 	}
 
 	

@@ -183,12 +183,16 @@ public class MainPanel extends JPanel {
 		gui.deleteButtonClicked(tweetId);
 	}
 
-	public void printSettingsScreen() {
+	public void printSettingsScreen(DetailedAccount account) {
 		removeAll();
 		stopTimelineTimer();
-		settingsScreen = new SettingsScreen(this);
+		settingsScreen = new SettingsScreen(this, account);
 		add(settingsScreen);
 		refresh();
+	}
+
+	public void changeUsernameClicked(String screenName) {
+		gui.changeUsernameClicked(screenName);
 	}
 
 }

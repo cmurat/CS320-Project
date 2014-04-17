@@ -134,7 +134,6 @@ public class GUI extends JFrame {
 
 	public void printProfile(DetailedAccount account) {
 		mainPanel.printProfile(account);
-
 	}
 
 	public void homeButtonClicked() {
@@ -205,8 +204,8 @@ public class GUI extends JFrame {
 		guiManager.settingsButtonClicked();
 	}
 
-	public void printSettingsScreen() {
-		mainPanel.printSettingsScreen();		
+	public void printSettingsScreen(DetailedAccount account) {
+		mainPanel.printSettingsScreen(account);		
 	}
 	
 	public void favoriteButtonClicked(long tweetId) {
@@ -216,12 +215,10 @@ public class GUI extends JFrame {
 
 	public void retweetButtonClicked(long tweetId) {
 		guiManager.tweetListenerHandler.retweet(tweetId);
-		
 	}
 
 	public void unFollowButtonClicked(long userID) {
 		guiManager.unFollowClicked(userID);
-		
 	}
 
 	public long getCurrentUserId() {
@@ -237,8 +234,8 @@ public class GUI extends JFrame {
 		return guiManager.logOutButtonClicked();
 	}
 
-	
-
-
+	public void changeUsernameClicked(String screenName) {
+		guiManager.changeUsernameClicked(screenName);		
+	}
 
 }

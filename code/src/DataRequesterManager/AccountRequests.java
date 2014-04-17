@@ -4,12 +4,11 @@ import java.io.IOException;
 
 import DataRequester.AccountHandler;
 import DataRequester.DetailedAccount;
-import GUIManager.GUIManager;
 
 public class AccountRequests {
-
 	AccountHandler accountHandler;
- DataRequestManager dataRequestManager;
+	DataRequestManager dataRequestManager;
+	
 	public AccountRequests(AccountHandler accountHandler,DataRequestManager dataRequestManager) {
 		this.accountHandler = accountHandler;
 		this.dataRequestManager=dataRequestManager;
@@ -44,8 +43,10 @@ public class AccountRequests {
 	public boolean logOutClicked() {
 		accountHandler.logout();
 		return true;
-		
-		
+	}
+
+	public void changeUsername(String screenName) {
+		accountHandler.setProfileName(screenName);
 	}
 
 }

@@ -22,6 +22,7 @@ public class AccountProfileScreen extends JPanel {
 	private static final long serialVersionUID = 5820507962378503935L;
 	private DetailedAccount account;
 	private MainPanel mainPanel;
+	
 	public AccountProfileScreen(DetailedAccount account,MainPanel mainPanel){
 		this.account = account;
 		this.mainPanel = mainPanel;
