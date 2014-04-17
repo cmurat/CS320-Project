@@ -74,6 +74,7 @@ public class GUIManager {
 	public void meButtonClicked() {
 		gui.printProfile(dataRequestManager.getCurrentUserAccount());
 	}
+	
 	public long getCurrentUserId(){
 		return dataRequestManager.getCurrentUserAccount().getUserID();
 	}

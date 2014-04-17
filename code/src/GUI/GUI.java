@@ -186,12 +186,10 @@ public class GUI extends JFrame {
 
 	public void printSearchScreen() {
 		mainPanel.printSearchScreen();
-
 	}
 
 	public void printSearchScreenResults(ArrayList<Tweet> searchResults) {
 		mainPanel.printSearchScreenResult(searchResults);
-		
 	}
 
 	public void followButtonPressed(long userID) {
@@ -204,13 +202,11 @@ public class GUI extends JFrame {
 	}
 
 	public void settingsButtonClicked() {
-		// TODO Auto-generated method stub
-		
+		guiManager.settingsButtonClicked();
 	}
 
 	public void printSettingsScreen() {
-		// TODO Auto-generated method stub
-		
+		mainPanel.printSettingsScreen();		
 	}
 	
 	public void favoriteButtonClicked(long tweetId) {

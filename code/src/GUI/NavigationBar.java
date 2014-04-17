@@ -14,11 +14,11 @@ import javax.swing.JPanel;
 
 import GUI.listeners.DMessageListener;
 import GUI.listeners.HomeButtonListener;
+import GUI.listeners.LogoutButtonListener;
 import GUI.listeners.MeButtonListener;
 import GUI.listeners.NotificationsButtonListener;
 import GUI.listeners.SearchButtonListener;
 import GUI.listeners.SettingsButtonListener;
-import GUI.listeners.logoutButtonListener;
 
 @SuppressWarnings("serial")
 public class NavigationBar extends JPanel {
@@ -119,7 +119,7 @@ public class NavigationBar extends JPanel {
 	
 	private void addLogOutButton(int dimension) {
 		JButton logOutButton = getIconButton("icon/LogOutButton.png", dimension);
-		logOutButton.addActionListener(new logoutButtonListener(logOutButton, gui));
+		logOutButton.addActionListener(new LogoutButtonListener(logOutButton, gui));
 		logOutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(logOutButton);
 	}

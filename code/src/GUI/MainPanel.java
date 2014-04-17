@@ -26,6 +26,7 @@ public class MainPanel extends JPanel {
 	private JScrollPane accountPane;
 	private DMessageView dMessageView;
 	private SearchScreen searchScreen;
+	private SettingsScreen settingsScreen;
 
 	public MainPanel(GUI gui) {
 		this.gui = gui;
@@ -142,12 +143,10 @@ public class MainPanel extends JPanel {
 
 	public void followersClicked(long userId) {
 		gui.followersClicked(userId);
-
 	}
 
 	public void searchEntered() {
 		gui.searchEntered();
-
 	}
 
 	public String getSearch() {
@@ -174,7 +173,6 @@ public class MainPanel extends JPanel {
 
 	public void unFollowButtonClicled(long userID) {
 		gui.unFollowButtonClicked(userID);
-		
 	}
 
 	public long getCurrentUserId() {
@@ -183,6 +181,14 @@ public class MainPanel extends JPanel {
 
 	public void deleteButtonClicked(long tweetId) {
 		gui.deleteButtonClicked(tweetId);
+	}
+
+	public void printSettingsScreen() {
+		removeAll();
+		stopTimelineTimer();
+		settingsScreen = new SettingsScreen(this);
+		add(settingsScreen);
+		refresh();
 	}
 
 }

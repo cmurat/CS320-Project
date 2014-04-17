@@ -11,15 +11,16 @@ import GUI.GUI;
 public class SettingsButtonListener implements ActionListener{
 	private JButton settingsButton;
 	private GUI gui;
+	
 	public SettingsButtonListener(JButton settingsButton, GUI gui) {
 		this.settingsButton = settingsButton;
 		this.gui = gui;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		System.out.println("\nSettings button is clicked!");
 		settingsButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		gui.settingsButtonClicked();
-		System.out.println("\nSettings button is clicked!");
 		settingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));	
 	}
 }
