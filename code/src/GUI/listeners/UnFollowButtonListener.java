@@ -3,6 +3,8 @@ package GUI.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+
 import GUI.MainPanel;
 
 public class UnFollowButtonListener implements ActionListener {
@@ -15,7 +17,7 @@ public class UnFollowButtonListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		mainPanel.unFollowButtonClicled(userID);
 
 	}
 

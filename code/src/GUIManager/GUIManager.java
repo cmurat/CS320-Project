@@ -117,8 +117,7 @@ public class GUIManager {
 		dataRequestManager.sendMessage(userId, message);
 	}
 
-	public void followClicked(long userID) {
-		long userToFollowId = 0;// TODO userToFollowID needed
+	public void followClicked(long userToFollowId) {
 		try {
 			dataRequestManager.navigationHandler.follow(userToFollowId);
 		} catch (TwitterException e) {
@@ -126,8 +125,7 @@ public class GUIManager {
 		}
 	}
 
-	public void unFollowClicked() {
-		long userToUnFollowId = 0;// TODO userToUnFollowID needed
+	public void unFollowClicked(long userToUnFollowId) {
 		try {
 			dataRequestManager.navigationHandler.unFollow(userToUnFollowId);
 		} catch (TwitterException e) {

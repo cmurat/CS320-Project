@@ -172,4 +172,9 @@ public class MainPanel extends JPanel {
 		gui.retweetButtonClicked(tweetId);
 	}
 
+	public void unFollowButtonClicled(long userID) {
+		gui.unFollowButtonClicked(userID);
+		
+	}
+
 }

@@ -221,6 +221,11 @@ public class GUI extends JFrame {
 		
 	}
 
+	public void unFollowButtonClicked(long userID) {
+		guiManager.unFollowClicked(userID);
+		
+	}
+
 	
 
 
