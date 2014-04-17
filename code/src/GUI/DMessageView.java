@@ -2,26 +2,13 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
-
-import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.event.ChangeListener;
 
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
-import twitter4j.User;
 
 @SuppressWarnings("serial")
 public class DMessageView extends JPanel {
@@ -36,7 +23,6 @@ public class DMessageView extends JPanel {
 		directMessages = responseList;
 		messageListPanel = null;
 		newMessagePanel = null;
-//		mainPanel.add(this);
 		calculateBounds();
 		setLayout(new GridLayout(0, 1));
 	}
@@ -54,6 +40,38 @@ public class DMessageView extends JPanel {
 		messageListPanel = new JPanel();
 		messageListPanel.setLayout(null);
 		messageListPanel.setBackground(Color.cyan);
+		messageListPanel.add(getHeaderPanel());
+		
+//		ArrayList<JPanel> conversations = new ArrayList<JPanel>();
+//		
+//		for (int i = 0; i < directMessages.size(); i++) {
+//			DirectMessage message = directMessages.get(i);
+//			
+//		}
+		
+		System.out.println("NumDirectMessages: " + directMessages.size());
+		
+		
+		for (int i = 0; i < directMessages.size(); i++) {
+			System.out.println("--------------------------------------------------------------------------");
+			System.out.println(i + ". Direct Message:");
+			DirectMessage message = directMessages.get(i);
+			System.out.println("Access Level: " + message.getAccessLevel());
+			System.out.println("DMessage ID: " + message.getId());
+			System.out.println("Recipient ID: " + message.getRecipientId());
+			System.out.println("Recipient's Screen Name: " + message.getRecipientScreenName());
+			System.out.println("Sender ID: " + message.getSenderId());
+			System.out.println("Sender's Screen Name: " + message.getSenderScreenName());
+			System.out.println("Text: " + message.getText());
+			System.out.println("DMessage is created at: " + message.getCreatedAt());
+		}
+		
+		add(messageListPanel);
+		repaint();
+		revalidate();
+	}
+
+	private JPanel getHeaderPanel() {
 		JPanel headerPanel = new JPanel();
 		headerPanel.setBounds(getX(), getY(), getWidth(), getHeight() / 9);
 		headerPanel.setLocation(0, 0);
@@ -68,9 +86,6 @@ public class DMessageView extends JPanel {
 		newDMessageButton.setFocusPainted(false);
 		headerPanel.add(dMessageField, BorderLayout.WEST);
 		headerPanel.add(newDMessageButton, BorderLayout.EAST);
-		messageListPanel.add(headerPanel);
-		add(messageListPanel);
-		repaint();
-		revalidate();
+		return headerPanel;
 	}
 }

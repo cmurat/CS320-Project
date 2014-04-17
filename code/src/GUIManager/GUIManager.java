@@ -3,6 +3,12 @@ package GUIManager;
 import java.awt.Desktop;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
@@ -21,7 +27,8 @@ public class GUIManager {
 		this.dataRequestManager = dataRequestManager;
 		this.loginURL = dataRequestManager.createRequestTokenURL();
 		this.gui = new GUI(this);
-		this.tweetListenerHandler = new TweetListenerHandler(this, dataRequestManager);
+		this.tweetListenerHandler = new TweetListenerHandler(this,
+				dataRequestManager);
 	}
 
 	public void loginButtonClicked() {
@@ -87,7 +94,18 @@ public class GUIManager {
 	}
 
 	public void dMessageButtonClicked() {
-		gui.printDMessages(dataRequestManager.getDirectMessages());
+		ResponseList<DirectMessage> receivedDMessages = dataRequestManager.getDirectMessages();
+		ResponseList<DirectMessage> sentDMessages = dataRequestManager.getSentDirectMessages();
+		receivedDMessages.addAll(sentDMessages);
+		Collections.sort(receivedDMessages, new Comparator<DirectMessage>() {
+			@Override
+			public int compare(DirectMessage o1, DirectMessage o2) {
+				Date date1 = o1.getCreatedAt();
+				Date date2 = o2.getCreatedAt();
+				return date2.compareTo(date1);
+			}
+		});
+		gui.printDMessages(receivedDMessages);
 	}
 
 	public ResponseList<DirectMessage> getDirectMessages() {
