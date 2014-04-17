@@ -8,14 +8,15 @@ import javax.swing.JButton;
 
 import GUI.GUI;
 
-public class MeButtonListener implements ActionListener{
+public class MeButtonListener implements ActionListener {
 	private JButton meButton;
 	private GUI gui;
+
 	public MeButtonListener(JButton meButton, GUI gui) {
 		this.meButton = meButton;
 		this.gui = gui;
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("\nMe button is clicked!");
 		meButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));

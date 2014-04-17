@@ -7,13 +7,14 @@ import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import GUI.MainPanel;
 
-public class ChangeProfilePictureButtonListener implements ActionListener{
+public class ChangeProfilePictureButtonListener implements ActionListener {
 	private MainPanel mainPanel;
 	private JButton changeProfilePictureButton;
-	
+
 	public ChangeProfilePictureButtonListener(JButton changeProfilePictureButton, MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
 		this.changeProfilePictureButton = changeProfilePictureButton;
@@ -21,17 +22,23 @@ public class ChangeProfilePictureButtonListener implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("\n change username is clicked!");
+		System.out.println("\n change profile picture is clicked!");
 		changeProfilePictureButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-		mainPanel.changeProfilePictureClicked(askPictureFile());
+		File pictureFile = askPictureFile();
+		if (pictureFile != null)
+			mainPanel.changeProfilePictureClicked(pictureFile);
 		changeProfilePictureButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 	private File askPictureFile() {
-		JFileChooser jfc = new JFileChooser();
-	    jfc.showDialog(null,"Please Select the File");
-	    jfc.setVisible(true);
-	    return jfc.getSelectedFile();
+		JFileChooser fileChooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(
+				"Image Files", "jpg", "jpeg", "gif", "png", 
+				"JPG", "JPEG", "GIF", "PNG");
+		fileChooser.setFileFilter(filter);
+		fileChooser.showDialog(mainPanel, "OK");
+		fileChooser.setVisible(true);
+		return fileChooser.getSelectedFile();
 	}
 
 }

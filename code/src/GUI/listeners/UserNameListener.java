@@ -12,6 +12,7 @@ public class UserNameListener implements ActionListener {
 	private long userId;
 	private JButton userName;
 	private MainPanel mainPanel;
+
 	public UserNameListener(long userId, JButton userName, MainPanel mainPanel) {
 		this.userId = userId;
 		this.userName = userName;
@@ -19,7 +20,6 @@ public class UserNameListener implements ActionListener {
 	}
 
 	@Override
-
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("\n User Name is clicked!");
 		userName.setCursor(new Cursor(Cursor.WAIT_CURSOR));

@@ -11,7 +11,8 @@ public class FollowButtonListener implements ActionListener {
 	private long userID;
 	private MainPanel mainPanel;
 	private JButton button;
-	public FollowButtonListener(long userID, MainPanel mainPanel,JButton button) {
+
+	public FollowButtonListener(long userID, MainPanel mainPanel, JButton button) {
 		this.userID = userID;
 		this.mainPanel = mainPanel;
 		this.button = button;
@@ -23,10 +24,9 @@ public class FollowButtonListener implements ActionListener {
 		mainPanel.followButtonPressed(userID);
 		button.setText("UnFollow");
 		button.removeActionListener(this);
-		button.addActionListener(new UnFollowButtonListener(userID, mainPanel,button));
+		button.addActionListener(new UnFollowButtonListener(userID, mainPanel, button));
 		button.revalidate();
 		button.repaint();
-
 	}
 
 }

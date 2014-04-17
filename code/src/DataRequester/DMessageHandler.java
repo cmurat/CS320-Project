@@ -12,8 +12,7 @@ public class DMessageHandler {
 		this.twitter = twitter;
 	}
 
-	public void sendDirectMessage(long userId, String message)
-			throws TwitterException {
+	public void sendDirectMessage(long userId, String message) throws TwitterException {
 		twitter.sendDirectMessage(userId, message);
 	}
 

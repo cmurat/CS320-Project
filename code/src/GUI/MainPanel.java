@@ -46,12 +46,12 @@ public class MainPanel extends JPanel {
 		add(tweetBox, BorderLayout.SOUTH);
 		refresh();
 	}
-	
+
 	private void stopTimelineTimer() {
 		if (tweetStream != null)
 			tweetStream.stopRefreshTimer();
 	}
-	
+
 	public void refreshTimeline() {
 		gui.homeButtonClicked();
 	}
@@ -130,7 +130,6 @@ public class MainPanel extends JPanel {
 
 	public void followingClicked(long userId) {
 		gui.followingClicked(userId);
-
 	}
 
 	public void printAccounts(ArrayList<Account> accounts) {
@@ -156,7 +155,6 @@ public class MainPanel extends JPanel {
 
 	public void followButtonPressed(long userID) {
 		gui.followButtonPressed(userID);
-		
 	}
 
 	public void startRefreshTimer() {

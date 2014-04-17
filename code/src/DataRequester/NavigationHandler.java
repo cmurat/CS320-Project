@@ -17,7 +17,7 @@ public class NavigationHandler {
 		this.twitter = twitter;
 	}
 
-	public ArrayList<Tweet> getTimeline()  {
+	public ArrayList<Tweet> getTimeline() {
 		List<Status> statuses = null;
 		try {
 			statuses = twitter.getHomeTimeline();
@@ -29,9 +29,9 @@ public class NavigationHandler {
 		return tweets;
 	}
 
-	public ArrayList<Tweet> getMentions(){
+	public ArrayList<Tweet> getMentions() {
 		@SuppressWarnings("deprecation")
-		List<Status> statuses =null;
+		List<Status> statuses = null;
 		try {
 			statuses = twitter.getMentions();
 		} catch (TwitterException e) {
@@ -54,7 +54,6 @@ public class NavigationHandler {
 		try {
 			result = twitter.search(query);
 		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ArrayList<Tweet> queryResult = getTweets(result.getTweets());
@@ -70,15 +69,13 @@ public class NavigationHandler {
 		return tweets;
 	}
 
-	public ArrayList<Account> getFollowers(long userId){
+	public ArrayList<Account> getFollowers(long userId) {
 		List<User> users = null;
 		try {
 			users = twitter.getFollowersList(userId, -1);
 		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ArrayList<Account> accounts = getAccounts(users);
@@ -87,17 +84,15 @@ public class NavigationHandler {
 
 	public ArrayList<Account> getFollowings(long userId) {
 		List<User> users = null;
-		
-			try {
-				users = twitter.getFriendsList(userId, -1);
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (TwitterException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
+
+		try {
+			users = twitter.getFriendsList(userId, -1);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+
 		ArrayList<Account> accounts = getAccounts(users);
 		return accounts;
 	}

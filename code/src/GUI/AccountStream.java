@@ -21,12 +21,14 @@ import GUI.listeners.UserNameListener;
 @SuppressWarnings("serial")
 public class AccountStream extends JPanel {
 	private MainPanel mainPanel;
+
 	public AccountStream(MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
 		setLayout(new GridLayout(0, 1));
 
 		setBackground(Color.white);
 	}
+
 	public JScrollPane printAccounttream(ArrayList<Account> accounts) {
 		printAccounts(accounts);
 		System.out.println("\nAssume AccountStream is painted.");
@@ -37,24 +39,25 @@ public class AccountStream extends JPanel {
 		tweetPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		return tweetPane;
 	}
+
 	private void printAccounts(ArrayList<Account> accounts) {
-		for (Account account : accounts) {			
+		for (Account account : accounts) {
 			JPanel imagePanel = new JPanel();
 			imagePanel.setBackground(Color.WHITE);
 			imagePanel.setOpaque(true);
-			
+
 			JPanel contentPanel = new JPanel();
 			contentPanel.setBackground(Color.WHITE);
 			contentPanel.setOpaque(true);
-			contentPanel.setLayout(new GridLayout(2,1));
-			
+			contentPanel.setLayout(new GridLayout(2, 1));
+
 			addUserImage(account, imagePanel);
 			addUserName(account, contentPanel);
 
 			JPanel tweetPanel = new JPanel();
 			tweetPanel.setLayout(new BorderLayout());
-			tweetPanel.add(imagePanel,BorderLayout.WEST);
-			tweetPanel.add(contentPanel,BorderLayout.CENTER);
+			tweetPanel.add(imagePanel, BorderLayout.WEST);
+			tweetPanel.add(contentPanel, BorderLayout.CENTER);
 			add(tweetPanel);
 		}
 	}
@@ -76,7 +79,7 @@ public class AccountStream extends JPanel {
 		userName.setFocusable(false);
 		userName.setContentAreaFilled(false);
 		userName.setHorizontalAlignment(JButton.LEFT);
-		userName.addActionListener(new UserNameListener(account.getUserID(),userName,mainPanel));
+		userName.addActionListener(new UserNameListener(account.getUserID(), userName, mainPanel));
 		userName.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		contentPanel.add(userName);
 	}

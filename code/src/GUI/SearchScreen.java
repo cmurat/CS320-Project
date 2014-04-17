@@ -7,9 +7,9 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class SearchScreen extends JPanel {
 	private MainPanel mainPanel;
 	private JTextField searchBar;
@@ -20,7 +20,6 @@ public class SearchScreen extends JPanel {
 		setLayout(new BorderLayout());
 		addSearchResultScreen();
 		addSearchBar();
-
 	}
 
 	private void addSearchResultScreen() {
@@ -47,7 +46,6 @@ public class SearchScreen extends JPanel {
 	}
 
 	private KeyListener getEnterKeyAdapter(final JTextField searchBar) {
-
 		return new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent event) {

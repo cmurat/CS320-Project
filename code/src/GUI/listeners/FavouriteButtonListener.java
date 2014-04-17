@@ -12,7 +12,9 @@ public class FavouriteButtonListener implements ActionListener {
 	private long tweetId;
 	private JButton userName;
 	private MainPanel mainPanel;
-	public FavouriteButtonListener(long tweetId, JButton userName, MainPanel mainPanel) {
+
+	public FavouriteButtonListener(long tweetId, JButton userName,
+			MainPanel mainPanel) {
 		this.tweetId = tweetId;
 		this.userName = userName;
 		this.mainPanel = mainPanel;

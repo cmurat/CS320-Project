@@ -28,7 +28,6 @@ public class AccountHandler {
 	}
 
 	public boolean loginTwitterFromStorage() throws IOException {
-
 		accessToken = loadAccessToken();
 		if (accessToken == null)
 			return false;
@@ -64,24 +63,26 @@ public class AccountHandler {
 	private void storeAccessToken(AccessToken accessToken) throws IOException {
 		Writer output;
 		output = new BufferedWriter(new FileWriter("twitter4j.password", true));
-		output.append(accessToken.getToken() + "\n"
-				+ accessToken.getTokenSecret());
+		output.append(accessToken.getToken() + "\n"	+ accessToken.getTokenSecret());
 		output.close();
 
 	}
-	public void setProfilePicture(File image){
+
+	public void setProfilePicture(File image) {
 		try {
 			twitter.updateProfileImage(image);
 		} catch (TwitterException e) {
 			System.out.println("\nProfile Picture couldnt set");
 			e.printStackTrace();
 		}
-		
+
 	}
-	public void setProfileName(String screenName){
+
+	public void setProfileName(String screenName) {
 		try {
 			User user = twitter.verifyCredentials();
-			twitter.updateProfile(screenName, user.getURL(),user.getLocation(),user.getDescription());
+			twitter.updateProfile(screenName, user.getURL(),
+					user.getLocation(), user.getDescription());
 		} catch (TwitterException e) {
 			System.out.println("\nProfile name couldnt set");
 			e.printStackTrace();
@@ -101,42 +102,45 @@ public class AccountHandler {
 		}
 
 	}
-	public DetailedAccount getHomeAccount(){
-		User user = null; 
+
+	public DetailedAccount getHomeAccount() {
+		User user = null;
 		ArrayList<Tweet> tweets = null;
-		
+
 		try {
 			user = twitter.showUser(twitter.getId());
 			tweets = createTweetList(user.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		DetailedAccount account = new DetailedAccount(user, tweets);
 		return account;
 	}
 
-	public DetailedAccount getDetailedAccount(long userId){
-		User user = null; 
+	public DetailedAccount getDetailedAccount(long userId) {
+		User user = null;
 		ArrayList<Tweet> tweets = null;
-		
+
 		try {
 			user = twitter.showUser(userId);
 			tweets = createTweetList(user.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		DetailedAccount account = new DetailedAccount(user, tweets);
 		setupAccount(account, user);
 		return account;
 
 	}
-	
+
 	private void setupAccount(DetailedAccount account, User user) {
 		boolean followStatus = false;
 		try {
-			followStatus = twitter.showFriendship(twitter.getId(), user.getId()).isSourceFollowingTarget();
+			followStatus = twitter
+					.showFriendship(twitter.getId(), user.getId())
+					.isSourceFollowingTarget();
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -148,7 +152,7 @@ public class AccountHandler {
 		account.setFollowRequestSent(user.isFollowRequestSent());
 		account.setFollowStatus(followStatus);
 	}
-	
+
 	private ArrayList<Tweet> createTweetList(long userId) throws TwitterException {
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 		List<Status> statuses = twitter.getUserTimeline(userId);
@@ -164,7 +168,7 @@ public class AccountHandler {
 		passwordFile.delete();
 		System.out.println("succesfully logOut");
 		System.exit(0);
-		
+
 	}
 
 }

@@ -2,7 +2,6 @@ package DataRequesterManager;
 
 import java.util.ArrayList;
 
-import twitter4j.TwitterException;
 import DataRequester.NavigationHandler;
 import DataRequester.Tweet;
 

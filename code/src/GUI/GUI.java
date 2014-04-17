@@ -2,7 +2,6 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -13,7 +12,6 @@ import javax.swing.JFrame;
 
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
-import twitter4j.TwitterException;
 import DataRequester.Account;
 import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
@@ -49,7 +47,7 @@ public class GUI extends JFrame {
 	private void calculateBounds() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) (screenSize.getWidth() / 4);
-		int height = (int) screenSize.getHeight() - getTaskBarHeight()-30;
+		int height = (int) screenSize.getHeight() - getTaskBarHeight() - 30;
 		int yPos = 0;
 		int xPos = (int) (screenSize.getWidth() - width);
 		setBounds(xPos, yPos, width, height);
@@ -73,7 +71,6 @@ public class GUI extends JFrame {
 		add(loginPanel);
 		getContentPane().repaint();
 		getContentPane().validate();
-	
 	}
 
 	public void pinEntered() {
@@ -143,7 +140,6 @@ public class GUI extends JFrame {
 
 	public void mentionsButtonClicked() {
 		guiManager.mentionButtonClicked();
-
 	}
 
 	public void userNameClicked(long userId) {
@@ -156,32 +152,26 @@ public class GUI extends JFrame {
 
 	public void followingClicked(long userId) {
 		guiManager.followingClicked(userId);
-
 	}
 
 	public void printAccounts(ArrayList<Account> followers) {
 		mainPanel.printAccounts(followers);
-
 	}
 
 	public void followersClicked(long userId) {
 		guiManager.followersClicked(userId);
-
 	}
 
 	public void searchEntered() {
 		guiManager.getSearch();
-
 	}
 
 	public String getSearch() {
 		return mainPanel.getSearch();
-
 	}
 
 	public void searchButtonClicked() {
 		guiManager.searchButtonClicked();
-
 	}
 
 	public void printSearchScreen() {
@@ -194,7 +184,6 @@ public class GUI extends JFrame {
 
 	public void followButtonPressed(long userID) {
 		guiManager.followClicked(userID);
-		
 	}
 
 	public void startRefreshTimer() {
@@ -206,12 +195,11 @@ public class GUI extends JFrame {
 	}
 
 	public void printSettingsScreen() {
-		mainPanel.printSettingsScreen();		
+		mainPanel.printSettingsScreen();
 	}
-	
+
 	public void favoriteButtonClicked(long tweetId) {
 		guiManager.tweetListenerHandler.favorite(tweetId);
-		
 	}
 
 	public void retweetButtonClicked(long tweetId) {
@@ -228,15 +216,14 @@ public class GUI extends JFrame {
 
 	public void deleteButtonClicked(long tweetId) {
 		guiManager.tweetListenerHandler.delete(tweetId);
-		
 	}
-	
-	public boolean logOutButtonClicked(){
+
+	public boolean logOutButtonClicked() {
 		return guiManager.logOutButtonClicked();
 	}
 
 	public void changeUsernameClicked(String screenName) {
-		guiManager.changeUsernameClicked(screenName);		
+		guiManager.changeUsernameClicked(screenName);
 	}
 
 	public void changeProfilePictureClicked(File image) {

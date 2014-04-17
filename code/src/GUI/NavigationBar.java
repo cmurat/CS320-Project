@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -31,7 +29,7 @@ public class NavigationBar extends JPanel {
 		buttonList = new ArrayList<JButton>();
 		calculateBounds();
 		setOpaque(true);
-		setLayout(new GridLayout(1,6));
+		setLayout(new GridLayout(1, 6));
 		setBackground(Color.WHITE);
 		addButtonToButtonList();
 		printbuttonList();
@@ -44,7 +42,7 @@ public class NavigationBar extends JPanel {
 	}
 
 	private void addButtonToButtonList() {
-		int dimension = getWidth()/8;
+		int dimension = getWidth() / 8;
 		addHomeButton(dimension);
 		addNotificationsButton(dimension);
 		addMeButton(dimension);
@@ -53,7 +51,6 @@ public class NavigationBar extends JPanel {
 		addSettingsButton(dimension);
 		addLogOutButton(dimension);
 	}
-
 
 	private ImageIcon getImageIcon(String iconPath, int dimension) {
 		Image img = new ImageIcon(iconPath).getImage();
@@ -84,7 +81,8 @@ public class NavigationBar extends JPanel {
 
 	private void addNotificationsButton(int dimension) {
 		JButton notificationsButton = getIconButton("icon/mail2.png", dimension);
-		notificationsButton.addActionListener(new NotificationsButtonListener(notificationsButton, gui));
+		notificationsButton.addActionListener(
+				new NotificationsButtonListener(notificationsButton, gui));
 		notificationsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(notificationsButton);
 	}
@@ -112,11 +110,12 @@ public class NavigationBar extends JPanel {
 
 	private void addSettingsButton(int dimension) {
 		JButton settingsButton = getIconButton("icon/settings.png", dimension);
-		settingsButton.addActionListener(new SettingsButtonListener(settingsButton, gui));
+		settingsButton.addActionListener(
+				new SettingsButtonListener(settingsButton, gui));
 		settingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(settingsButton);
 	}
-	
+
 	private void addLogOutButton(int dimension) {
 		JButton logOutButton = getIconButton("icon/LogOutButton.png", dimension);
 		logOutButton.addActionListener(new LogoutButtonListener(logOutButton, gui));

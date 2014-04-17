@@ -3,8 +3,6 @@ package DataRequesterManager;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.naming.directory.InvalidAttributesException;
-
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
 import twitter4j.Twitter;
@@ -49,7 +47,7 @@ public class DataRequestManager {
 	}
 
 	private void initDataRequesterManagerClasses() {
-		this.accountRequests = new AccountRequests(accountHandler,this);
+		this.accountRequests = new AccountRequests(accountHandler, this);
 		this.tweetStreamRequests = new TweetStreamRequests(navigationHandler);
 		this.tweetRequests = new TweetRequests(tweetHandler, this);
 	}

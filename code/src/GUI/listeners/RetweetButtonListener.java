@@ -12,7 +12,9 @@ public class RetweetButtonListener implements ActionListener {
 	private long tweetId;
 	private JButton userName;
 	private MainPanel mainPanel;
-	public RetweetButtonListener(long tweetId, JButton userName, MainPanel mainPanel) {
+
+	public RetweetButtonListener(long tweetId, JButton userName,
+			MainPanel mainPanel) {
 		this.tweetId = tweetId;
 		this.userName = userName;
 		this.mainPanel = mainPanel;
@@ -23,4 +25,5 @@ public class RetweetButtonListener implements ActionListener {
 		userName.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		mainPanel.retweetButtonClicked(tweetId);
 		userName.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-	}}
+	}
+}

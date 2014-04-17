@@ -21,8 +21,7 @@ public class GUIManager {
 		this.dataRequestManager = dataRequestManager;
 		this.loginURL = dataRequestManager.createRequestTokenURL();
 		this.gui = new GUI(this);
-		this.tweetListenerHandler = new TweetListenerHandler(this,
-				dataRequestManager);
+		this.tweetListenerHandler = new TweetListenerHandler(this, dataRequestManager);
 	}
 
 	public void loginButtonClicked() {
@@ -70,13 +69,11 @@ public class GUIManager {
 		System.out.println("\nAssume it is sent: " + tweet);
 	}
 
-	
-
 	public void meButtonClicked() {
 		gui.printProfile(dataRequestManager.getCurrentUserAccount());
 	}
-	
-	public long getCurrentUserId(){
+
+	public long getCurrentUserId() {
 		return dataRequestManager.getCurrentUserAccount().getUserID();
 	}
 
@@ -88,7 +85,7 @@ public class GUIManager {
 	public void mentionButtonClicked() {
 		gui.printTimeline(dataRequestManager.getMentions());
 	}
-	
+
 	public void dMessageButtonClicked() {
 		gui.printDMessages(dataRequestManager.getDirectMessages());
 	}
@@ -126,22 +123,23 @@ public class GUIManager {
 
 	public void followingClicked(long userId) {
 		gui.printAccounts(dataRequestManager.getFollowings(userId));
-		
+
 	}
 
 	public void followersClicked(long userId) {
 		gui.printAccounts(dataRequestManager.getFollowers(userId));
-		
+
 	}
 
 	public void getSearch() {
 		String search = gui.getSearch();
-		gui.printSearchScreenResults(dataRequestManager.getSearchResults(search));
+		gui.printSearchScreenResults(dataRequestManager
+				.getSearchResults(search));
 	}
 
 	public void searchButtonClicked() {
 		gui.printSearchScreen();
-		
+
 	}
 
 	public void settingsButtonClicked() {
@@ -160,5 +158,4 @@ public class GUIManager {
 		dataRequestManager.accountRequests.changeProfilePicture(image);
 	}
 
-	
 }

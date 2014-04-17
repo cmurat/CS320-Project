@@ -12,6 +12,7 @@ public class FollowingsListener implements ActionListener {
 	private MainPanel mainPanel;
 	private JButton followings;
 	private long userId;
+
 	public FollowingsListener(long userId, JButton followings, MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
 		this.followings = followings;
@@ -24,7 +25,6 @@ public class FollowingsListener implements ActionListener {
 		followings.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		mainPanel.followingClicked(userId);
 		followings.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
 	}
 
 }

@@ -9,8 +9,8 @@ public class TweetListenerHandler {
 
 	public TweetListenerHandler(GUIManager guiManager,
 			DataRequestManager dataRequestManager) {
-		this.dataRequestManager=dataRequestManager;
-		this.guiManager=guiManager;
+		this.dataRequestManager = dataRequestManager;
+		this.guiManager = guiManager;
 	}
 
 	public void postTweet(String tweet, String imageLocation) {
@@ -21,27 +21,22 @@ public class TweetListenerHandler {
 		try {
 			dataRequestManager.tweetHandler.favorite(tweetID);
 		} catch (TwitterException e) {
-			
 			e.printStackTrace();
 		}
-		
 	}
 
 	public void unFavorite(long tweetID) {
 		try {
 			dataRequestManager.tweetHandler.unFavorite(tweetID);
 		} catch (TwitterException e) {
-			
 			e.printStackTrace();
 		}
-		
 	}
 
 	public void retweet(long tweetID) {
 		try {
 			dataRequestManager.tweetHandler.retweet(tweetID);
 		} catch (TwitterException e) {
-			
 			e.printStackTrace();
 		}
 	}
@@ -50,9 +45,8 @@ public class TweetListenerHandler {
 		try {
 			dataRequestManager.tweetHandler.delete(tweetID);
 		} catch (TwitterException e) {
-			
 			e.printStackTrace();
-		}	
+		}
 	}
 
 }

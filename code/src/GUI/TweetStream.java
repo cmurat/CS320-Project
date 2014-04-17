@@ -49,13 +49,11 @@ public class TweetStream extends JPanel {
 		JScrollPane tweetPane = new JScrollPane(this);
 		tweetPane.setOpaque(true);
 		tweetPane.getVerticalScrollBar().setUnitIncrement(16);
-		tweetPane
-				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		tweetPane
-				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		tweetPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		tweetPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		return tweetPane;
 	}
-	
+
 	public void changeRefreshTimerDelay(int delay) {
 		refreshTime = delay;
 	}
@@ -74,7 +72,7 @@ public class TweetStream extends JPanel {
 		try {
 			refreshTimer.cancel();
 		} catch (IllegalStateException e) {
-//			e.printStackTrace(); OK..
+			// e.printStackTrace(); OK..
 		}
 	}
 
@@ -87,11 +85,11 @@ public class TweetStream extends JPanel {
 			JPanel tweetPanel = new JPanel();
 			tweetPanel.setBorder(new LineBorder(Color.BLACK, 1, true));
 			JPanel imagePanel = new JPanel();
-			JPanel buttonPanel=new JPanel();
+			JPanel buttonPanel = new JPanel();
 			buttonPanel.setBackground(Color.WHITE);
 			buttonPanel.setOpaque(true);
 			buttonPanel.setLayout(new FlowLayout());
-			
+
 			imagePanel.setBackground(Color.WHITE);
 			imagePanel.setOpaque(true);
 			JPanel contentPanel = new JPanel();
@@ -104,35 +102,38 @@ public class TweetStream extends JPanel {
 			addTweetContent(tweet, contentPanel);
 			tweetPanel.add(imagePanel, BorderLayout.WEST);
 			tweetPanel.add(contentPanel, BorderLayout.CENTER);
-			addFavouriteButton(buttonPanel,tweet);
-			addRetweetButton(buttonPanel,tweet);
-			if(mainPanel.getCurrentUserId()==tweet.getUserId()){
-				addDeleteButton(buttonPanel,tweet);
+			addFavouriteButton(buttonPanel, tweet);
+			addRetweetButton(buttonPanel, tweet);
+			if (mainPanel.getCurrentUserId() == tweet.getUserId()) {
+				addDeleteButton(buttonPanel, tweet);
 			}
-			contentPanel.add(buttonPanel,BorderLayout.SOUTH);
+			contentPanel.add(buttonPanel, BorderLayout.SOUTH);
 			add(tweetPanel);
 		}
-		
+
 	}
-	
+
 	private void addDeleteButton(JPanel buttonPanel, Tweet tweet) {
 		JButton deleteButton = getIconButton("icon/DeleteIcon.png");
-		deleteButton.addActionListener( new DeleteButtonListener(tweet.getTweetId(), deleteButton, mainPanel));
+		deleteButton.addActionListener(
+				new DeleteButtonListener(tweet.getTweetId(), deleteButton, mainPanel));
 		buttonPanel.add(deleteButton);
 	}
 
 	private void addRetweetButton(JPanel buttonPanel, Tweet tweet) {
 		JButton retweetButton = getIconButton("icon/RetweetIcon.png");
-		retweetButton.addActionListener( new RetweetButtonListener(tweet.getTweetId(), retweetButton, mainPanel));
+		retweetButton.addActionListener(
+				new RetweetButtonListener(tweet.getTweetId(), retweetButton, mainPanel));
 		buttonPanel.add(retweetButton);
-	
+
 	}
 
 	private void addFavouriteButton(JPanel buttonPanel, Tweet tweet) {
 		JButton favouriteButton = getIconButton("icon/FavoriteIcon.png");
-		favouriteButton.addActionListener( new FavouriteButtonListener(tweet.getTweetId(), favouriteButton, mainPanel));
+		favouriteButton.addActionListener(
+				new FavouriteButtonListener(tweet.getTweetId(), favouriteButton, mainPanel));
 		buttonPanel.add(favouriteButton);
-		}
+	}
 
 	private JButton getIconButton(String iconLocation) {
 		JButton button = new JButton();
@@ -142,6 +143,7 @@ public class TweetStream extends JPanel {
 		button.setIcon(getImageIcon(iconLocation));
 		return button;
 	}
+
 	private ImageIcon getImageIcon(String iconPath) {
 		Image img = new ImageIcon(iconPath).getImage();
 		img = img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -159,8 +161,7 @@ public class TweetStream extends JPanel {
 		userName.setFocusable(false);
 		userName.setContentAreaFilled(false);
 		userName.setHorizontalAlignment(JButton.LEFT);
-		userName.addActionListener(new UserNameListener(tweet.getUserId(),
-				userName, mainPanel));
+		userName.addActionListener(new UserNameListener(tweet.getUserId(), userName, mainPanel));
 		userName.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		contentPanel.add(userName, BorderLayout.NORTH);
 	}

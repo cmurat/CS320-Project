@@ -9,10 +9,10 @@ import DataRequester.DetailedAccount;
 public class AccountRequests {
 	AccountHandler accountHandler;
 	DataRequestManager dataRequestManager;
-	
-	public AccountRequests(AccountHandler accountHandler,DataRequestManager dataRequestManager) {
+
+	public AccountRequests(AccountHandler accountHandler, DataRequestManager dataRequestManager) {
 		this.accountHandler = accountHandler;
-		this.dataRequestManager=dataRequestManager;
+		this.dataRequestManager = dataRequestManager;
 	}
 
 	public boolean checkPIN(String pin) throws IOException {

@@ -2,8 +2,6 @@ package DataRequester;
 
 import java.io.File;
 
-import javax.naming.directory.InvalidAttributesException;
-
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -21,11 +19,10 @@ public class TweetHandler {
 		StatusUpdate status = new StatusUpdate(tweet);
 		if (!imageLocation.equals(""))
 			status.media(new File(imageLocation));
-		
+
 		try {
 			twitter.updateStatus(status);
 		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

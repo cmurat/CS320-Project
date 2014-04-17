@@ -55,10 +55,5 @@ public class DetailedAccount extends Account {
 	public void setFollowRequestSent(boolean followRequestSent) {
 		this.followRequestSent = followRequestSent;
 	}
-
-//	public ArrayList<DirectMessage> getDirectMessage() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
+	
 }

@@ -12,7 +12,9 @@ public class DeleteButtonListener implements ActionListener {
 	private long tweetId;
 	private JButton buttonName;
 	private MainPanel mainPanel;
-	public DeleteButtonListener(long tweetId, JButton buttonName, MainPanel mainPanel) {
+
+	public DeleteButtonListener(long tweetId, JButton buttonName,
+			MainPanel mainPanel) {
 		this.tweetId = tweetId;
 		this.buttonName = buttonName;
 		this.mainPanel = mainPanel;
@@ -23,4 +25,5 @@ public class DeleteButtonListener implements ActionListener {
 		buttonName.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		mainPanel.deleteButtonClicked(tweetId);
 		buttonName.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-	}}
+	}
+}

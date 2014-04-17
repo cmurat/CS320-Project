@@ -8,7 +8,7 @@ import twitter4j.User;
 
 public class Tweet {
 	private User user;
-	private Status status; 
+	private Status status;
 
 	public Tweet(Status status) {
 		this.status = status;

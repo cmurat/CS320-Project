@@ -18,17 +18,18 @@ import GUI.listeners.FollowersListener;
 import GUI.listeners.FollowingsListener;
 import GUI.listeners.UnFollowButtonListener;
 
+@SuppressWarnings("serial")
 public class AccountProfileScreen extends JPanel {
-	private static final long serialVersionUID = 5820507962378503935L;
 	private DetailedAccount account;
 	private MainPanel mainPanel;
-	
-	public AccountProfileScreen(DetailedAccount account,MainPanel mainPanel){
+
+	public AccountProfileScreen(DetailedAccount account, MainPanel mainPanel) {
 		this.account = account;
 		this.mainPanel = mainPanel;
 		setLayout(new BorderLayout());
 		addUserInfoTo();
 	}
+
 	private void addUserInfoTo() {
 		JPanel picturePanel = new JPanel();
 		picturePanel.setLayout(new BoxLayout(picturePanel, BoxLayout.Y_AXIS));
@@ -40,8 +41,8 @@ public class AccountProfileScreen extends JPanel {
 		infoPanel.setLayout(new GridLayout(2, 3));
 		createLabels(infoPanel);
 		add(infoPanel, BorderLayout.CENTER);
-
 	}
+
 	private void createLabels(JPanel userInfoPanel) {
 		createFollowingsLabel(userInfoPanel);
 		createFollowersLabel(userInfoPanel);
@@ -55,12 +56,13 @@ public class AccountProfileScreen extends JPanel {
 		try {
 			imageURL = new URL(account.getProfilePictureURL());
 		} catch (MalformedURLException e) {
-			System.err.println("couldn't locate image");
+			System.err.println("Couldn't locate image");
 		}
 		JLabel profilePicture = new JLabel(new ImageIcon(imageURL));
 		profilePicture.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		picturePanel.add(profilePicture);
 	}
+
 	private void createProfileNameLabel(JPanel picturePanel) {
 		JLabel profileName = new JLabel(account.getUserName());
 		profileName.setHorizontalAlignment(JLabel.CENTER);
@@ -70,13 +72,15 @@ public class AccountProfileScreen extends JPanel {
 
 	private void createFollowLabel(JPanel userInfoPanel) {
 		JButton follow = null;
-		if(account.isFollowed()){
+		if (account.isFollowed()) {
 			follow = new JButton("UnFollow");
-			follow.addActionListener(new UnFollowButtonListener(account.getUserID(),mainPanel,follow));
-		}else{
+			follow.addActionListener(new UnFollowButtonListener(account
+					.getUserID(), mainPanel, follow));
+		} else {
 			follow = new JButton("Follow");
-			follow.addActionListener(new FollowButtonListener(account.getUserID(),mainPanel,follow));
-			
+			follow.addActionListener(new FollowButtonListener(account
+					.getUserID(), mainPanel, follow));
+
 		}
 		follow.setHorizontalAlignment(JButton.CENTER);
 		follow.setOpaque(true);
@@ -85,15 +89,16 @@ public class AccountProfileScreen extends JPanel {
 
 	private void createFollowingsLabel(JPanel userInfoPanel) {
 		JButton followings = buttonCreater("Followings");
-		followings.addActionListener(new FollowingsListener(account.getUserID(), followings, mainPanel));
+		followings.addActionListener(new FollowingsListener(
+				account.getUserID(), followings, mainPanel));
 		userInfoPanel.add(followings);
 	}
-
 
 	private void createFollowersLabel(JPanel userInfoPanel) {
 		JButton followers = buttonCreater("Followers");
 		System.out.println(account.getUserID());
-		followers.addActionListener(new FollowersListener(account.getUserID(), followers, mainPanel));
+		followers.addActionListener(new FollowersListener(account.getUserID(),
+				followers, mainPanel));
 		userInfoPanel.add(followers);
 	}
 
@@ -108,7 +113,6 @@ public class AccountProfileScreen extends JPanel {
 		button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		return button;
 	}
-
 
 	private void createFollowingsAmountLabel(JPanel userInfoPanel) {
 		JLabel followingNumber = new JLabel("" + account.getFollowingsAmount());

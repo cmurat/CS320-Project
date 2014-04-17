@@ -57,8 +57,7 @@ public class LoginPanel extends JPanel {
 		};
 	}
 
-	private JButton getIconButton(String iconLocation, int size,
-			ActionListener listener) {
+	private JButton getIconButton(String iconLocation, int size, ActionListener listener) {
 		JButton button = new JButton();
 		button.setBorderPainted(false);
 		button.setFocusable(false);
@@ -75,8 +74,7 @@ public class LoginPanel extends JPanel {
 	}
 
 	private JLabel getGreetingNote() {
-		JLabel greetingNote = new JLabel(
-				"To Enter Twitter Please Click on the Icon");
+		JLabel greetingNote = new JLabel("To Enter Twitter Please Click on the Icon");
 		greetingNote.setHorizontalAlignment(JLabel.CENTER);
 		greetingNote.setVerticalAlignment(JLabel.TOP);
 		return greetingNote;
@@ -123,7 +121,7 @@ public class LoginPanel extends JPanel {
 			}
 		};
 	}
-	
+
 	private void pinEntered() {
 		pinInputField.setEnabled(false);
 		setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -138,8 +136,7 @@ public class LoginPanel extends JPanel {
 	}
 
 	private void addOkButtonTo(JPanel buttonPanel) {
-		JButton okButton = getIconButton("icon/ok.png", getWidth() / 5,
-				getOkButtonListener());
+		JButton okButton = getIconButton("icon/ok.png", getWidth() / 5, getOkButtonListener());
 		buttonPanel.add(okButton, BorderLayout.EAST);
 	}
 
@@ -153,8 +150,7 @@ public class LoginPanel extends JPanel {
 	}
 
 	private void addBackButtonTo(JPanel buttonPanel) {
-		JButton backButton = getIconButton("icon/back.png", getWidth() / 5,
-				getBackButtonListener());
+		JButton backButton = getIconButton("icon/back.png", getWidth() / 5,	getBackButtonListener());
 		buttonPanel.add(backButton, BorderLayout.WEST);
 	}
 
@@ -166,7 +162,7 @@ public class LoginPanel extends JPanel {
 			}
 		};
 	}
-	
+
 	public String getPIN() {
 		return pinInputField.getText();
 	}
