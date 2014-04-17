@@ -49,7 +49,7 @@ public class DataRequestManager {
 	}
 
 	private void initDataRequesterManagerClasses() {
-		this.accountRequests = new AccountRequests(accountHandler);
+		this.accountRequests = new AccountRequests(accountHandler,this);
 		this.tweetStreamRequests = new TweetStreamRequests(navigationHandler);
 		this.tweetRequests = new TweetRequests(tweetHandler, this);
 	}

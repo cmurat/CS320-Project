@@ -9,9 +9,10 @@ import GUIManager.GUIManager;
 public class AccountRequests {
 
 	AccountHandler accountHandler;
-
-	public AccountRequests(AccountHandler accountHandler) {
+ DataRequestManager dataRequestManager;
+	public AccountRequests(AccountHandler accountHandler,DataRequestManager dataRequestManager) {
 		this.accountHandler = accountHandler;
+		this.dataRequestManager=dataRequestManager;
 	}
 
 	public boolean checkPIN(String pin) throws IOException {
@@ -38,6 +39,13 @@ public class AccountRequests {
 
 	public DetailedAccount getCurrentUserDetailedAccount() {
 		return accountHandler.getHomeAccount();
+	}
+
+	public boolean logOutClicked() {
+		accountHandler.logout();
+		return true;
+		
+		
 	}
 
 }

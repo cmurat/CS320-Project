@@ -146,5 +146,10 @@ public class GUIManager {
 		gui.printSettingsScreen();
 	}
 
+	public boolean logOutButtonClicked() {
+		return dataRequestManager.accountRequests.logOutClicked();
+		
+	}
+
 	
 }

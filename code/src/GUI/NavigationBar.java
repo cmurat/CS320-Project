@@ -18,6 +18,7 @@ import GUI.listeners.MeButtonListener;
 import GUI.listeners.NotificationsButtonListener;
 import GUI.listeners.SearchButtonListener;
 import GUI.listeners.SettingsButtonListener;
+import GUI.listeners.logoutButtonListener;
 
 @SuppressWarnings("serial")
 public class NavigationBar extends JPanel {
@@ -50,6 +51,7 @@ public class NavigationBar extends JPanel {
 		addSearchButton(dimension);
 		addDMessageButton(dimension);
 		addSettingsButton(dimension);
+		addLogOutButton(dimension);
 	}
 
 
@@ -113,5 +115,12 @@ public class NavigationBar extends JPanel {
 		settingsButton.addActionListener(new SettingsButtonListener(settingsButton, gui));
 		settingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(settingsButton);
+	}
+	
+	private void addLogOutButton(int dimension) {
+		JButton logOutButton = getIconButton("icon/LogOutButton.png", dimension);
+		logOutButton.addActionListener(new logoutButtonListener(logOutButton, gui));
+		logOutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		buttonList.add(logOutButton);
 	}
 }

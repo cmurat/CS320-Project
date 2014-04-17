@@ -28,7 +28,7 @@ public class SettingsScreen extends JPanel {
 		
 		addChangeImageButton(settingsPanel);
 		addChangeUsernameButton(settingsPanel);
-		addLogoutButton(settingsPanel);
+		//addLogoutButton(settingsPanel);
 		
 		add(settingsPanel, BorderLayout.NORTH);
 		
@@ -48,7 +48,7 @@ public class SettingsScreen extends JPanel {
 
 	private void addLogoutButton(JPanel settingsPanel) {
 		JButton logoutButton = createButton("Logout");
-		logoutButton.addActionListener(new logoutButtonListener(logoutButton));
+		//logoutButton.addActionListener(new logoutButtonListener(logoutButton));
 		settingsPanel.add(logoutButton);
 	}
 

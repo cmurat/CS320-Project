@@ -144,6 +144,9 @@ public class AccountHandler {
 	public void logout() {
 		File passwordFile = new File("twitter4j.password");
 		passwordFile.delete();
+		System.out.println("succesfully logOut");
+		System.exit(0);
+		
 	}
 
 }

@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -71,6 +72,7 @@ public class GUI extends JFrame {
 		add(loginPanel);
 		getContentPane().repaint();
 		getContentPane().validate();
+	
 	}
 
 	public void pinEntered() {
@@ -233,6 +235,10 @@ public class GUI extends JFrame {
 	public void deleteButtonClicked(long tweetId) {
 		guiManager.tweetListenerHandler.delete(tweetId);
 		
+	}
+	
+	public boolean logOutButtonClicked(){
+		return guiManager.logOutButtonClicked();
 	}
 
 	
