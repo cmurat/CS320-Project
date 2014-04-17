@@ -115,17 +115,14 @@ public class TweetStream extends JPanel {
 		JButton retweetButton = getIconButton("icon/RetweetIcon.png");
 		retweetButton.addActionListener( new RetweetButtonListener(tweet.getTweetId(), retweetButton, mainPanel));
 		contentPanel.add(retweetButton, BorderLayout.SOUTH);
-		System.out.println("retweet button eklendi");
-		
-		
+	
 	}
 
-	private void addFavouriteButton(JPanel tweetPanel, Tweet tweet) {
+	private void addFavouriteButton(JPanel contentPanel, Tweet tweet) {
 		JButton favouriteButton = getIconButton("icon/FavoriteIcon.png");
 		favouriteButton.addActionListener( new FavouriteButtonListener(tweet.getTweetId(), favouriteButton, mainPanel));
-		tweetPanel.add(favouriteButton, BorderLayout.PAGE_END);
-		System.out.println("favourite button eklendi");
-	}
+		contentPanel.add(favouriteButton, BorderLayout.PAGE_END);
+		}
 
 	private JButton getIconButton(String iconLocation) {
 		JButton button = new JButton();
