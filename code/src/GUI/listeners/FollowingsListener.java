@@ -24,7 +24,7 @@ public class FollowingsListener implements ActionListener {
 		System.out.println("\n Followings is clicked!");
 		followings.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		mainPanel.followingClicked(userId);
-		followings.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		followings.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 
 }

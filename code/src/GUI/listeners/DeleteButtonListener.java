@@ -10,20 +10,19 @@ import GUI.MainPanel;
 
 public class DeleteButtonListener implements ActionListener {
 	private long tweetId;
-	private JButton buttonName;
+	private JButton deleteButton;
 	private MainPanel mainPanel;
 
-	public DeleteButtonListener(long tweetId, JButton buttonName,
-			MainPanel mainPanel) {
+	public DeleteButtonListener(long tweetId, JButton deleteButton, MainPanel mainPanel) {
 		this.tweetId = tweetId;
-		this.buttonName = buttonName;
+		this.deleteButton = deleteButton;
 		this.mainPanel = mainPanel;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("retweet is clicked!");
-		buttonName.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+		deleteButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		mainPanel.deleteButtonClicked(tweetId);
-		buttonName.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		deleteButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 }

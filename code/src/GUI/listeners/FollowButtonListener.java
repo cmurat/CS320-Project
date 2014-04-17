@@ -1,5 +1,6 @@
 package GUI.listeners;
 
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,6 +26,7 @@ public class FollowButtonListener implements ActionListener {
 		button.setText("UnFollow");
 		button.removeActionListener(this);
 		button.addActionListener(new UnFollowButtonListener(userID, mainPanel, button));
+		button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		button.revalidate();
 		button.repaint();
 	}

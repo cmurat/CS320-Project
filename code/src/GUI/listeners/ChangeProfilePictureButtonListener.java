@@ -27,7 +27,7 @@ public class ChangeProfilePictureButtonListener implements ActionListener {
 		File pictureFile = askPictureFile();
 		if (pictureFile != null)
 			mainPanel.changeProfilePictureClicked(pictureFile);
-		changeProfilePictureButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		changeProfilePictureButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 
 	private File askPictureFile() {

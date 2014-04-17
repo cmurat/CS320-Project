@@ -24,7 +24,7 @@ public class UserNameListener implements ActionListener {
 		System.out.println("\n User Name is clicked!");
 		userName.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		mainPanel.userNameClicked(userId);
-		userName.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		userName.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 
 }

@@ -26,7 +26,7 @@ public class FollowersListener implements ActionListener {
 		System.out.println(userId);
 		followers.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		mainPanel.followersClicked(userId);
-		followers.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		followers.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 
 }

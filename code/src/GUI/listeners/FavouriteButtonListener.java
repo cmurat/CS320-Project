@@ -13,8 +13,7 @@ public class FavouriteButtonListener implements ActionListener {
 	private JButton userName;
 	private MainPanel mainPanel;
 
-	public FavouriteButtonListener(long tweetId, JButton userName,
-			MainPanel mainPanel) {
+	public FavouriteButtonListener(long tweetId, JButton userName, MainPanel mainPanel) {
 		this.tweetId = tweetId;
 		this.userName = userName;
 		this.mainPanel = mainPanel;
@@ -24,7 +23,7 @@ public class FavouriteButtonListener implements ActionListener {
 		System.out.println("\n favourite is clicked!");
 		userName.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		mainPanel.favoriteButtonClicked(tweetId);
-		userName.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		userName.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 
 }

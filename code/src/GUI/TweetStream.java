@@ -81,35 +81,40 @@ public class TweetStream extends JPanel {
 
 	private void printTweets(ArrayList<Tweet> tweets) {
 		for (Tweet tweet : tweets) {
-			JPanel tweetPanel = new JPanel();
-			tweetPanel.setBorder(new LineBorder(Color.BLACK, 1, true));
-			JPanel imagePanel = new JPanel();
-			JPanel buttonPanel = new JPanel();
-			buttonPanel.setBackground(Color.WHITE);
-			buttonPanel.setOpaque(true);
+			JPanel buttonPanel = createPanel();
 			buttonPanel.setLayout(new FlowLayout());
-
-			imagePanel.setBackground(Color.WHITE);
-			imagePanel.setOpaque(true);
-			JPanel contentPanel = new JPanel();
-			contentPanel.setBackground(Color.WHITE);
-			contentPanel.setOpaque(true);
-			contentPanel.setLayout(new BorderLayout());
-			tweetPanel.setLayout(new BorderLayout(0, -20));
+			
+			JPanel imagePanel = createPanel();
 			addUserImage(tweet, imagePanel);
+			
+			JPanel contentPanel = createPanel();
+			contentPanel.setLayout(new BorderLayout());
 			addUserName(tweet, contentPanel);
 			addTweetContent(tweet, contentPanel);
+			
+			JPanel tweetPanel = new JPanel();
+			tweetPanel.setBorder(new LineBorder(Color.BLACK, 1, true));
+			tweetPanel.setLayout(new BorderLayout(0, -20));
 			tweetPanel.add(imagePanel, BorderLayout.WEST);
 			tweetPanel.add(contentPanel, BorderLayout.CENTER);
 			addFavouriteButton(buttonPanel, tweet);
 			addRetweetButton(buttonPanel, tweet);
+			
 			if (mainPanel.getCurrentUserId() == tweet.getUserId()) {
 				addDeleteButton(buttonPanel, tweet);
 			}
+			
 			contentPanel.add(buttonPanel, BorderLayout.SOUTH);
 			add(tweetPanel);
 		}
 
+	}
+
+	private JPanel createPanel() {
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setOpaque(true);
+		return panel;
 	}
 
 	private void addDeleteButton(JPanel buttonPanel, Tweet tweet) {
@@ -140,6 +145,7 @@ public class TweetStream extends JPanel {
 		button.setFocusable(false);
 		button.setContentAreaFilled(false);
 		button.setIcon(getImageIcon(iconLocation));
+		button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		return button;
 	}
 

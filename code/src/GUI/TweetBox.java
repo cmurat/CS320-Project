@@ -72,8 +72,7 @@ public class TweetBox extends JPanel {
 		return new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				if (tweetField.getText().length() >= MAX_CHAR_LIMIT) {
-					tweetField.setText(tweetField.getText().substring(0,
-							MAX_CHAR_LIMIT));
+					tweetField.setText(tweetField.getText().substring(0, MAX_CHAR_LIMIT));
 				}
 			}
 		};

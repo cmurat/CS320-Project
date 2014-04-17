@@ -23,13 +23,23 @@ public class ChangeUsernameButtonListener implements ActionListener {
 		System.out.println("\n change username is clicked!");
 		changeUsernameButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		String username = askNewName();
-		if (username.matches(".*[a-zA-Z]+.*") || username.matches(".*[0-9]+.*"))
+		if (checkValidity(username))
 			mainPanel.changeUsernameClicked(username);
-		changeUsernameButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		changeUsernameButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	}
+
+	private boolean checkValidity(String username) {
+		return !username.equals("")
+				&& (username.matches(".*[a-zA-Z]+.*") 
+						|| username.matches(".*[0-9]+.*"));
 	}
 
 	private String askNewName() {
-		return JOptionPane.showInputDialog(mainPanel, "Enter new username");
+		String userInput = JOptionPane.showInputDialog(mainPanel, "Enter new username");
+		if (userInput != null && (userInput.length() <= 20)) {
+			return userInput;
+		}
+		return "";
 	}
 
 }

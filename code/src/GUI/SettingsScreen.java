@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -56,6 +57,7 @@ public class SettingsScreen extends JPanel {
 		button.setFocusable(false);
 		button.setContentAreaFilled(true);
 		button.setHorizontalAlignment(JButton.LEFT);
+		button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		return button;
 	}
 
