@@ -177,4 +177,12 @@ public class MainPanel extends JPanel {
 		
 	}
 
+	public long getCurrentUserId() {
+		return gui.getCurrentUserId();
+	}
+
+	public void deleteButtonClicked(long tweetId) {
+		gui.deleteButtonClicked(tweetId);
+	}
+
 }

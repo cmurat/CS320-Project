@@ -69,28 +69,13 @@ public class GUIManager {
 		System.out.println("\nAssume it is sent: " + tweet);
 	}
 
-	public void favoriteClicked() {
-		long tweetID = 0;// TODO for Burak and Ugur Manager needs long tweetID
-		tweetListenerHandler.favorite(tweetID);
-	}
-
-	public void unFavoriteClicked() {
-		long tweetID = 0;// TODO for Burak and Ugur Manager needs long tweetID
-		tweetListenerHandler.unFavorite(tweetID);
-	}
-
-	public void retweetClicked() {
-		long tweetID = 0;// TODO for Burak and Ugur Manager needs long tweetID
-		tweetListenerHandler.retweet(tweetID);
-	}
-
-	public void deleteClicked() {
-		long tweetID = 0;// TODO for Burak and Ugur Manager needs long tweetID
-		tweetListenerHandler.delete(tweetID);
-	}
+	
 
 	public void meButtonClicked() {
 		gui.printProfile(dataRequestManager.getCurrentUserAccount());
+	}
+	public long getCurrentUserId(){
+		return dataRequestManager.getCurrentUserAccount().getUserID();
 	}
 
 	public void homeButtonClicked() {
@@ -161,4 +146,5 @@ public class GUIManager {
 		gui.printSettingsScreen();
 	}
 
+	
 }

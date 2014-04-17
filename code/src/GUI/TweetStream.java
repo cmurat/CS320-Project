@@ -20,6 +20,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 
 import DataRequester.Tweet;
+import GUI.listeners.DeleteButtonListener;
 import GUI.listeners.FavouriteButtonListener;
 import GUI.listeners.RetweetButtonListener;
 import GUI.listeners.UserNameListener;
@@ -105,23 +106,32 @@ public class TweetStream extends JPanel {
 			tweetPanel.add(contentPanel, BorderLayout.CENTER);
 			addFavouriteButton(buttonPanel,tweet);
 			addRetweetButton(buttonPanel,tweet);
+			if(mainPanel.getCurrentUserId()==tweet.getUserId()){
+				addDeleteButton(buttonPanel,tweet);
+			}
 			contentPanel.add(buttonPanel,BorderLayout.SOUTH);
 			add(tweetPanel);
 		}
 		
 	}
 	
-	private void addRetweetButton(JPanel contentPanel, Tweet tweet) {
+	private void addDeleteButton(JPanel buttonPanel, Tweet tweet) {
+		JButton deleteButton = getIconButton("icon/DeleteIcon.png");
+		deleteButton.addActionListener( new DeleteButtonListener(tweet.getTweetId(), deleteButton, mainPanel));
+		buttonPanel.add(deleteButton);
+	}
+
+	private void addRetweetButton(JPanel buttonPanel, Tweet tweet) {
 		JButton retweetButton = getIconButton("icon/RetweetIcon.png");
 		retweetButton.addActionListener( new RetweetButtonListener(tweet.getTweetId(), retweetButton, mainPanel));
-		contentPanel.add(retweetButton, BorderLayout.SOUTH);
+		buttonPanel.add(retweetButton);
 	
 	}
 
-	private void addFavouriteButton(JPanel contentPanel, Tweet tweet) {
+	private void addFavouriteButton(JPanel buttonPanel, Tweet tweet) {
 		JButton favouriteButton = getIconButton("icon/FavoriteIcon.png");
 		favouriteButton.addActionListener( new FavouriteButtonListener(tweet.getTweetId(), favouriteButton, mainPanel));
-		contentPanel.add(favouriteButton, BorderLayout.PAGE_END);
+		buttonPanel.add(favouriteButton);
 		}
 
 	private JButton getIconButton(String iconLocation) {

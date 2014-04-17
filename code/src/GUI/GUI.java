@@ -226,6 +226,15 @@ public class GUI extends JFrame {
 		
 	}
 
+	public long getCurrentUserId() {
+		return guiManager.getCurrentUserId();
+	}
+
+	public void deleteButtonClicked(long tweetId) {
+		guiManager.tweetListenerHandler.delete(tweetId);
+		
+	}
+
 	
 
 
