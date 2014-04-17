@@ -46,9 +46,29 @@ public class AccountProfileScreen extends JPanel {
 	private void createLabels(JPanel userInfoPanel) {
 		createFollowingsLabel(userInfoPanel);
 		createFollowersLabel(userInfoPanel);
-		createFollowLabel(userInfoPanel);
+		if(account.getUserID()!=mainPanel.getCurrentUserId())
+			createFollowLabel(userInfoPanel);
+		else
+			createTweetLabel(userInfoPanel);
 		createFollowingsAmountLabel(userInfoPanel);
 		createFollowersAmountLabel(userInfoPanel);
+		if(account.getUserID()==mainPanel.getCurrentUserId())
+			createTweetNumberLabel(userInfoPanel);
+	}
+
+	private void createTweetNumberLabel(JPanel userInfoPanel) {
+		JLabel tweetNumber= new JLabel(String.valueOf(account.getTweetCount()));
+		tweetNumber.setHorizontalAlignment(JLabel.CENTER);
+		tweetNumber.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		userInfoPanel.add(tweetNumber);		
+	}
+
+	private void createTweetLabel(JPanel userInfoPanel) {
+		JLabel tweetLabel = new JLabel("Tweets");
+		tweetLabel.setHorizontalAlignment(JLabel.CENTER);
+		tweetLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		userInfoPanel.add(tweetLabel);
+		
 	}
 
 	private void createProfilePictureLabel(JPanel picturePanel) {
@@ -72,6 +92,14 @@ public class AccountProfileScreen extends JPanel {
 
 	private void createFollowLabel(JPanel userInfoPanel) {
 		JButton follow = null;
+		follow = chooseFollowButton();
+		follow.setHorizontalAlignment(JButton.CENTER);
+		follow.setOpaque(true);
+		userInfoPanel.add(follow);
+	}
+
+	private JButton chooseFollowButton() {
+		JButton follow;
 		if (account.isFollowed()) {
 			follow = new JButton("UnFollow");
 			follow.addActionListener(new UnFollowButtonListener(account
@@ -82,9 +110,7 @@ public class AccountProfileScreen extends JPanel {
 					.getUserID(), mainPanel, follow));
 
 		}
-		follow.setHorizontalAlignment(JButton.CENTER);
-		follow.setOpaque(true);
-		userInfoPanel.add(follow);
+		return follow;
 	}
 
 	private void createFollowingsLabel(JPanel userInfoPanel) {

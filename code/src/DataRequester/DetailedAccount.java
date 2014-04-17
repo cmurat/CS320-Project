@@ -43,6 +43,9 @@ public class DetailedAccount extends Account {
 	public boolean isFollowed() {
 		return isFollowed;
 	}
+	public int getTweetCount(){
+		return user.getStatusesCount();
+	}
 
 	public void setFollowStatus(boolean followStatus) {
 		this.isFollowed = followStatus;

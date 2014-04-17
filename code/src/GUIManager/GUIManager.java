@@ -74,7 +74,7 @@ public class GUIManager {
 	}
 
 	public long getCurrentUserId() {
-		return dataRequestManager.getCurrentUserAccount().getUserID();
+		return dataRequestManager.getUserId();
 	}
 
 	public void homeButtonClicked() {

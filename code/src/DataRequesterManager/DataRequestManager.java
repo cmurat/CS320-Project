@@ -107,4 +107,9 @@ public class DataRequestManager {
 	public ArrayList<Tweet> getSearchResults(String search) {
 		return navigationHandler.searchTweets(search);
 	}
+
+	public long getUserId() {
+		
+		return accountHandler.getAccountUserID();
+	}
 }

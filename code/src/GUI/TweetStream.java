@@ -44,8 +44,7 @@ public class TweetStream extends JPanel {
 	}
 
 	public JScrollPane printTweetStream(ArrayList<Tweet> tweets) {
-		addTweets(tweets);
-		printTweets();
+		printTweets(tweets);
 		JScrollPane tweetPane = new JScrollPane(this);
 		tweetPane.setOpaque(true);
 		tweetPane.getVerticalScrollBar().setUnitIncrement(16);
@@ -80,7 +79,7 @@ public class TweetStream extends JPanel {
 		this.tweets.addAll(tweets);
 	}
 
-	private void printTweets() {
+	private void printTweets(ArrayList<Tweet> tweets) {
 		for (Tweet tweet : tweets) {
 			JPanel tweetPanel = new JPanel();
 			tweetPanel.setBorder(new LineBorder(Color.BLACK, 1, true));

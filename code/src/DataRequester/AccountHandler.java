@@ -22,6 +22,7 @@ public class AccountHandler {
 	Twitter twitter;
 	private RequestToken requestToken;
 	private AccessToken accessToken;
+	private User currentUser;
 
 	public AccountHandler(Twitter twitter) {
 		this.twitter = twitter;
@@ -31,17 +32,33 @@ public class AccountHandler {
 		accessToken = loadAccessToken();
 		if (accessToken == null)
 			return false;
-		twitter.setOAuthAccessToken(accessToken);
+		try {
+			twitter.setOAuthAccessToken(accessToken);
+			currentUser = twitter.verifyCredentials();
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return true;
 	}
 
 	public boolean loginTwitterNewUser(String Pin) throws IOException {
 		try {
 			accessToken = createAccessToken(Pin);
+			
 		} catch (TwitterException e) {
 			return false;
 		}
 		twitter.setOAuthAccessToken(accessToken);
+		try {
+			currentUser = twitter.verifyCredentials();
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		storeAccessToken(accessToken);
 		return true;
 	}
@@ -49,6 +66,9 @@ public class AccountHandler {
 	private AccessToken createAccessToken(String Pin) throws TwitterException {
 		AccessToken access = twitter.getOAuthAccessToken(requestToken, Pin);
 		return access;
+	}
+	public long getAccountUserID(){
+		return currentUser.getId();
 	}
 
 	public String createRequestTokenURL() {
@@ -80,9 +100,9 @@ public class AccountHandler {
 
 	public void setProfileName(String screenName) {
 		try {
-			User user = twitter.verifyCredentials();
-			twitter.updateProfile(screenName, user.getURL(),
-					user.getLocation(), user.getDescription());
+			twitter.updateProfile(screenName, currentUser.getURL(),
+					currentUser.getLocation(), currentUser.getDescription());
+			currentUser = twitter.verifyCredentials();
 		} catch (TwitterException e) {
 			System.out.println("\nProfile name couldnt set");
 			e.printStackTrace();
@@ -104,17 +124,16 @@ public class AccountHandler {
 	}
 
 	public DetailedAccount getHomeAccount() {
-		User user = null;
 		ArrayList<Tweet> tweets = null;
 
 		try {
-			user = twitter.showUser(twitter.getId());
-			tweets = createTweetList(user.getId());
+			currentUser = twitter.verifyCredentials();
+			tweets = createTweetList(currentUser.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		DetailedAccount account = new DetailedAccount(user, tweets);
+		DetailedAccount account = new DetailedAccount(currentUser, tweets);
 		return account;
 	}
 
