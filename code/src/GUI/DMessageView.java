@@ -60,36 +60,4 @@ public class DMessageView extends JPanel {
 		repaint();
 		revalidate();
 	}
-
-//	public void printDirectMessageStream(){
-//		printDirectMessages();
-//	}
-
-//	private void printDirectMessages() {
-//		for (DirectMessage directMessage : directMessages) {
-//			User user = directMessage.getRecipient();
-//			JLabel userImage = new JLabel(new ImageIcon(user.getProfileImageURL()));
-//			JLabel userName = new JLabel("" + user.getName());
-//			JLabel date = new JLabel("" + directMessage.getCreatedAt());
-//			JLabel messageContent = new JLabel(directMessage.getText());
-//
-//			JPanel messageHeaderPanel = new JPanel(new FlowLayout());
-//			messageHeaderPanel.add(userName);
-//			messageHeaderPanel.add(date);
-//
-//			JPanel messageContentPanel = new JPanel(new GridLayout(2, 1));
-//			messageContentPanel.add(messageHeaderPanel, -1);
-//			messageContentPanel.add(messageContent, -1);
-//
-//			JPanel messagePanel = new JPanel(new FlowLayout());
-//			messagePanel.add(userImage, -1);
-//			messagePanel.add(messageContentPanel, -1);
-//
-//			add(messagePanel);
-//		}
-//	}
-
-//	public ResponseList<DirectMessage> getDirectMessages(){
-//		return mainPanel.getDirectMessages();
-//	}
 }
