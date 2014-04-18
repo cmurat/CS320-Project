@@ -2,6 +2,9 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -33,27 +36,26 @@ public class DMessageView extends JPanel {
 		messageListPanel = null;
 		newMessagePanel = null;
 		calculateBounds();
+		setBackground(Color.green);
 		setLayout(new GridLayout(0, 1));
 	}
 
 	private void calculateBounds() {
-		int xPos = mainPanel.getBounds().x;
-		int yPos = mainPanel.getBounds().y;
-		int width = mainPanel.getBounds().width;
-		int height = mainPanel.getBounds().height;
+		int xPos = mainPanel.getX();
+		int yPos = mainPanel.getY();
+		int width = mainPanel.getWidth();
+		int height = mainPanel.getHeight();
 		setBounds(xPos, yPos, width, height);
 	}
 
 	public void printDMessageView() {
 		messageListPanel = new JPanel();
-		messageListPanel.setLayout(null);
+		messageListPanel.setLayout(new BorderLayout());
 		messageListPanel.setBackground(Color.cyan);
-		messageListPanel.add(getHeaderPanel());
+		messageListPanel.add(getHeaderPanel(), BorderLayout.NORTH);
 		
 		JPanel conversationListPanel = new JPanel();
-		conversationListPanel.setBounds(getX(), getY() + getHeight() / 10, getWidth(), getHeight() - getHeight() / 10);
-		conversationListPanel.setLocation(0, 0);
-		conversationListPanel.setLayout(new GridLayout(0, 1));
+		conversationListPanel.setLayout(new GridBagLayout());
 		
 		HashMap<String, ArrayList<DMessage>> conversationMap = new HashMap<String, ArrayList<DMessage>>();
 
@@ -74,15 +76,20 @@ public class DMessageView extends JPanel {
 		sortedConversationMap.putAll(conversationMap);
 		
 		Set<String> keys = sortedConversationMap.keySet();
+		int i = 0;
+		GridBagConstraints c = new GridBagConstraints();
 		for (String key : keys) {
 			JPanel conversationPanel = new JPanel();
 			conversationPanel.add(new JLabel(key));
 			conversationPanel.setBorder(new LineBorder(Color.black));
-			conversationPanel.setBackground(null);
-//			conversationListPanel.add(conversationPanel);
+			conversationPanel.setBackground(Color.gray);
+			conversationPanel.setPreferredSize(new Dimension(getWidth(), getHeight() / 10));
+			c.gridy = i++;
+			c.anchor = GridBagConstraints.PAGE_START;
+			conversationListPanel.add(conversationPanel, c);
 		}
 		conversationListPanel.setBackground(Color.red);
-		messageListPanel.add(conversationListPanel);
+		messageListPanel.add(conversationListPanel, BorderLayout.NORTH);
 
 //		Set<String> keys = sortedConversationMap.keySet();
 //		for (String key : keys) {
@@ -124,11 +131,8 @@ public class DMessageView extends JPanel {
 
 	private JPanel getHeaderPanel() {
 		JPanel headerPanel = new JPanel();
-		headerPanel.setBounds(getX(), getY(), getWidth(), getHeight() / 10);
-		headerPanel.setLocation(0, 0);
 		headerPanel.setLayout(new BorderLayout());
 		JTextField dMessageField = new JTextField("  Direct Message");
-		dMessageField.setEditable(false);
 		dMessageField.setFocusable(false);
 		dMessageField.setBackground(null);
 		dMessageField.setBorder(null);
@@ -137,6 +141,7 @@ public class DMessageView extends JPanel {
 		newDMessageButton.setFocusPainted(false);
 		headerPanel.add(dMessageField, BorderLayout.WEST);
 		headerPanel.add(newDMessageButton, BorderLayout.EAST);
+		headerPanel.setPreferredSize(new Dimension(getWidth(), getHeight() / 20));
 		return headerPanel;
 	}
 }

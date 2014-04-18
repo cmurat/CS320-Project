@@ -30,7 +30,7 @@ public class MainPanel extends JPanel {
 
 	public MainPanel(GUI gui) {
 		this.gui = gui;
-		setBounds(0, gui.getHeight() / 8, gui.getWidth(), gui.getHeight() - gui.getHeight() / 8);
+		setBounds(0, gui.getHeight() / 10, gui.getWidth(), gui.getHeight() - gui.getHeight() / 10);
 		setLayout(new BorderLayout());
 		setOpaque(true);
 		setBackground(Color.WHITE);

@@ -68,7 +68,7 @@ public class NavigationBar extends JPanel {
 	}
 
 	private void calculateBounds() {
-		setBounds(0, 0, gui.getWidth(), gui.getHeight() / 8);
+		setBounds(0, gui.getY(), gui.getWidth(), gui.getHeight() / 10);
 	}
 
 	private void addHomeButton(int dimension) {
