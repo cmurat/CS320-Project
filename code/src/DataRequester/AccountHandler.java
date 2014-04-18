@@ -67,8 +67,13 @@ public class AccountHandler {
 		AccessToken access = twitter.getOAuthAccessToken(requestToken, Pin);
 		return access;
 	}
+	
 	public long getAccountUserID(){
 		return currentUser.getId();
+	}
+	
+	public String getAccountScreenName() {
+		return currentUser.getScreenName();
 	}
 
 	public String createRequestTokenURL() {

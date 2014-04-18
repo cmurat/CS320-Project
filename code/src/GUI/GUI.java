@@ -15,6 +15,7 @@ import twitter4j.ResponseList;
 import DataRequester.Account;
 import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
+import GUIManager.DMessage;
 import GUIManager.GUIManager;
 
 @SuppressWarnings("serial")
@@ -118,8 +119,8 @@ public class GUI extends JFrame {
 		mainPanel.printMentions(tweets);
 	}
 
-	public void printDMessages(ResponseList<DirectMessage> responseList) {
-		mainPanel.printDMessages(responseList);
+	public void printDMessages(ArrayList<DMessage> dMessages) {
+		mainPanel.printDMessages(dMessages);
 	}
 
 	public String getTweet() {

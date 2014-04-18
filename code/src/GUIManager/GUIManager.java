@@ -83,6 +83,10 @@ public class GUIManager {
 	public long getCurrentUserId() {
 		return dataRequestManager.getUserId();
 	}
+	
+	public String getUserScreenName() {
+		return dataRequestManager.getUserScreenName();
+	}
 
 	public void homeButtonClicked() {
 		gui.printTimeline(dataRequestManager.getTimeline());
@@ -94,9 +98,30 @@ public class GUIManager {
 	}
 
 	public void dMessageButtonClicked() {
+		ResponseList<DirectMessage> allDMessages = getAllDMessages();
+		ArrayList<DMessage> dMessages = convertThemForGUI(allDMessages);
+		gui.printDMessages(dMessages);
+	}
+
+	private ArrayList<DMessage> convertThemForGUI(
+			ResponseList<DirectMessage> allDMessages) {
+		String userScreenName = getUserScreenName();
+		ArrayList<DMessage> dMessages = new ArrayList<DMessage>();
+		for (int i = 0; i < allDMessages.size(); i++) {
+			dMessages.add(new DMessage(allDMessages.get(i), userScreenName));
+		}
+		return dMessages;
+	}
+
+	private ResponseList<DirectMessage> getAllDMessages() {
 		ResponseList<DirectMessage> receivedDMessages = dataRequestManager.getDirectMessages();
 		ResponseList<DirectMessage> sentDMessages = dataRequestManager.getSentDirectMessages();
 		receivedDMessages.addAll(sentDMessages);
+		sortDMessagesByDate(receivedDMessages);
+		return receivedDMessages;
+	}
+
+	private void sortDMessagesByDate(ResponseList<DirectMessage> receivedDMessages) {
 		Collections.sort(receivedDMessages, new Comparator<DirectMessage>() {
 			@Override
 			public int compare(DirectMessage o1, DirectMessage o2) {
@@ -105,7 +130,6 @@ public class GUIManager {
 				return date2.compareTo(date1);
 			}
 		});
-		gui.printDMessages(receivedDMessages);
 	}
 
 	public ResponseList<DirectMessage> getDirectMessages() {

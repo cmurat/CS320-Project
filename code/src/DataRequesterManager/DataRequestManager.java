@@ -111,9 +111,12 @@ public class DataRequestManager {
 	public ArrayList<Tweet> getSearchResults(String search) {
 		return navigationHandler.searchTweets(search);
 	}
+	
+	public String getUserScreenName() {
+		return accountHandler.getAccountScreenName();
+	}
 
 	public long getUserId() {
-		
 		return accountHandler.getAccountUserID();
 	}
 }

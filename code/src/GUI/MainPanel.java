@@ -14,6 +14,7 @@ import twitter4j.ResponseList;
 import DataRequester.Account;
 import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
+import GUIManager.DMessage;
 
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel {
@@ -31,7 +32,7 @@ public class MainPanel extends JPanel {
 
 	public MainPanel(GUI gui) {
 		this.gui = gui;
-		setBounds(0, gui.getHeight() / 10, gui.getWidth(), gui.getHeight());
+		setBounds(0, gui.getHeight() / 8, gui.getWidth(), gui.getHeight() - gui.getHeight() / 8);
 		setLayout(new BorderLayout());
 		setOpaque(true);
 		setBackground(Color.WHITE);
@@ -110,10 +111,10 @@ public class MainPanel extends JPanel {
 		refresh();
 	}
 
-	public void printDMessages(ResponseList<DirectMessage> responseList) {
+	public void printDMessages(ArrayList<DMessage> dMessages) {
 		removeAll();
 		stopTimelineTimer();
-		dMessageView = new DMessageView(this, responseList);
+		dMessageView = new DMessageView(this, dMessages);
 		dMessageView.printDMessageView();
 		add(dMessageView);
 		add(tweetBox, BorderLayout.SOUTH);
