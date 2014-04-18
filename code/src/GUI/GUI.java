@@ -10,12 +10,10 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import twitter4j.DirectMessage;
-import twitter4j.ResponseList;
 import DataRequester.Account;
+import DataRequester.DMessage;
 import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
-import GUIManager.DMessage;
 import GUIManager.GUIManager;
 
 @SuppressWarnings("serial")

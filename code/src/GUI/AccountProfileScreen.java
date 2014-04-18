@@ -3,7 +3,6 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.net.MalformedURLException;
 import java.net.URL;
 

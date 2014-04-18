@@ -9,12 +9,10 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import twitter4j.DirectMessage;
-import twitter4j.ResponseList;
 import DataRequester.Account;
+import DataRequester.DMessage;
 import DataRequester.DetailedAccount;
 import DataRequester.Tweet;
-import GUIManager.DMessage;
 
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel {

@@ -71,10 +71,6 @@ public class AccountHandler {
 	public long getAccountUserID(){
 		return currentUser.getId();
 	}
-	
-	public String getAccountScreenName() {
-		return currentUser.getScreenName();
-	}
 
 	public String createRequestTokenURL() {
 		try {

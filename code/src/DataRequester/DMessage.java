@@ -1,4 +1,4 @@
-package GUIManager;
+package DataRequester;
 
 import java.util.Date;
 import twitter4j.DirectMessage;

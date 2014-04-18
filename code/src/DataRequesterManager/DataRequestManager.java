@@ -10,6 +10,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import DataRequester.Account;
 import DataRequester.AccountHandler;
+import DataRequester.DMessage;
 import DataRequester.DMessageHandler;
 import DataRequester.DetailedAccount;
 import DataRequester.NavigationHandler;
@@ -111,12 +112,12 @@ public class DataRequestManager {
 	public ArrayList<Tweet> getSearchResults(String search) {
 		return navigationHandler.searchTweets(search);
 	}
-	
-	public String getUserScreenName() {
-		return accountHandler.getAccountScreenName();
-	}
 
 	public long getUserId() {
 		return accountHandler.getAccountUserID();
+	}
+
+	public ArrayList<DMessage> getAllDMessages() {
+		return dMessageHandler.getAllDMessages();
 	}
 }

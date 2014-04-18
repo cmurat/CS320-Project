@@ -11,14 +11,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import GUIManager.DMessage;
+import DataRequester.DMessage;
 
 @SuppressWarnings("serial")
 public class DMessageView extends JPanel {

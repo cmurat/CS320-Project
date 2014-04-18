@@ -29,8 +29,8 @@ public class NavigationHandler {
 		return tweets;
 	}
 
+	@SuppressWarnings("deprecation")
 	public ArrayList<Tweet> getMentions() {
-		@SuppressWarnings("deprecation")
 		List<Status> statuses = null;
 		try {
 			statuses = twitter.getMentions();
