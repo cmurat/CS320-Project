@@ -31,9 +31,12 @@ public class Tweet {
 	public String getUserName() {
 		return user.getName();
 	}
+	public String getScreenName(){
+		return user.getScreenName();
+	}
 
 	public long getUserId() {
-		return status.getUser().getId();
+		return user.getId();
 	}
 
 	public long getTweetId() {

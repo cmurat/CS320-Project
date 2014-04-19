@@ -28,7 +28,7 @@ public class AccountHandler {
 		this.twitter = twitter;
 	}
 
-	public boolean loginTwitterFromStorage() throws IOException {
+	public boolean loginTwitterFromStorage(){
 		accessToken = loadAccessToken();
 		if (accessToken == null)
 			return false;
@@ -45,13 +45,8 @@ public class AccountHandler {
 		return true;
 	}
 
-	public boolean loginTwitterNewUser(String Pin) throws IOException {
-		try {
-			accessToken = createAccessToken(Pin);
-			
-		} catch (TwitterException e) {
-			return false;
-		}
+	public boolean loginTwitterNewUser(String Pin){
+		accessToken = createAccessToken(Pin);
 		twitter.setOAuthAccessToken(accessToken);
 		try {
 			currentUser = twitter.verifyCredentials();
@@ -63,8 +58,14 @@ public class AccountHandler {
 		return true;
 	}
 
-	private AccessToken createAccessToken(String Pin) throws TwitterException {
-		AccessToken access = twitter.getOAuthAccessToken(requestToken, Pin);
+	private AccessToken createAccessToken(String Pin) {
+		AccessToken access = null;
+		try {
+			access = twitter.getOAuthAccessToken(requestToken, Pin);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return access;
 	}
 	
@@ -81,11 +82,16 @@ public class AccountHandler {
 		return requestToken.getAuthenticationURL();
 	}
 
-	private void storeAccessToken(AccessToken accessToken) throws IOException {
+	private void storeAccessToken(AccessToken accessToken){
 		Writer output;
-		output = new BufferedWriter(new FileWriter("twitter4j.password", true));
-		output.append(accessToken.getToken() + "\n"	+ accessToken.getTokenSecret());
-		output.close();
+		try {
+			output = new BufferedWriter(new FileWriter("twitter4j.password", true));
+			output.append(accessToken.getToken() + "\n"	+ accessToken.getTokenSecret());
+			output.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -110,7 +116,7 @@ public class AccountHandler {
 		}
 	}
 
-	private AccessToken loadAccessToken() throws IOException {
+	private AccessToken loadAccessToken(){
 		BufferedReader read;
 		try {
 			read = new BufferedReader(new FileReader("twitter4j.password"));
@@ -119,6 +125,10 @@ public class AccountHandler {
 			read.close();
 			return new AccessToken(token, tokenSecret);
 		} catch (FileNotFoundException e) {
+			return null;
+		} catch (IOException e) {
+			
+			e.printStackTrace();
 			return null;
 		}
 
@@ -173,9 +183,15 @@ public class AccountHandler {
 		account.setFollowStatus(followStatus);
 	}
 
-	private ArrayList<Tweet> createTweetList(long userId) throws TwitterException {
+	private ArrayList<Tweet> createTweetList(long userId){
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
-		List<Status> statuses = twitter.getUserTimeline(userId);
+		List<Status> statuses = null;
+		try {
+			statuses = twitter.getUserTimeline(userId);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for (Status status : statuses) {
 			Tweet currentTweet = new Tweet(status);
 			tweets.add(currentTweet);
@@ -189,6 +205,10 @@ public class AccountHandler {
 		System.out.println("succesfully logOut");
 		System.exit(0);
 
+	}
+
+	public String getAccountUserScreenName() {
+		return currentUser.getScreenName();
 	}
 
 }

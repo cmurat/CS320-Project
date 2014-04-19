@@ -36,20 +36,40 @@ public class TweetHandler {
 		return true;
 	}
 
-	public void delete(long tweetID) throws TwitterException {
-		twitter.destroyStatus(tweetID);
+	public void delete(long tweetID){
+		try {
+			twitter.destroyStatus(tweetID);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void retweet(long tweetID) throws TwitterException {
-		twitter.retweetStatus(tweetID);
+	public void retweet(long tweetID){
+		try {
+			twitter.retweetStatus(tweetID);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void favorite(long tweetID) throws TwitterException {
-		twitter.createFavorite(tweetID);
+	public void favorite(long tweetID){
+		try {
+			twitter.createFavorite(tweetID);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void unFavorite(long tweetID) throws TwitterException {
-		twitter.destroyFavorite(tweetID);
+	public void unFavorite(long tweetID){
+		try {
+			twitter.destroyFavorite(tweetID);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -1,5 +1,6 @@
 package DataRequesterManager;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -22,10 +23,6 @@ public class DataRequestManager {
 
 	public GUIManager guiManager;
 
-	// DataRequesterManager classes
-	public AccountRequests accountRequests;
-	public TweetRequests tweetRequests;
-	public TweetStreamRequests tweetStreamRequests;
 
 	// Model Classes
 	public AccountHandler accountHandler;
@@ -36,7 +33,7 @@ public class DataRequestManager {
 	public DataRequestManager(GUIManager guiManager) {
 		this.guiManager = guiManager;
 		initModelClasses();
-		initDataRequesterManagerClasses();
+//		initDataRequesterManagerClasses();
 	}
 
 	private void initModelClasses() {
@@ -46,35 +43,30 @@ public class DataRequestManager {
 		navigationHandler = new NavigationHandler(twitter);
 		tweetHandler = new TweetHandler(twitter);
 	}
-
-	private void initDataRequesterManagerClasses() {
-		this.accountRequests = new AccountRequests(accountHandler, this);
-		this.tweetStreamRequests = new TweetStreamRequests(navigationHandler);
-		this.tweetRequests = new TweetRequests(tweetHandler, this);
-	}
-
 	public String createRequestTokenURL() {
-		return accountRequests.createRequestTokenURL();
+		return accountHandler.createRequestTokenURL();
 	}
 
-	public boolean checkPIN(String pin) throws IOException {
-		return accountRequests.checkPIN(pin);
+	public boolean checkPIN(String pin){
+		return accountHandler.loginTwitterNewUser(pin);
 	}
 
 	public boolean isAuthExists() {
-		return accountRequests.isAuthExists();
+		boolean result = false;
+		result = accountHandler.loginTwitterFromStorage();
+		return result;
 	}
 
 	public DetailedAccount getDetailedAccount(long userId) {
-		return accountRequests.getDetailedAccount(userId);
+		return accountHandler.getDetailedAccount(userId);
 	}
 
 	public DetailedAccount getCurrentUserAccount() {
-		return accountRequests.getCurrentUserDetailedAccount();
+		return accountHandler.getHomeAccount();
 	}
 
 	public ArrayList<Tweet> getTimeline() {
-		return tweetStreamRequests.getTimeline();
+		return navigationHandler.getTimeline();
 	}
 
 	public void sendMessage(long userId, String message) {
@@ -119,5 +111,48 @@ public class DataRequestManager {
 
 	public ArrayList<DMessage> getAllDMessages() {
 		return dMessageHandler.getAllDMessages();
+	}
+
+	public String getUserScreenName() {
+		return accountHandler.getAccountUserScreenName();
+	}
+
+	public void follow(long userToFollowId) {
+		navigationHandler.follow(userToFollowId);
+		
+	}
+
+	public void unFollow(long userToUnFollowId) {
+		navigationHandler.unFollow(userToUnFollowId);
+		
+	}
+
+	public boolean logOutClicked() {
+		accountHandler.logout();
+		return true;
+	}
+
+	public void changeUsername(String screenName) {
+		accountHandler.setProfileName(screenName);
+	}
+
+	public void changeProfilePicture(File image) {
+		accountHandler.setProfilePicture(image);
+		
+	}
+
+	public void deleteTweet(long tweetId) {
+		tweetHandler.delete(tweetId);
+		
+	}
+
+	public void retweet(long tweetId) {
+		tweetHandler.retweet(tweetId);
+		
+	}
+
+	public void favorite(long tweetId) {
+		tweetHandler.retweet(tweetId);
+		
 	}
 }

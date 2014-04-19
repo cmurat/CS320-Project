@@ -3,6 +3,7 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.GridLayout;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -44,6 +45,9 @@ public class MainPanel extends JPanel {
 		add(tweetStream.printTweetStream(tweets));
 		add(tweetBox, BorderLayout.SOUTH);
 		refresh();
+	}
+	public TweetBox getTweetBox(){
+		return tweetBox;
 	}
 
 	private void stopTimelineTimer() {
@@ -196,5 +200,10 @@ public class MainPanel extends JPanel {
 	public void changeProfilePictureClicked(File image) {
 		gui.changeProfilePictureClicked(image);
 	}
+
+	public String getCurrentUserScreenName() {
+		return gui.getCurrentUserScreenName();
+	}
+
 
 }

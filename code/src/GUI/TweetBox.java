@@ -31,12 +31,11 @@ public class TweetBox extends JPanel {
 	}
 
 	private void addTweetField() {
-		tweetField = new JTextArea();
+		tweetField = new JTextArea("Write a tweet, Press Enter..");
 		tweetField.setColumns(MAX_CHAR_LIMIT);
 		tweetField.setLineWrap(true);
 		tweetField.setWrapStyleWord(false);
 		tweetField.setOpaque(false);
-		tweetField.setText("Write a tweet, Press Enter..");
 
 		tweetField.addFocusListener(getFocusAdapter());
 		tweetField.addKeyListener(getEnterKeyAdapter());
@@ -60,7 +59,8 @@ public class TweetBox extends JPanel {
 			@Override
 			public void keyReleased(KeyEvent event) {
 				if (event.getKeyCode() == KeyEvent.VK_ENTER) {
-					mainPanel.tweetEntered();
+					if(tweetField.getText().trim().length() > 0)
+						mainPanel.tweetEntered();
 					tweetField.setText("Write a tweet, Press Enter..");
 					tweetField.transferFocusUpCycle();
 				}
@@ -80,6 +80,9 @@ public class TweetBox extends JPanel {
 
 	public String getTweet() {
 		return tweetField.getText();
+	}
+	public void setTweetField(String t){
+		tweetField.setText(t);
 	}
 
 }

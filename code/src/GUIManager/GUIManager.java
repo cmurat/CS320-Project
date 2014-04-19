@@ -3,9 +3,9 @@ package GUIManager;
 import java.awt.Desktop;
 import java.io.File;
 import java.net.URL;
+
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
-import twitter4j.TwitterException;
 import DataRequesterManager.DataRequestManager;
 import GUI.GUI;
 
@@ -14,14 +14,11 @@ public class GUIManager {
 	private GUI gui;
 	private String loginURL;
 	private DataRequestManager dataRequestManager;
-	public TweetListenerHandler tweetListenerHandler;
 
 	public GUIManager(DataRequestManager dataRequestManager) {
 		this.dataRequestManager = dataRequestManager;
 		this.loginURL = dataRequestManager.createRequestTokenURL();
 		this.gui = new GUI(this);
-		this.tweetListenerHandler = new TweetListenerHandler(this,
-				dataRequestManager);
 	}
 
 	public void loginButtonClicked() {
@@ -64,8 +61,8 @@ public class GUIManager {
 	public void postTweet() {
 		String tweet = gui.getTweet();
 		String imageLocation = "";// TODO for Burak and Ugur Manager need and
-									// imageLocation;
-		tweetListenerHandler.postTweet(tweet, imageLocation);
+		// imageLocation;
+		dataRequestManager.postTweet(tweet, imageLocation);
 		System.out.println("\nAssume it is sent: " + tweet);
 	}
 
@@ -96,25 +93,19 @@ public class GUIManager {
 
 	public void sendMessageClicked() {
 		long userId = 0;// TODO long userId, String message needed to derived
-						// from gui Burak and Ugur
+		// from gui Burak and Ugur
 		String message = null;
 		dataRequestManager.sendMessage(userId, message);
 	}
 
 	public void followClicked(long userToFollowId) {
-		try {
-			dataRequestManager.navigationHandler.follow(userToFollowId);
-		} catch (TwitterException e) {
-			e.printStackTrace();
-		}
+
+		dataRequestManager.follow(userToFollowId);
+
 	}
 
 	public void unFollowClicked(long userToUnFollowId) {
-		try {
-			dataRequestManager.navigationHandler.unFollow(userToUnFollowId);
-		} catch (TwitterException e) {
-			e.printStackTrace();
-		}
+		dataRequestManager.unFollow(userToUnFollowId);
 	}
 
 	public void userNameClicked(long userId) {
@@ -147,15 +138,34 @@ public class GUIManager {
 	}
 
 	public boolean logOutButtonClicked() {
-		return dataRequestManager.accountRequests.logOutClicked();
+		return dataRequestManager.logOutClicked();
 	}
 
 	public void changeUsernameClicked(String screenName) {
-		dataRequestManager.accountRequests.changeUsername(screenName);
+		dataRequestManager.changeUsername(screenName);
 	}
 
 	public void changeProfilePictureClicked(File image) {
-		dataRequestManager.accountRequests.changeProfilePicture(image);
+		dataRequestManager.changeProfilePicture(image);
+	}
+
+	public String getCurrentUserScreenName() {
+		return dataRequestManager.getUserScreenName();
+	}
+
+	public void delete(long tweetId) {
+		dataRequestManager.deleteTweet(tweetId);
+		
+	}
+
+	public void retweet(long tweetId) {
+		dataRequestManager.retweet(tweetId);
+		
+	}
+
+	public void favorite(long tweetId) {
+		dataRequestManager.favorite(tweetId);
+		
 	}
 
 }

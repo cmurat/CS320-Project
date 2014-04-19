@@ -198,11 +198,11 @@ public class GUI extends JFrame {
 	}
 
 	public void favoriteButtonClicked(long tweetId) {
-		guiManager.tweetListenerHandler.favorite(tweetId);
+		guiManager.favorite(tweetId);
 	}
 
 	public void retweetButtonClicked(long tweetId) {
-		guiManager.tweetListenerHandler.retweet(tweetId);
+		guiManager.retweet(tweetId);
 	}
 
 	public void unFollowButtonClicked(long userID) {
@@ -214,7 +214,7 @@ public class GUI extends JFrame {
 	}
 
 	public void deleteButtonClicked(long tweetId) {
-		guiManager.tweetListenerHandler.delete(tweetId);
+		guiManager.delete(tweetId);
 	}
 
 	public boolean logOutButtonClicked() {
@@ -227,6 +227,10 @@ public class GUI extends JFrame {
 
 	public void changeProfilePictureClicked(File image) {
 		guiManager.changeProfilePictureClicked(image);
+	}
+
+	public String getCurrentUserScreenName() {
+		return guiManager.getCurrentUserScreenName();
 	}
 
 }

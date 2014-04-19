@@ -42,8 +42,14 @@ public class NavigationHandler {
 		return mentions;
 	}
 
-	public ArrayList<Tweet> getFavorites() throws TwitterException {
-		List<Status> statuses = twitter.getFavorites();
+	public ArrayList<Tweet> getFavorites(){
+		List<Status> statuses = null;
+		try {
+			statuses = twitter.getFavorites();
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Tweet> favorites = getTweets(statuses);
 		return favorites;
 	}
@@ -106,12 +112,22 @@ public class NavigationHandler {
 		return accounts;
 	}
 
-	public void follow(long userToFollowId) throws TwitterException {
-		twitter.createFriendship(userToFollowId, true);
+	public void follow(long userToFollowId) {
+		try {
+			twitter.createFriendship(userToFollowId, true);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void unFollow(long userToUnFollowId) throws TwitterException {
-		twitter.destroyFriendship(userToUnFollowId);
+	public void unFollow(long userToUnFollowId){
+		try {
+			twitter.destroyFriendship(userToUnFollowId);
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
