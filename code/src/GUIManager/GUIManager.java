@@ -60,8 +60,7 @@ public class GUIManager {
 
 	public void postTweet() {
 		String tweet = gui.getTweet();
-		String imageLocation = "";// TODO for Burak and Ugur Manager need and
-		// imageLocation;
+		String imageLocation = "";
 		dataRequestManager.postTweet(tweet, imageLocation);
 		System.out.println("\nAssume it is sent: " + tweet);
 	}
