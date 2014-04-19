@@ -111,7 +111,7 @@ public class TweetStream extends JPanel {
 			addRetweetButton(buttonPanel, tweet);
 			
 			if (mainPanel.getCurrentUserId() == tweet.getUserId()) {
-				addDeleteButton(buttonPanel, tweet);
+				addDeleteButton(buttonPanel, tweet,tweetPanel);
 			}
 			
 			contentPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -143,10 +143,10 @@ public class TweetStream extends JPanel {
 		return panel;
 	}
 
-	private void addDeleteButton(JPanel buttonPanel, Tweet tweet) {
+	private void addDeleteButton(JPanel buttonPanel, Tweet tweet, JPanel tweetPanel) {
 		JButton deleteButton = getIconButton("icon/DeleteIcon.png");
 		deleteButton.addActionListener(
-				new DeleteButtonListener(tweet.getTweetId(), deleteButton, mainPanel));
+				new DeleteButtonListener(tweet.getTweetId(), deleteButton, mainPanel,tweetPanel));
 		buttonPanel.add(deleteButton);
 	}
 
