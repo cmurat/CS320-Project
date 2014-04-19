@@ -65,7 +65,22 @@ public class TweetHandler {
 
 	public void unFavorite(long tweetID){
 		try {
+			System.out.println("came here to unfav");
 			twitter.destroyFavorite(tweetID);
+			System.out.println("success unfav");
+			
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void unRetweet(long tweetId) {
+		try {
+			System.out.println("came here to unretweet");
+			twitter.destroyStatus(tweetId);
+			System.out.println("success unretw");
+			
 		} catch (TwitterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

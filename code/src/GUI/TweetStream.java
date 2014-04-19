@@ -151,20 +151,36 @@ public class TweetStream extends JPanel {
 	}
 
 	private void addRetweetButton(JPanel buttonPanel, Tweet tweet) {
-		JButton retweetButton = getIconButton("icon/RetweetIcon.png");
+		JButton retweetButton = getIconButton(selectRetweetButtonAddress(tweet));
 		retweetButton.addActionListener(
-				new RetweetButtonListener(tweet.getTweetId(), retweetButton, mainPanel));
+				new RetweetButtonListener(tweet.getTweetId(), retweetButton, mainPanel,tweet));
 		buttonPanel.add(retweetButton);
 
 	}
+	
+	private String selectRetweetButtonAddress(Tweet tweet){
+		String address="icon/RetweetIconBefore.png";
+		if(tweet.isRetweeted()){
+			address="icon/RetweetIcon.png";
+		}
+		return address;
+	}
+	
 
 	private void addFavouriteButton(JPanel buttonPanel, Tweet tweet) {
-		JButton favouriteButton = getIconButton("icon/FavoriteIcon.png");
+		JButton favouriteButton = getIconButton(selectFavouriteButtonAddress(tweet));
 		favouriteButton.addActionListener(
-				new FavouriteButtonListener(tweet.getTweetId(), favouriteButton, mainPanel));
+				new FavouriteButtonListener(tweet.getTweetId(), favouriteButton, mainPanel,tweet));
 		buttonPanel.add(favouriteButton);
 	}
-
+	
+	private String selectFavouriteButtonAddress(Tweet tweet){
+		String address="icon/FavoriteIconBefore.png";
+		if(tweet.isFavorited()){
+			address="icon/FavoriteIcon.png";
+		}
+		return address;
+	}
 	private JButton getIconButton(String iconLocation) {
 		JButton button = new JButton();
 		button.setBorderPainted(false);

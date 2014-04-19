@@ -168,4 +168,14 @@ public class GUIManager {
 		
 	}
 
+	public void unFavoriteButtonClicked(long tweetId) {
+		dataRequestManager.unFavorite(tweetId);
+		
+	}
+
+	public void unRetweetButtonClicked(long tweetId) {
+		dataRequestManager.unRetweet(tweetId);
+		
+	}
+
 }

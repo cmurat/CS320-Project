@@ -233,4 +233,13 @@ public class GUI extends JFrame {
 		return guiManager.getCurrentUserScreenName();
 	}
 
+	public void unFavoriteButtonClicked(long tweetId) {
+		guiManager.unFavoriteButtonClicked(tweetId);
+		
+	}
+
+	public void unRetweetButtonClicked(long tweetId) {
+		guiManager.unRetweetButtonClicked(tweetId);
+	}
+
 }

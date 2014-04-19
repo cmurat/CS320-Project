@@ -42,6 +42,12 @@ public class Tweet {
 	public long getTweetId() {
 		return status.getId();
 	}
+	public boolean isRetweeted(){
+		return status.isRetweetedByMe();
+	}
+	public boolean isFavorited(){
+		return status.isFavorited();
+	}
 
 	public String toString() {
 		String s = getUserName() + "\n" + getContent();

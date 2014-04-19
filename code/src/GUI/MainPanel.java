@@ -205,5 +205,15 @@ public class MainPanel extends JPanel {
 		return gui.getCurrentUserScreenName();
 	}
 
+	public void unFavoriteButtonClicked(long tweetId) {
+		gui.unFavoriteButtonClicked(tweetId);
+		
+	}
+
+	public void unRetweetButtonClicked(long tweetId) {
+		gui.unRetweetButtonClicked(tweetId);
+		
+	}
+
 
 }

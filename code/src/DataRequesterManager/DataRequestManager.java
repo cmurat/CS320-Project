@@ -155,4 +155,14 @@ public class DataRequestManager {
 		tweetHandler.retweet(tweetId);
 		
 	}
+
+	public void unFavorite(long tweetId) {
+		tweetHandler.unFavorite(tweetId);
+		
+	}
+
+	public void unRetweet(long tweetId) {
+		tweetHandler.unRetweet(tweetId);
+		
+	}
 }
