@@ -28,7 +28,7 @@ public class ReplyButtonListener implements ActionListener {
 				System.out.println(currentToken);
 				if(ifCurrentUser(currentToken))
 					continue;
-				String plainAlphaNumbericReprentation = currentToken.replaceAll("[^\\p{L}\\p{Nd}]", "");
+				String plainAlphaNumbericReprentation = currentToken.replaceAll("[^\\p{L}\\p{Nd}\\_]", "");
 				replyText+= "@"+plainAlphaNumbericReprentation+ " ";
 			}
 		}

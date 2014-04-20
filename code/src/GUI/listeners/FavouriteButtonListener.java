@@ -17,24 +17,28 @@ public class FavouriteButtonListener implements ActionListener {
 	private JButton favButton;
 	private MainPanel mainPanel;
 	private Tweet tweet;
+	private boolean favStatus;
 
 	public FavouriteButtonListener(long tweetId, JButton favButton, MainPanel mainPanel, Tweet tweet) {
 		this.tweetId = tweetId;
 		this.favButton = favButton;
 		this.mainPanel = mainPanel;
 		this.tweet=tweet;
+		this.favStatus = tweet.isFavorited();
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		String address="icon/FavoriteIcon.png";
 		System.out.println("\n favourite is clicked!");
 		favButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-		if(tweet.isFavorited()){
+		if(favStatus){
 			address="icon/FavoriteIconBefore.png";
 			mainPanel.unFavoriteButtonClicked(tweetId);
+			favStatus = false;;
 		}
 		else{
 			mainPanel.favoriteButtonClicked(tweetId);
+			favStatus= true;
 		}
 		Image img = new ImageIcon(address).getImage();
 		img = img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);

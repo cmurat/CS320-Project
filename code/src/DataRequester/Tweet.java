@@ -19,7 +19,6 @@ public class Tweet {
 	public URL getUserImage() {
 		return user.getProfileImageUrlHttps();
 	}
-
 	public String getContent() {
 		return status.getText();
 	}

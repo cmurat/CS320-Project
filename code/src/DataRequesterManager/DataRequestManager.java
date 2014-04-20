@@ -152,7 +152,7 @@ public class DataRequestManager {
 	}
 
 	public void favorite(long tweetId) {
-		tweetHandler.retweet(tweetId);
+		tweetHandler.favorite(tweetId);
 		
 	}
 
