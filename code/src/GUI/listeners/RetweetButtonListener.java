@@ -16,21 +16,24 @@ public class RetweetButtonListener implements ActionListener {
 	private JButton retweetButton;
 	private MainPanel mainPanel;
 	private Tweet tweet;
+	boolean retweeted;
 
 	public RetweetButtonListener(long tweetId, JButton retweetButton, MainPanel mainPanel, Tweet tweet) {
 		this.tweetId = tweetId;
 		this.retweetButton = retweetButton;
 		this.mainPanel = mainPanel;
 		this.tweet=tweet;
+		this.retweeted=tweet.isRetweeted();
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		String address="icon/RetweetIcon.png";
 		System.out.println("retweet is clicked!");
 		retweetButton.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-		if(!tweet.isRetweeted()){
-
+		if(!retweeted){
 			mainPanel.retweetButtonClicked(tweetId);
+			retweeted=true;
 		}
 		Image img = new ImageIcon(address).getImage();
 		img = img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
