@@ -2,6 +2,7 @@ package GUIManager;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import twitter4j.DirectMessage;
@@ -175,6 +176,25 @@ public class GUIManager {
 	public void unRetweetButtonClicked(long tweetId) {
 		dataRequestManager.unRetweet(tweetId);
 		
+	}
+
+	public void conversationClicked(String peer) {
+		String userPicture = dataRequestManager.getCurrentUserAccount().getProfilePictureURL();
+		gui.printConversationView(peer, getPictureURL(userPicture));
+	}
+
+	private URL getPictureURL(String userPicture) {
+		URL pictureURL = null;
+		try {
+			pictureURL = new URL(userPicture);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return pictureURL;
+	}
+
+	public void backToMessageListClicked() {
+		gui.printDMessages(null);
 	}
 
 }

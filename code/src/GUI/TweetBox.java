@@ -1,6 +1,8 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -8,6 +10,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
 @SuppressWarnings("serial")
 public class TweetBox extends JPanel {
@@ -18,16 +21,7 @@ public class TweetBox extends JPanel {
 	public TweetBox(MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
 		setLayout(new BorderLayout());
-		calculateBounds();
 		addTweetField();
-	}
-
-	private void calculateBounds() {
-		int width = mainPanel.getBounds().width;
-		int height = mainPanel.getBounds().height / 8;
-		int xPos = mainPanel.getBounds().x;
-		int yPos = mainPanel.getBounds().height - height;
-		setBounds(xPos, yPos, width, height);
 	}
 
 	private void addTweetField() {
@@ -36,6 +30,7 @@ public class TweetBox extends JPanel {
 		tweetField.setLineWrap(true);
 		tweetField.setWrapStyleWord(false);
 		tweetField.setOpaque(false);
+		tweetField.setBorder(new LineBorder(Color.black));
 
 		tweetField.addFocusListener(getFocusAdapter());
 		tweetField.addKeyListener(getEnterKeyAdapter());
@@ -50,6 +45,13 @@ public class TweetBox extends JPanel {
 			public void focusGained(FocusEvent e) {
 				if (tweetField.getText().equals("Write a tweet, Press Enter.."))
 					tweetField.setText("");
+			}
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (tweetField.getText().equals("")) {
+					tweetField.setText("Write a tweet, Press Enter..");
+				}
 			}
 		};
 	}

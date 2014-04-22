@@ -3,8 +3,10 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -32,6 +34,7 @@ public class MainPanel extends JPanel {
 	public MainPanel(GUI gui) {
 		this.gui = gui;
 		setBounds(0, gui.getHeight() / 10, gui.getWidth(), gui.getHeight() - gui.getHeight() / 10);
+		setPreferredSize(new Dimension(gui.getWidth(), gui.getHeight() - gui.getHeight() / 10));
 		setLayout(new BorderLayout());
 		setOpaque(true);
 		setBackground(Color.WHITE);
@@ -116,9 +119,10 @@ public class MainPanel extends JPanel {
 	public void printDMessages(ArrayList<DMessage> dMessages) {
 		removeAll();
 		stopTimelineTimer();
-		dMessageView = new DMessageView(this, dMessages);
-		dMessageView.printDMessageView();
-		add(dMessageView);
+		if (dMessageView == null)
+			dMessageView = new DMessageView(this);
+		dMessageView.printDMessageListPanel(dMessages);
+		add(dMessageView, BorderLayout.CENTER);
 		add(tweetBox, BorderLayout.SOUTH);
 		refresh();
 	}
@@ -213,6 +217,18 @@ public class MainPanel extends JPanel {
 	public void unRetweetButtonClicked(long tweetId) {
 		gui.unRetweetButtonClicked(tweetId);
 		
+	}
+
+	public void conversationClicked(String peer) {
+		gui.conversationClicked(peer);
+	}
+
+	public void printConversationView(String peer, URL userPicture) {
+		dMessageView.printConversationView(peer, userPicture);
+	}
+
+	public void backToMessageListClicked() {
+		gui.backToMessageListClicked();
 	}
 
 

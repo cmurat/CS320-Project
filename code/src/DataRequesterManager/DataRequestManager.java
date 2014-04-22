@@ -115,7 +115,7 @@ public class DataRequestManager {
 
 	public String getUserScreenName() {
 		return accountHandler.getAccountUserScreenName();
-	}
+	} 
 
 	public void follow(long userToFollowId) {
 		navigationHandler.follow(userToFollowId);

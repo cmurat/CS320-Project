@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -36,7 +37,6 @@ public class GUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Twitter Desktop Streamer");
 		calculateBounds();
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setLayout(new GridBagLayout());
 		getContentPane().setBackground(Color.WHITE);
 		setResizable(false);
@@ -240,6 +240,18 @@ public class GUI extends JFrame {
 
 	public void unRetweetButtonClicked(long tweetId) {
 		guiManager.unRetweetButtonClicked(tweetId);
+	}
+
+	public void conversationClicked(String peer) {
+		guiManager.conversationClicked(peer);
+	}
+
+	public void printConversationView(String peer, URL userPicture) {
+		mainPanel.printConversationView(peer, userPicture);
+	}
+
+	public void backToMessageListClicked() {
+		guiManager.backToMessageListClicked();
 	}
 
 }

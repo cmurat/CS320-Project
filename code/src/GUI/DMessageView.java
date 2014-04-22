@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -11,6 +12,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -26,7 +29,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
@@ -39,12 +44,16 @@ public class DMessageView extends JPanel {
 	private ArrayList<DMessage> directMessages;
 	private JPanel messageListPanel;
 	private JPanel newMessagePanel;
+	private JPanel conversationView;
+	private TreeMap<String, ArrayList<DMessage>> sortedConversationMap;
 
-	public DMessageView(MainPanel mainPanel, ArrayList<DMessage> dMessages) {
+	public DMessageView(MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
-		directMessages = dMessages;
+		directMessages = new ArrayList<DMessage>();
+		sortedConversationMap = new TreeMap<String, ArrayList<DMessage>>();
 		messageListPanel = null;
 		newMessagePanel = null;
+		conversationView = null;
 		calculateBounds();
 		setLayout(new BorderLayout());
 	}
@@ -53,13 +62,17 @@ public class DMessageView extends JPanel {
 		int xPos = mainPanel.getX();
 		int yPos = mainPanel.getY();
 		int width = mainPanel.getWidth();
-		int height = mainPanel.getHeight();
+		int height = mainPanel.getHeight() - mainPanel.getHeight() / 20;
 		setBounds(xPos, yPos, width, height);
+		setPreferredSize(new Dimension(width, height));
 	}
 
-	public void printDMessageView() {
+	public void printDMessageListPanel(ArrayList<DMessage> dMessages) {
 		removeAll();
-		createMessageListPanel();
+		if (dMessages != null) {
+			directMessages.addAll(dMessages);
+			createMessageListPanel();
+		}
 		add(messageListPanel, BorderLayout.NORTH);
 		repaint();
 		revalidate();
@@ -77,17 +90,19 @@ public class DMessageView extends JPanel {
 		c.gridy = 0;
 		messageListPanel.add(getHeaderPanel(), c);
 	}
-	
+
 	private JPanel getHeaderPanel() {
 		JPanel headerPanel = new JPanel(new BorderLayout());
 		headerPanel.add(getDMessageField(), BorderLayout.WEST);
 		headerPanel.add(getNewDMessageButton(), BorderLayout.EAST);
-		headerPanel.setPreferredSize(new Dimension(getWidth(), getHeight() / 20));
+		headerPanel
+				.setPreferredSize(new Dimension(getWidth(), getHeight() / 20));
 		return headerPanel;
 	}
 
 	private JTextField getDMessageField() {
 		JTextField dMessageField = new JTextField("  Direct Message");
+		dMessageField.setFont(getFont().deriveFont(Font.BOLD));
 		dMessageField.setFocusable(false);
 		dMessageField.setBackground(null);
 		dMessageField.setBorder(null);
@@ -105,7 +120,22 @@ public class DMessageView extends JPanel {
 		GridBagConstraints d = new GridBagConstraints();
 		d.fill = GridBagConstraints.HORIZONTAL;
 		d.gridy = 1;
-		messageListPanel.add(getConversationListPanel(), d);
+		messageListPanel.add(createConversationPane(), d);
+	}
+
+	private JScrollPane createConversationPane() {
+		JPanel layoutPanel = new JPanel(new BorderLayout());
+		layoutPanel.add(getConversationListPanel(), BorderLayout.NORTH);
+		JScrollPane conversationPane = new JScrollPane(layoutPanel);
+		conversationPane.setOpaque(true);
+		conversationPane
+				.setPreferredSize(new Dimension(getWidth(), getHeight()));
+		conversationPane.getVerticalScrollBar().setUnitIncrement(16);
+		conversationPane
+				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		conversationPane
+				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		return conversationPane;
 	}
 
 	private JPanel getConversationListPanel() {
@@ -116,18 +146,19 @@ public class DMessageView extends JPanel {
 	}
 
 	private void addConversationsTo(JPanel conversationListPanel) {
-		TreeMap<String, ArrayList<DMessage>> sortedConversationMap = sortConversationsByDate(getConversations());
+		sortedConversationMap = sortConversationsByDate(getConversations());
 		Set<String> keys = sortedConversationMap.keySet();
 		int i = 0;
 		GridBagConstraints c = new GridBagConstraints();
 		for (String key : keys) {
 			DMessage lastMessage = sortedConversationMap.get(key).get(0);
-			JPanel conversationPanel = createConversationPanel();
+			JPanel conversationPanel = createListItemPanel();
 			addPeerImage(lastMessage, conversationPanel);
 			addMiddlePanel(conversationPanel, key, lastMessage);
 			addTimePanel(lastMessage, conversationPanel);
 			conversationPanel.addMouseListener(getConversationMouseAdapter());
-			addConversationPanel(conversationListPanel, i++, c, conversationPanel);
+			addConversationPanel(conversationListPanel, i++, c,
+					conversationPanel);
 		}
 	}
 
@@ -156,28 +187,32 @@ public class DMessageView extends JPanel {
 		return sortedConversationMap;
 	}
 
-	private JPanel createConversationPanel() {
-		JPanel conversationPanel = new JPanel(new BorderLayout());
-		conversationPanel.setOpaque(false);
-		conversationPanel.setBackground(Color.white);
-		conversationPanel.setPreferredSize(new Dimension(getWidth(), getHeight() / 10));
-		conversationPanel.setBorder(new LineBorder(Color.black));
-		return conversationPanel;
+	private JPanel createListItemPanel() {
+		JPanel listItemPanel = new JPanel(new BorderLayout());
+		listItemPanel.setOpaque(false);
+		listItemPanel.setBackground(Color.white);
+		listItemPanel.setPreferredSize(new Dimension(getWidth(),
+				getHeight() / 10));
+		listItemPanel.setBorder(new LineBorder(Color.black));
+		return listItemPanel;
 	}
 
 	private void addPeerImage(DMessage lastMessage, JPanel conversationPanel) {
 		JPanel imagePanel = new JPanel(new FlowLayout());
 		imagePanel.add(getPeerImage(lastMessage));
-		imagePanel.setPreferredSize(new Dimension(getHeight() / 10, getHeight() / 10));
+		imagePanel.setPreferredSize(new Dimension(getHeight() / 10,
+				getHeight() / 10));
 		imagePanel.addMouseListener(getPeerImageMouseAdapter());
 		conversationPanel.add(imagePanel, BorderLayout.WEST);
 	}
 
 	@SuppressWarnings("deprecation")
 	private JLabel getPeerImage(DMessage lastMessage) {
-		JLabel image = new JLabel(new ImageIcon(lastMessage.getPeer().getProfileImageUrlHttps(), lastMessage.getPeer().getName()));
+		JLabel image = new JLabel(new ImageIcon(lastMessage.getPeer()
+				.getProfileImageUrlHttps(), lastMessage.getPeer().getScreenName()));
 		image.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-		image.setPreferredSize(new Dimension(image.getIcon().getIconWidth(), image.getIcon().getIconHeight()));
+		image.setPreferredSize(new Dimension(image.getIcon().getIconWidth(),
+				image.getIcon().getIconHeight()));
 		return image;
 	}
 
@@ -187,15 +222,16 @@ public class DMessageView extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				JPanel panel = (JPanel) e.getSource();
 				JLabel image = (JLabel) panel.getComponent(0);
-				System.out.println("Direct Message: " + image.getIcon().toString() + " is clicked!");
+				System.out.println("Direct Message: "
+						+ image.getIcon().toString() + " is clicked!");
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				JPanel panel = (JPanel) e.getSource();
 				panel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				JPanel panel = (JPanel) e.getSource();
@@ -204,7 +240,8 @@ public class DMessageView extends JPanel {
 		};
 	}
 
-	private void addMiddlePanel(JPanel conversationPanel, String key, DMessage lastMessage) {
+	private void addMiddlePanel(JPanel conversationPanel, String key,
+			DMessage lastMessage) {
 		JPanel middlePanel = new JPanel(new GridLayout(2, 1));
 		middlePanel.add(getLastMessagePanel(lastMessage), 1, 0);
 		middlePanel.add(getNamePanel(key, lastMessage), 0, 0);
@@ -214,7 +251,8 @@ public class DMessageView extends JPanel {
 	private JPanel getLastMessagePanel(DMessage lastMessage) {
 		JPanel lastMessagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		if (lastMessage.getIsSent())
-			lastMessagePanel.add(new JLabel(new ImageIcon("icon/replyIcon.png")));
+			lastMessagePanel
+					.add(new JLabel(new ImageIcon("icon/replyIcon.png")));
 		JLabel label = new JLabel(lastMessage.getMessage());
 		label.setFont(getFont().deriveFont(Font.PLAIN));
 		label.setForeground(Color.gray);
@@ -228,7 +266,7 @@ public class DMessageView extends JPanel {
 		peerName.addMouseListener(getNameContentMouseAdapter());
 		JLabel peerHandle = new JLabel('@' + key);
 		peerHandle.addMouseListener(getNameContentMouseAdapter());
-		peerHandle.setFont(getFont().deriveFont((float)11));
+		peerHandle.setFont(getFont().deriveFont((float) 11));
 		namePanel.add(peerName);
 		namePanel.add(peerHandle);
 		return namePanel;
@@ -238,17 +276,20 @@ public class DMessageView extends JPanel {
 		return new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Direct Message: " + ((JLabel)e.getSource()).getText() + " is clicked!");
+				System.out.println("Direct Message: "
+						+ ((JLabel) e.getSource()).getText() + " is clicked!");
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				((JLabel)e.getSource()).setCursor(new Cursor(Cursor.HAND_CURSOR));
+				((JLabel) e.getSource()).setCursor(new Cursor(
+						Cursor.HAND_CURSOR));
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {
-				((JLabel)e.getSource()).setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				((JLabel) e.getSource()).setCursor(new Cursor(
+						Cursor.DEFAULT_CURSOR));
 			}
 		};
 	}
@@ -261,14 +302,19 @@ public class DMessageView extends JPanel {
 		Date now = new GregorianCalendar().getTime();
 		StringTokenizer tokens = new StringTokenizer(messageDate.toGMTString());
 		if (messageDate.getYear() < now.getYear()) {
-			timeLabel.setText(tokens.nextToken() + " " + tokens.nextToken() + " " + tokens.nextToken());
-		} else if (messageDate.getMonth() == now.getMonth() && messageDate.getDay() == now.getDay()) {
+			timeLabel.setText(tokens.nextToken() + " " + tokens.nextToken()
+					+ " " + tokens.nextToken());
+		} else if (messageDate.getMonth() == now.getMonth()
+				&& messageDate.getDay() == now.getDay()) {
 			if (messageDate.getHours() < now.getHours()) {
-				timeLabel.setText((now.getHours() - messageDate.getHours()) + "h");
+				timeLabel.setText((now.getHours() - messageDate.getHours())
+						+ "h");
 			} else if (messageDate.getMinutes() < now.getMinutes()) {
-				timeLabel.setText((now.getMinutes() - messageDate.getMinutes()) + "m");
+				timeLabel.setText((now.getMinutes() - messageDate.getMinutes())
+						+ "m");
 			} else {
-				timeLabel.setText((now.getSeconds() - messageDate.getSeconds()) + "s");
+				timeLabel.setText((now.getSeconds() - messageDate.getSeconds())
+						+ "s");
 			}
 		} else {
 			timeLabel.setText(tokens.nextToken() + " " + tokens.nextToken());
@@ -284,7 +330,7 @@ public class DMessageView extends JPanel {
 				JPanel conversation = (JPanel) e.getSource();
 				JPanel imagePanel = (JPanel) conversation.getComponent(0);
 				JLabel image = (JLabel) imagePanel.getComponent(0);
-				System.out.println("Direct Message: Assume " + image.getIcon().toString() + " is opened.");
+				mainPanel.conversationClicked(image.getIcon().toString());
 			}
 		};
 	}
@@ -294,6 +340,154 @@ public class DMessageView extends JPanel {
 		c.gridy = i;
 		c.anchor = GridBagConstraints.ABOVE_BASELINE_LEADING;
 		conversationListPanel.add(conversationPanel, c);
+	}
+
+	public void printConversationView(String peer, URL userPicture) {
+		removeAll();
+		createConversationView(peer, userPicture);
+		add(conversationView, BorderLayout.NORTH);
+		repaint();
+		revalidate();
+	}
+
+	private void createConversationView(String peer, URL userPicture) {
+		conversationView = new JPanel(new GridBagLayout());
+		addConversationHeader(peer);
+		addMessages(peer, userPicture);
+	}
+
+	private void addConversationHeader(String peer) {
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridy = 0;
+		conversationView.add(getConversationHeader(peer), c);
+	}
+
+	private Component getConversationHeader(String peer) {
+		JPanel headerPanel = new JPanel(new BorderLayout());
+		headerPanel.add(getNavigationField(peer), BorderLayout.WEST);
+		headerPanel
+				.setPreferredSize(new Dimension(getWidth(), getHeight() / 20));
+		return headerPanel;
+	}
+
+	private JPanel getNavigationField(String peer) {
+		JPanel navigationPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		addDMessageButtonTo(navigationPanel);
+		addPeerFieldTo(navigationPanel, peer);
+		return navigationPanel;
+	}
+
+	private void addDMessageButtonTo(JPanel navigationPanel) {
+		JTextField dMessageField = getDMessageField();
+		dMessageField.addMouseListener(getNavigationFieldListener());
+		navigationPanel.add(dMessageField);
+	}
+
+	private MouseListener getNavigationFieldListener() {
+		return new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mainPanel.backToMessageListClicked();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				JTextField dMessageField = (JTextField) e.getSource();
+				dMessageField.setForeground(Color.blue);
+				dMessageField.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				JTextField dMessageField = (JTextField) e.getSource();
+				dMessageField.setForeground(null);
+				dMessageField.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+		};
+	}
+
+	private void addPeerFieldTo(JPanel navigationPanel, String peer) {
+		JTextField peerField = getDMessageField();
+		peerField.setText(" > with " + peer);
+		navigationPanel.add(peerField);
+	}
+
+	private void addMessages(String peer, URL userPicture) {
+		GridBagConstraints d = new GridBagConstraints();
+		d.fill = GridBagConstraints.HORIZONTAL;
+		d.gridy = 1;
+		conversationView.add(createMessagePane(peer, userPicture), d);
+	}
+
+	private Component createMessagePane(String peer, URL userPicture) {
+		JPanel layout = new JPanel(new BorderLayout());
+		layout.add(getMessageList(peer, userPicture), BorderLayout.NORTH);
+		JScrollPane messagePane = new JScrollPane(layout);
+		messagePane.setOpaque(true);
+		messagePane.getVerticalScrollBar().setUnitIncrement(16);
+		messagePane.setPreferredSize(new Dimension(getWidth(), getHeight()));
+		messagePane
+				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		messagePane
+				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		return messagePane;
+	}
+
+	private Component getMessageList(String peer, URL userPicture) {
+		JPanel messageListPanel = new JPanel(new GridBagLayout());
+		addMessagesTo(messageListPanel, peer, userPicture);
+		messageListPanel.setBackground(null);
+		return messageListPanel;
+	}
+
+	private void addMessagesTo(JPanel messageListPanel, String peer,
+			URL userPicture) {
+		ArrayList<DMessage> messages = sortedConversationMap.get(peer);
+		int i = 0;
+		GridBagConstraints c = new GridBagConstraints();
+
+		for (DMessage message : messages) {
+			JPanel messagePanel = createListItemPanel();
+			if (message.getIsSent()) {
+				addSentMessageTo(messagePanel, message, userPicture);
+			} else {
+				addReceivedMessageTo(messagePanel, message);
+			}
+			c.gridy = i++;
+			c.anchor = GridBagConstraints.ABOVE_BASELINE_LEADING;
+			messageListPanel.add(messagePanel, c);
+			
+		}
+	}
+
+	private void addSentMessageTo(JPanel messagePanel, DMessage message,
+			URL userPicture) {
+		messagePanel.add(getImage(userPicture), BorderLayout.EAST);
+		JPanel middlePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JLabel messageLabel = new JLabel(message.getMessage());
+		middlePanel.add(messageLabel);
+		messagePanel.add(middlePanel, BorderLayout.CENTER);
+	}
+
+	private JPanel getImage(URL userPicture) {
+		JPanel imagePanel = new JPanel(new FlowLayout());
+		JLabel image = new JLabel(new ImageIcon(userPicture));
+		image.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		image.setPreferredSize(new Dimension(image.getIcon().getIconWidth(),
+				image.getIcon().getIconHeight()));
+		imagePanel.add(image);
+		imagePanel.setPreferredSize(new Dimension(getHeight() / 10,
+				getHeight() / 10));
+		return imagePanel;
+	}
+
+	private void addReceivedMessageTo(JPanel messagePanel, DMessage message) {
+		messagePanel.add(getImage(message.getPeer().getProfileImageUrlHttps()), BorderLayout.WEST);
+		JPanel middlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel messageLabel = new JLabel(message.getMessage());
+		middlePanel.add(messageLabel);
+		messagePanel.add(middlePanel, BorderLayout.CENTER);
 	}
 
 }
