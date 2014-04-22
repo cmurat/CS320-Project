@@ -102,7 +102,7 @@ public class NavigationBar extends JPanel {
 	}
 
 	private void addDMessageButton(int dimension) {
-		JButton dMessageButton = getIconButton("icon/mail3.png", dimension);
+		JButton dMessageButton = getIconButton("icon/messages.png", dimension);
 		dMessageButton.addActionListener(new DMessageListener(dMessageButton, gui));
 		dMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(dMessageButton);
