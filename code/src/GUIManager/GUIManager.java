@@ -7,6 +7,8 @@ import java.net.URL;
 
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
+import twitter4j.TwitterException;
+import DataRequester.DMessage;
 import DataRequesterManager.DataRequestManager;
 import GUI.GUI;
 
@@ -89,13 +91,6 @@ public class GUIManager {
 
 	public ResponseList<DirectMessage> getDirectMessages() {
 		return dataRequestManager.getDirectMessages();
-	}
-
-	public void sendMessageClicked() {
-		String screenName = "";// TODO long userId, String message needed to derived
-		// from gui Burak and Ugur
-		String message = null;
-		dataRequestManager.sendMessage(screenName, message);
 	}
 
 	public void followClicked(long userToFollowId) {
@@ -203,8 +198,16 @@ public class GUIManager {
 
 	public void newDMessageEntered() {
 		String receiver = gui.getNewDMessageReceiver();
-		// TODO continue from here..
-		System.out.println("Say it is sent.");
+		String message = gui.getNewDMessage();
+		DMessage sentDMessage = null;
+		try {
+			sentDMessage = dataRequestManager.sendDirectMessage(receiver, message);
+		} catch (TwitterException e) {
+			e.printStackTrace();
+			gui.printDMessageError(e.getErrorMessage());
+			return;
+		}
+		gui.printConversationOf(sentDMessage);
 	}
 
 }

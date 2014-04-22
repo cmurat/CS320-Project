@@ -23,7 +23,6 @@ public class DataRequestManager {
 
 	public GUIManager guiManager;
 
-
 	// Model Classes
 	public AccountHandler accountHandler;
 	public DMessageHandler dMessageHandler;
@@ -33,7 +32,7 @@ public class DataRequestManager {
 	public DataRequestManager(GUIManager guiManager) {
 		this.guiManager = guiManager;
 		initModelClasses();
-//		initDataRequesterManagerClasses();
+		// initDataRequesterManagerClasses();
 	}
 
 	private void initModelClasses() {
@@ -43,11 +42,12 @@ public class DataRequestManager {
 		navigationHandler = new NavigationHandler(twitter);
 		tweetHandler = new TweetHandler(twitter);
 	}
+
 	public String createRequestTokenURL() {
 		return accountHandler.createRequestTokenURL();
 	}
 
-	public boolean checkPIN(String pin){
+	public boolean checkPIN(String pin) {
 		return accountHandler.loginTwitterNewUser(pin);
 	}
 
@@ -69,18 +69,15 @@ public class DataRequestManager {
 		return navigationHandler.getTimeline();
 	}
 
-	public void sendMessage(String screenName, String message) {
-		try {
-			dMessageHandler.sendDirectMessage(screenName, message);
-		} catch (TwitterException e) {
-			e.printStackTrace();
-		}
+	public DMessage sendDirectMessage(String screenName, String message)
+			throws TwitterException {
+		return dMessageHandler.sendDirectMessage(screenName, message);
 	}
 
 	public ResponseList<DirectMessage> getDirectMessages() {
 		return dMessageHandler.getDirectMessages();
 	}
-	
+
 	public ResponseList<DirectMessage> getSentDirectMessages() {
 		return dMessageHandler.getSentDirectMessages();
 	}
@@ -115,16 +112,16 @@ public class DataRequestManager {
 
 	public String getUserScreenName() {
 		return accountHandler.getAccountUserScreenName();
-	} 
+	}
 
 	public void follow(long userToFollowId) {
 		navigationHandler.follow(userToFollowId);
-		
+
 	}
 
 	public void unFollow(long userToUnFollowId) {
 		navigationHandler.unFollow(userToUnFollowId);
-		
+
 	}
 
 	public boolean logOutClicked() {
@@ -138,31 +135,31 @@ public class DataRequestManager {
 
 	public void changeProfilePicture(File image) {
 		accountHandler.setProfilePicture(image);
-		
+
 	}
 
 	public void deleteTweet(long tweetId) {
 		tweetHandler.delete(tweetId);
-		
+
 	}
 
 	public void retweet(long tweetId) {
 		tweetHandler.retweet(tweetId);
-		
+
 	}
 
 	public void favorite(long tweetId) {
 		tweetHandler.favorite(tweetId);
-		
+
 	}
 
 	public void unFavorite(long tweetId) {
 		tweetHandler.unFavorite(tweetId);
-		
+
 	}
 
 	public void unRetweet(long tweetId) {
 		tweetHandler.unRetweet(tweetId);
-		
+
 	}
 }

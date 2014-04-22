@@ -270,4 +270,18 @@ public class GUI extends JFrame {
 		return mainPanel.getNewDMessageReceiver();
 	}
 
+	public String getNewDMessage() {
+		return mainPanel.getNewDMessage();
+	}
+
+	public void printDMessageError(String errorMessage) {
+		mainPanel.printDMessageError(errorMessage);
+	}
+
+	public void printConversationOf(DMessage sentDMessage) {
+		ArrayList<DMessage> sentMessageList = new ArrayList<DMessage>();
+		sentMessageList.add(sentDMessage);
+		mainPanel.printDMessages(sentMessageList);
+	}
+
 }

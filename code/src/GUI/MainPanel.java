@@ -251,5 +251,12 @@ public class MainPanel extends JPanel {
 		return dMessageView.getNewDMessageReceiver();
 	}
 
+	public String getNewDMessage() {
+		return dMessageView.getNewDMessage();
+	}
+
+	public void printDMessageError(String errorMessage) {
+		dMessageView.printDMessageError(errorMessage);
+	}
 
 }

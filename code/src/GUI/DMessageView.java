@@ -518,8 +518,10 @@ public class DMessageView extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				JTextField receiver = (JTextField) e.getSource();
-				if (receiver.getText().equals("Enter the receiver.."))
+				if (receiver.getText().equals("Enter the receiver..") || receiver.getForeground().equals(Color.red)) {
 					receiver.setText("");
+					receiver.setForeground(null);
+				}
 			}
 
 			@Override
@@ -576,6 +578,17 @@ public class DMessageView extends JPanel {
 
 	public String getNewDMessageReceiver() {
 		return ((JTextField)newMessagePanel.getComponent(0)).getText();
+	}
+
+	public String getNewDMessage() {
+		return ((JTextArea)(newMessagePanel.getComponent(1))).getText();
+	}
+
+	public void printDMessageError(String errorMessage) {
+		JTextField receiverField = (JTextField) newMessagePanel.getComponent(0);
+		receiverField.setText(errorMessage);
+		receiverField.setForeground(Color.red);
+		receiverField.transferFocusUpCycle();
 	}
 
 }
