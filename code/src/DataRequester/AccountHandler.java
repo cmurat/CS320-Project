@@ -50,7 +50,7 @@ public class AccountHandler {
 			id = twitter.showUser(screenName).getId();
 		} catch (TwitterException e) {
 			// TODO Auto-generated catch block
-			id = 0;
+			id = -1;
 		}
 		return id;
 	}
