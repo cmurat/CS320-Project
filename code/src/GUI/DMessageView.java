@@ -319,8 +319,10 @@ public class DMessageView extends JPanel {
 
 	public void printConversationView(String peer, URL userPicture) {
 		removeAll();
+		JPanel messagePanel=new JPanel();
+		messagePanel.setLayout(new FlowLayout());
 		createConversationView(peer, userPicture);
-		add(conversationView, BorderLayout.NORTH);
+		add(conversationView,BorderLayout.NORTH);
 		repaint();
 		revalidate();
 	}

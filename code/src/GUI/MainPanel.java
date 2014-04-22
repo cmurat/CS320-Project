@@ -228,6 +228,7 @@ public class MainPanel extends JPanel {
 	public void printConversationView(String peer, URL userPicture) {
 		remove(tweetBox);
 		dMessageView.printConversationView(peer, userPicture);
+		
 	}
 
 	public void backToMessageListClicked() {

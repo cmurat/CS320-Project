@@ -74,6 +74,7 @@ public class NavigationBar extends JPanel {
 	private void addHomeButton(int dimension) {
 
 		JButton homeButton = getIconButton("icon/home.png", dimension);
+		homeButton.setToolTipText("Home");
 		homeButton.addActionListener(new HomeButtonListener(homeButton, gui));
 		homeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(homeButton);
@@ -81,6 +82,7 @@ public class NavigationBar extends JPanel {
 
 	private void addNotificationsButton(int dimension) {
 		JButton notificationsButton = getIconButton("icon/notification2.png", dimension);
+		notificationsButton.setToolTipText("Notifications");
 		notificationsButton.addActionListener(
 				new NotificationsButtonListener(notificationsButton, gui));
 		notificationsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -89,6 +91,7 @@ public class NavigationBar extends JPanel {
 
 	private void addMeButton(int dimension) {
 		JButton meButton = getIconButton("icon/profile-icon.png", dimension);
+		meButton.setToolTipText("My Profile");
 		meButton.addActionListener(new MeButtonListener(meButton, gui));
 		meButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(meButton);
@@ -96,6 +99,7 @@ public class NavigationBar extends JPanel {
 
 	private void addSearchButton(int dimension) {
 		JButton searchButton = getIconButton("icon/search.png", dimension);
+		searchButton.setToolTipText("Search");
 		searchButton.addActionListener(new SearchButtonListener(searchButton, gui));
 		searchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(searchButton);
@@ -103,6 +107,7 @@ public class NavigationBar extends JPanel {
 
 	private void addDMessageButton(int dimension) {
 		JButton dMessageButton = getIconButton("icon/messages.png", dimension);
+		dMessageButton.setToolTipText("Direct Message");
 		dMessageButton.addActionListener(new DMessageListener(dMessageButton, gui));
 		dMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(dMessageButton);
@@ -110,6 +115,7 @@ public class NavigationBar extends JPanel {
 
 	private void addSettingsButton(int dimension) {
 		JButton settingsButton = getIconButton("icon/settings.png", dimension);
+		settingsButton.setToolTipText("Settings");
 		settingsButton.addActionListener(
 				new SettingsButtonListener(settingsButton, gui));
 		settingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -118,6 +124,7 @@ public class NavigationBar extends JPanel {
 
 	private void addLogOutButton(int dimension) {
 		JButton logOutButton = getIconButton("icon/logOut2.jpg", dimension);
+		logOutButton.setToolTipText("LogOut");
 		logOutButton.addActionListener(new LogoutButtonListener(logOutButton, gui));
 		logOutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(logOutButton);
