@@ -80,7 +80,7 @@ public class NavigationBar extends JPanel {
 	}
 
 	private void addNotificationsButton(int dimension) {
-		JButton notificationsButton = getIconButton("icon/mail2.png", dimension);
+		JButton notificationsButton = getIconButton("icon/notification2.png", dimension);
 		notificationsButton.addActionListener(
 				new NotificationsButtonListener(notificationsButton, gui));
 		notificationsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -117,7 +117,7 @@ public class NavigationBar extends JPanel {
 	}
 
 	private void addLogOutButton(int dimension) {
-		JButton logOutButton = getIconButton("icon/LogOutButton.png", dimension);
+		JButton logOutButton = getIconButton("icon/logOut2.jpg", dimension);
 		logOutButton.addActionListener(new LogoutButtonListener(logOutButton, gui));
 		logOutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonList.add(logOutButton);
