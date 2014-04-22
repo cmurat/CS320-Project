@@ -44,6 +44,16 @@ public class AccountHandler {
 		}
 		return true;
 	}
+	public long getUserIdByName(String screenName){
+		long id = 0;
+		try {
+			id = twitter.showUser(screenName).getId();
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			id = 0;
+		}
+		return id;
+	}
 
 	public boolean loginTwitterNewUser(String Pin){
 		accessToken = createAccessToken(Pin);
