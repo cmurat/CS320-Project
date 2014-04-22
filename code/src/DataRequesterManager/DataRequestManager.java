@@ -69,9 +69,9 @@ public class DataRequestManager {
 		return navigationHandler.getTimeline();
 	}
 
-	public void sendMessage(long userId, String message) {
+	public void sendMessage(String screenName, String message) {
 		try {
-			dMessageHandler.sendDirectMessage(userId, message);
+			dMessageHandler.sendDirectMessage(screenName, message);
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}

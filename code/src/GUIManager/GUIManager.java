@@ -92,10 +92,10 @@ public class GUIManager {
 	}
 
 	public void sendMessageClicked() {
-		long userId = 0;// TODO long userId, String message needed to derived
+		String screenName = "";// TODO long userId, String message needed to derived
 		// from gui Burak and Ugur
 		String message = null;
-		dataRequestManager.sendMessage(userId, message);
+		dataRequestManager.sendMessage(screenName, message);
 	}
 
 	public void followClicked(long userToFollowId) {

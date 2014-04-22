@@ -44,15 +44,17 @@ public class AccountHandler {
 		}
 		return true;
 	}
-	public long getUserIdByName(String screenName){
-		long id = 0;
+	public boolean isFollowedBy(String screenName) {
+		boolean isFollowed = false;
 		try {
-			id = twitter.showUser(screenName).getId();
+			 isFollowed = twitter.showFriendship(currentUser.getScreenName(), screenName).isSourceFollowedByTarget();
 		} catch (TwitterException e) {
 			// TODO Auto-generated catch block
-			id = -1;
+			e.printStackTrace();
 		}
-		return id;
+		return isFollowed;
+		
+		
 	}
 
 	public boolean loginTwitterNewUser(String Pin){
