@@ -16,7 +16,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -37,11 +36,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
 import DataRequester.DMessage;
+import GUI.listeners.DMessageNavigationFieldListener;
+import GUI.listeners.DirectMessageFieldEnterKeyListener;
+import GUI.listeners.DirectMessageFieldKeyListener;
+import GUI.listeners.DirectMessageFieldListener;
+import GUI.listeners.NameContentListener;
+import GUI.listeners.NewDirectMessageButtonListener;
+import GUI.listeners.PeerImageMouseListener;
+import GUI.listeners.ReceiverFieldListener;
 
 @SuppressWarnings("serial")
 public class DMessageView extends JPanel {
@@ -119,18 +125,11 @@ public class DMessageView extends JPanel {
 		JButton newDMessageButton = new JButton("New Message");
 		newDMessageButton.setBorderPainted(false);
 		newDMessageButton.setFocusPainted(false);
-		newDMessageButton.addMouseListener(getNewDMessageMouseAdapte());
+		newDMessageButton.addMouseListener(new NewDirectMessageButtonListener(mainPanel,newDMessageButton));
 		return newDMessageButton;
 	}
 
-	private MouseListener getNewDMessageMouseAdapte() {
-		return new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				mainPanel.newDMessageButtonClicked();
-			}
-		};
-	}
+
 
 	private void addConversationListPanel() {
 		GridBagConstraints d = new GridBagConstraints();
@@ -218,7 +217,7 @@ public class DMessageView extends JPanel {
 		imagePanel.add(getPeerImage(lastMessage));
 		imagePanel.setPreferredSize(new Dimension(getHeight() / 10,
 				getHeight() / 10));
-		imagePanel.addMouseListener(getPeerImageMouseAdapter());
+		imagePanel.addMouseListener(new PeerImageMouseListener());
 		conversationPanel.add(imagePanel, BorderLayout.WEST);
 	}
 
@@ -233,29 +232,6 @@ public class DMessageView extends JPanel {
 		return image;
 	}
 
-	private MouseAdapter getPeerImageMouseAdapter() {
-		return new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JPanel panel = (JPanel) e.getSource();
-				JLabel image = (JLabel) panel.getComponent(0);
-				System.out.println("Direct Message: "
-						+ image.getIcon().toString() + " is clicked!");
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				JPanel panel = (JPanel) e.getSource();
-				panel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				JPanel panel = (JPanel) e.getSource();
-				panel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			}
-		};
-	}
 
 	private void addMiddlePanel(JPanel conversationPanel, String key,
 			DMessage lastMessage) {
@@ -280,36 +256,15 @@ public class DMessageView extends JPanel {
 	private JPanel getNamePanel(String key, DMessage lastMessage) {
 		JPanel namePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel peerName = new JLabel(lastMessage.getPeer().getName());
-		peerName.addMouseListener(getNameContentMouseAdapter());
+		peerName.addMouseListener(new NameContentListener());
 		JLabel peerHandle = new JLabel('@' + key);
-		peerHandle.addMouseListener(getNameContentMouseAdapter());
+		peerHandle.addMouseListener(new NameContentListener());
 		peerHandle.setFont(getFont().deriveFont((float) 11));
 		namePanel.add(peerName);
 		namePanel.add(peerHandle);
 		return namePanel;
 	}
 
-	private MouseAdapter getNameContentMouseAdapter() {
-		return new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("Direct Message: "
-						+ ((JLabel) e.getSource()).getText() + " is clicked!");
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				((JLabel) e.getSource()).setCursor(new Cursor(
-						Cursor.HAND_CURSOR));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				((JLabel) e.getSource()).setCursor(new Cursor(
-						Cursor.DEFAULT_CURSOR));
-			}
-		};
-	}
 
 	@SuppressWarnings("deprecation")
 	private void addTimePanel(DMessage lastMessage, JPanel conversationPanel) {
@@ -344,10 +299,13 @@ public class DMessageView extends JPanel {
 		return new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+			
 				JPanel conversation = (JPanel) e.getSource();
+				conversation.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 				JPanel imagePanel = (JPanel) conversation.getComponent(0);
 				JLabel image = (JLabel) imagePanel.getComponent(0);
 				mainPanel.conversationClicked(image.getIcon().toString());
+				conversation.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
 		};
 	}
@@ -390,39 +348,17 @@ public class DMessageView extends JPanel {
 
 	private JPanel getNavigationField(String peer) {
 		JPanel navigationPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		addDMessageButtonTo(navigationPanel);
+		addBackToDMessageListButtonTo(navigationPanel);
 		addPeerFieldTo(navigationPanel, peer);
 		return navigationPanel;
 	}
 
-	private void addDMessageButtonTo(JPanel navigationPanel) {
+	private void addBackToDMessageListButtonTo(JPanel navigationPanel) {
 		JTextField dMessageField = getDMessageField();
-		dMessageField.addMouseListener(getNavigationFieldListener());
+		dMessageField.addMouseListener(new DMessageNavigationFieldListener(mainPanel,dMessageField));
 		navigationPanel.add(dMessageField);
 	}
 
-	private MouseListener getNavigationFieldListener() {
-		return new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				mainPanel.backToMessageListClicked();
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				JTextField dMessageField = (JTextField) e.getSource();
-				dMessageField.setForeground(Color.blue);
-				dMessageField.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				JTextField dMessageField = (JTextField) e.getSource();
-				dMessageField.setForeground(null);
-				dMessageField.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			}
-		};
-	}
 
 	private void addPeerFieldTo(JPanel navigationPanel, String peer) {
 		JTextField peerField = getDMessageField();
@@ -514,61 +450,16 @@ public class DMessageView extends JPanel {
 		JTextField receiver = new JTextField("Enter the receiver..");
 		receiver.setBorder(new LineBorder(Color.black));
 		receiver.setPreferredSize(new Dimension(getWidth(), getHeight() / 20));
-		receiver.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				JTextField receiver = (JTextField) e.getSource();
-				if (receiver.getText().equals("Enter the receiver..") || receiver.getForeground().equals(Color.red)) {
-					receiver.setText("");
-					receiver.setForeground(null);
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				JTextField receiver = (JTextField) e.getSource();
-				if (receiver.getText().equals(""))
-					receiver.setText("Enter the receiver..");
-			}
-		});
+		receiver.addFocusListener(new ReceiverFieldListener());
 		JTextArea dMessage = new JTextArea("Enter your message..");
 		dMessage.setPreferredSize(new Dimension(getWidth(), getHeight() / 10));
 		dMessage.setLineWrap(true);
 		dMessage.setOpaque(false);
 		dMessage.setColumns(140);
 		dMessage.setBorder(new LineBorder(Color.black));
-		dMessage.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				JTextArea message = (JTextArea) e.getSource();
-				if (message.getText().equals("Enter your message.."))
-					message.setText("");
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				JTextArea message = (JTextArea) e.getSource();
-				if (message.getText().equals(""))
-					message.setText("Enter your message..");
-			}
-		});
-		dMessage.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				JTextArea message = (JTextArea) e.getSource();
-				if (KeyEvent.VK_ENTER == e.getKeyCode() && !message.equals(""))
-					mainPanel.newDMessageEntered();
-			}
-		});
-		dMessage.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				JTextArea message = (JTextArea) e.getSource();
-				if (message.getText().length() >= 140) {
-					message.setText(message.getText().substring(0, 140));
-				}
-			}
-		});
+		dMessage.addFocusListener(new DirectMessageFieldListener() );
+		dMessage.addKeyListener(new DirectMessageFieldEnterKeyListener(mainPanel) );
+		dMessage.addKeyListener(new DirectMessageFieldKeyListener());
 		newMessagePanel.add(receiver, BorderLayout.NORTH);
 		newMessagePanel.add(dMessage, BorderLayout.SOUTH);
 		add(newMessagePanel);
