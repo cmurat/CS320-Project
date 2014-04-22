@@ -197,4 +197,14 @@ public class GUIManager {
 		gui.printDMessages(null);
 	}
 
+	public void newDMessageButtonClicked() {
+		gui.printNewDMessagePanel();
+	}
+
+	public void newDMessageEntered() {
+		String receiver = gui.getNewDMessageReceiver();
+		// TODO continue from here..
+		System.out.println("Say it is sent.");
+	}
+
 }

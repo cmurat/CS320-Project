@@ -254,4 +254,20 @@ public class GUI extends JFrame {
 		guiManager.backToMessageListClicked();
 	}
 
+	public void newDMessageButtonClicked() {
+		guiManager.newDMessageButtonClicked();
+	}
+
+	public void printNewDMessagePanel() {
+		mainPanel.printNewDMessagePanel();
+	}
+
+	public void newDMessageEntered() {
+		guiManager.newDMessageEntered();
+	}
+
+	public String getNewDMessageReceiver() {
+		return mainPanel.getNewDMessageReceiver();
+	}
+
 }

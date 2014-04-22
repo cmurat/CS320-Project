@@ -165,8 +165,10 @@ public class MainPanel extends JPanel {
 	}
 
 	public void startRefreshTimer() {
-		if (tweetStream != null)
+		if (tweetStream != null) {
+			System.out.println("\nrefresher started!");
 			tweetStream.startRefreshTimer();
+		}
 	}
 
 	public void favoriteButtonClicked(long tweetId) {
@@ -224,11 +226,29 @@ public class MainPanel extends JPanel {
 	}
 
 	public void printConversationView(String peer, URL userPicture) {
+		remove(tweetBox);
 		dMessageView.printConversationView(peer, userPicture);
 	}
 
 	public void backToMessageListClicked() {
 		gui.backToMessageListClicked();
+		add(tweetBox);
+	}
+
+	public void newDMessageButtonClicked() {
+		gui.newDMessageButtonClicked();
+	}
+
+	public void printNewDMessagePanel() {
+		dMessageView.printNewDMessageView();
+	}
+
+	public void newDMessageEntered() {
+		gui.newDMessageEntered();
+	}
+
+	public String getNewDMessageReceiver() {
+		return dMessageView.getNewDMessageReceiver();
 	}
 
 

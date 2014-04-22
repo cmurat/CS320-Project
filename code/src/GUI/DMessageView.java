@@ -10,6 +10,10 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -30,8 +34,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
@@ -96,7 +102,7 @@ public class DMessageView extends JPanel {
 		headerPanel.add(getDMessageField(), BorderLayout.WEST);
 		headerPanel.add(getNewDMessageButton(), BorderLayout.EAST);
 		headerPanel
-				.setPreferredSize(new Dimension(getWidth(), getHeight() / 20));
+		.setPreferredSize(new Dimension(getWidth(), getHeight() / 20));
 		return headerPanel;
 	}
 
@@ -113,7 +119,17 @@ public class DMessageView extends JPanel {
 		JButton newDMessageButton = new JButton("New Message");
 		newDMessageButton.setBorderPainted(false);
 		newDMessageButton.setFocusPainted(false);
+		newDMessageButton.addMouseListener(getNewDMessageMouseAdapte());
 		return newDMessageButton;
+	}
+
+	private MouseListener getNewDMessageMouseAdapte() {
+		return new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mainPanel.newDMessageButtonClicked();
+			}
+		};
 	}
 
 	private void addConversationListPanel() {
@@ -129,12 +145,12 @@ public class DMessageView extends JPanel {
 		JScrollPane conversationPane = new JScrollPane(layoutPanel);
 		conversationPane.setOpaque(true);
 		conversationPane
-				.setPreferredSize(new Dimension(getWidth(), getHeight()));
+		.setPreferredSize(new Dimension(getWidth(), getHeight()));
 		conversationPane.getVerticalScrollBar().setUnitIncrement(16);
 		conversationPane
-				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		conversationPane
-				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		return conversationPane;
 	}
 
@@ -209,7 +225,8 @@ public class DMessageView extends JPanel {
 	@SuppressWarnings("deprecation")
 	private JLabel getPeerImage(DMessage lastMessage) {
 		JLabel image = new JLabel(new ImageIcon(lastMessage.getPeer()
-				.getProfileImageUrlHttps(), lastMessage.getPeer().getScreenName()));
+				.getProfileImageUrlHttps(), lastMessage.getPeer()
+				.getScreenName()));
 		image.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 		image.setPreferredSize(new Dimension(image.getIcon().getIconWidth(),
 				image.getIcon().getIconHeight()));
@@ -252,7 +269,7 @@ public class DMessageView extends JPanel {
 		JPanel lastMessagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		if (lastMessage.getIsSent())
 			lastMessagePanel
-					.add(new JLabel(new ImageIcon("icon/replyIcon.png")));
+			.add(new JLabel(new ImageIcon("icon/replyIcon.png")));
 		JLabel label = new JLabel(lastMessage.getMessage());
 		label.setFont(getFont().deriveFont(Font.PLAIN));
 		label.setForeground(Color.gray);
@@ -367,7 +384,7 @@ public class DMessageView extends JPanel {
 		JPanel headerPanel = new JPanel(new BorderLayout());
 		headerPanel.add(getNavigationField(peer), BorderLayout.WEST);
 		headerPanel
-				.setPreferredSize(new Dimension(getWidth(), getHeight() / 20));
+		.setPreferredSize(new Dimension(getWidth(), getHeight() / 20));
 		return headerPanel;
 	}
 
@@ -426,11 +443,11 @@ public class DMessageView extends JPanel {
 		JScrollPane messagePane = new JScrollPane(layout);
 		messagePane.setOpaque(true);
 		messagePane.getVerticalScrollBar().setUnitIncrement(16);
-		messagePane.setPreferredSize(new Dimension(getWidth(), getHeight()));
+		messagePane.setPreferredSize(new Dimension(getWidth(), getHeight() - 50));
 		messagePane
-				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		messagePane
-				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		return messagePane;
 	}
 
@@ -457,7 +474,7 @@ public class DMessageView extends JPanel {
 			c.gridy = i++;
 			c.anchor = GridBagConstraints.ABOVE_BASELINE_LEADING;
 			messageListPanel.add(messagePanel, c);
-			
+
 		}
 	}
 
@@ -483,11 +500,82 @@ public class DMessageView extends JPanel {
 	}
 
 	private void addReceivedMessageTo(JPanel messagePanel, DMessage message) {
-		messagePanel.add(getImage(message.getPeer().getProfileImageUrlHttps()), BorderLayout.WEST);
+		messagePanel.add(getImage(message.getPeer().getProfileImageUrlHttps()),
+				BorderLayout.WEST);
 		JPanel middlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel messageLabel = new JLabel(message.getMessage());
 		middlePanel.add(messageLabel);
 		messagePanel.add(middlePanel, BorderLayout.CENTER);
+	}
+
+	public void printNewDMessageView() {
+		removeAll();
+		newMessagePanel = new JPanel(new BorderLayout());
+		JTextField receiver = new JTextField("Enter the receiver..");
+		receiver.setBorder(new LineBorder(Color.black));
+		receiver.setPreferredSize(new Dimension(getWidth(), getHeight() / 20));
+		receiver.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				JTextField receiver = (JTextField) e.getSource();
+				if (receiver.getText().equals("Enter the receiver.."))
+					receiver.setText("");
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				JTextField receiver = (JTextField) e.getSource();
+				if (receiver.getText().equals(""))
+					receiver.setText("Enter the receiver..");
+			}
+		});
+		JTextArea dMessage = new JTextArea("Enter your message..");
+		dMessage.setPreferredSize(new Dimension(getWidth(), getHeight() / 10));
+		dMessage.setLineWrap(true);
+		dMessage.setOpaque(false);
+		dMessage.setColumns(140);
+		dMessage.setBorder(new LineBorder(Color.black));
+		dMessage.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				JTextArea message = (JTextArea) e.getSource();
+				if (message.getText().equals("Enter your message.."))
+					message.setText("");
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				JTextArea message = (JTextArea) e.getSource();
+				if (message.getText().equals(""))
+					message.setText("Enter your message..");
+			}
+		});
+		dMessage.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				JTextArea message = (JTextArea) e.getSource();
+				if (KeyEvent.VK_ENTER == e.getKeyCode() && !message.equals(""))
+					mainPanel.newDMessageEntered();
+			}
+		});
+		dMessage.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				JTextArea message = (JTextArea) e.getSource();
+				if (message.getText().length() >= 140) {
+					message.setText(message.getText().substring(0, 140));
+				}
+			}
+		});
+		newMessagePanel.add(receiver, BorderLayout.NORTH);
+		newMessagePanel.add(dMessage, BorderLayout.SOUTH);
+		add(newMessagePanel);
+		repaint();
+		revalidate();
+	}
+
+	public String getNewDMessageReceiver() {
+		return ((JTextField)newMessagePanel.getComponent(0)).getText();
 	}
 
 }
