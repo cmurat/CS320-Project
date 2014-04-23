@@ -103,6 +103,7 @@ public class GUI extends JFrame {
 		getContentPane().add(navigationBar, BorderLayout.NORTH);
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 		printTimeline(tweets);
+		startRefreshTimer();
 	}
 
 	public void printTimeline(ArrayList<Tweet> tweets) {
@@ -282,6 +283,11 @@ public class GUI extends JFrame {
 		ArrayList<DMessage> sentMessageList = new ArrayList<DMessage>();
 		sentMessageList.add(sentDMessage);
 		mainPanel.printDMessages(sentMessageList);
+	}
+
+
+	public void refreshTimeline() {
+		mainPanel.refreshTimeline();
 	}
 
 }

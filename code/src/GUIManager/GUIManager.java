@@ -65,7 +65,7 @@ public class GUIManager {
 		String tweet = gui.getTweet();
 		String imageLocation = "";
 		dataRequestManager.postTweet(tweet, imageLocation);
-		System.out.println("\nAssume it is sent: " + tweet);
+		gui.refreshTimeline();
 	}
 
 	public void meButtonClicked() {
@@ -150,12 +150,10 @@ public class GUIManager {
 
 	public void delete(long tweetId) {
 		dataRequestManager.deleteTweet(tweetId);
-		
 	}
 
 	public void retweet(long tweetId) {
 		dataRequestManager.retweet(tweetId);
-		
 	}
 
 	public void favorite(long tweetId) {

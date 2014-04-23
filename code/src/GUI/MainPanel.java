@@ -45,16 +45,17 @@ public class MainPanel extends JPanel {
 
 	public void printTimeline(ArrayList<Tweet> tweets) {
 		removeAll();
-		TweetStream tweetStream = new TweetStream(this);
+		tweetStream = new TweetStream(this);
 		add(tweetStream.printTweetStream(tweets));
 		add(tweetBox, BorderLayout.SOUTH);
 		refresh();
 	}
+	
 	public TweetBox getTweetBox(){
 		return tweetBox;
 	}
 
-	private void stopTimelineTimer() {
+	private void stopRefreshTimer() {
 		if (tweetStream != null)
 			tweetStream.stopRefreshTimer();
 	}
@@ -70,7 +71,7 @@ public class MainPanel extends JPanel {
 
 	public void printMentions(ArrayList<Tweet> tweets) {
 		removeAll();
-		stopTimelineTimer();
+		stopRefreshTimer();
 		TweetStream tweetStream = new TweetStream(this);
 		tweetPane = tweetStream.printTweetStream(tweets);
 		add(tweetBox, BorderLayout.SOUTH);
@@ -92,7 +93,7 @@ public class MainPanel extends JPanel {
 
 	public void printProfile(DetailedAccount account) {
 		removeAll();
-		stopTimelineTimer();
+		stopRefreshTimer();
 		profilePanel = new ProfilePanel(this, account);
 		add(profilePanel, BorderLayout.NORTH);
 		add(tweetBox, BorderLayout.SOUTH);
@@ -101,7 +102,7 @@ public class MainPanel extends JPanel {
 
 	public void printSearchScreen() {
 		removeAll();
-		stopTimelineTimer();
+		stopRefreshTimer();
 		searchScreen = new SearchScreen(this);
 		add(searchScreen);
 		refresh();
@@ -115,7 +116,7 @@ public class MainPanel extends JPanel {
 
 	public void printDMessages(ArrayList<DMessage> dMessages) {
 		removeAll();
-		stopTimelineTimer();
+		stopRefreshTimer();
 		if (dMessageView == null)
 			dMessageView = new DMessageView(this);
 		dMessageView.printDMessageListPanel(dMessages);
@@ -134,7 +135,7 @@ public class MainPanel extends JPanel {
 
 	public void printAccounts(ArrayList<Account> accounts) {
 		removeAll();
-		stopTimelineTimer();
+		stopRefreshTimer();
 		accountStream = new AccountStream(this);
 		accountPane = accountStream.printAccounttream(accounts);
 		add(accountPane);
@@ -159,7 +160,6 @@ public class MainPanel extends JPanel {
 
 	public void startRefreshTimer() {
 		if (tweetStream != null) {
-			System.out.println("\nrefresher started!");
 			tweetStream.startRefreshTimer();
 		}
 	}
@@ -186,7 +186,7 @@ public class MainPanel extends JPanel {
 
 	public void printSettingsScreen() {
 		removeAll();
-		stopTimelineTimer();
+		stopRefreshTimer();
 		settingsScreen = new SettingsScreen(this);
 		add(settingsScreen);
 		refresh();
