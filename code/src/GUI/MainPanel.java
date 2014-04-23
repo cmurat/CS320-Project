@@ -9,6 +9,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -67,17 +68,13 @@ public class MainPanel extends JPanel {
 		repaint();
 	}
 
-	public void addComponent(Component component) {
-		add(component);
-	}
-
 	public void printMentions(ArrayList<Tweet> tweets) {
 		removeAll();
 		stopTimelineTimer();
 		TweetStream tweetStream = new TweetStream(this);
 		tweetPane = tweetStream.printTweetStream(tweets);
 		add(tweetBox, BorderLayout.SOUTH);
-		add(tweetPane);
+		add(tweetPane, BorderLayout.NORTH);
 		refresh();
 	}
 
@@ -97,7 +94,7 @@ public class MainPanel extends JPanel {
 		removeAll();
 		stopTimelineTimer();
 		profilePanel = new ProfilePanel(this, account);
-		profilePanel.printProfilePanel();
+		add(profilePanel, BorderLayout.NORTH);
 		add(tweetBox, BorderLayout.SOUTH);
 		refresh();
 	}
@@ -125,10 +122,6 @@ public class MainPanel extends JPanel {
 		add(dMessageView, BorderLayout.CENTER);
 		add(tweetBox, BorderLayout.SOUTH);
 		refresh();
-	}
-
-	public void revalidateGUI() {
-		gui.validate();
 	}
 
 	public void userNameClicked(long userId) {
@@ -218,7 +211,6 @@ public class MainPanel extends JPanel {
 
 	public void unRetweetButtonClicked(long tweetId) {
 		gui.unRetweetButtonClicked(tweetId);
-		
 	}
 
 	public void conversationClicked(String peer) {
@@ -228,12 +220,11 @@ public class MainPanel extends JPanel {
 	public void printConversationView(String peer, URL userPicture) {
 		remove(tweetBox);
 		dMessageView.printConversationView(peer, userPicture);
-		
 	}
 
 	public void backToMessageListClicked() {
 		gui.backToMessageListClicked();
-		add(tweetBox);
+		add(tweetBox, BorderLayout.SOUTH);
 	}
 
 	public void newDMessageButtonClicked() {

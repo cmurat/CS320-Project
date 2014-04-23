@@ -43,9 +43,4 @@ public class ProfilePanel extends JPanel {
 				mainPanel.getBounds().width, mainPanel.getBounds().height);
 	}
 
-	public void printProfilePanel() {
-		System.out.println("\nAssume profile panel is painted.");
-		mainPanel.addComponent(this);
-	}
-
 }

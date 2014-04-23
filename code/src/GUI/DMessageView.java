@@ -129,8 +129,6 @@ public class DMessageView extends JPanel {
 		return newDMessageButton;
 	}
 
-
-
 	private void addConversationListPanel() {
 		GridBagConstraints d = new GridBagConstraints();
 		d.fill = GridBagConstraints.HORIZONTAL;
@@ -232,7 +230,6 @@ public class DMessageView extends JPanel {
 		return image;
 	}
 
-
 	private void addMiddlePanel(JPanel conversationPanel, String key,
 			DMessage lastMessage) {
 		JPanel middlePanel = new JPanel(new GridLayout(2, 1));
@@ -264,7 +261,6 @@ public class DMessageView extends JPanel {
 		namePanel.add(peerHandle);
 		return namePanel;
 	}
-
 
 	@SuppressWarnings("deprecation")
 	private void addTimePanel(DMessage lastMessage, JPanel conversationPanel) {
@@ -361,7 +357,6 @@ public class DMessageView extends JPanel {
 		navigationPanel.add(dMessageField);
 	}
 
-
 	private void addPeerFieldTo(JPanel navigationPanel, String peer) {
 		JTextField peerField = getDMessageField();
 		peerField.setText(" > with " + peer);
@@ -437,6 +432,7 @@ public class DMessageView extends JPanel {
 		return imagePanel;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void addReceivedMessageTo(JPanel messagePanel, DMessage message) {
 		messagePanel.add(getImage(message.getPeer().getProfileImageUrlHttps()),
 				BorderLayout.WEST);
