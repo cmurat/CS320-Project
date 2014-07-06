@@ -1,4 +1,4 @@
-package GUI.listeners;
+package GUIListeners.NavigatorListeners;
 
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;

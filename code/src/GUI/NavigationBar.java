@@ -10,13 +10,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import GUI.listeners.DMessageListener;
-import GUI.listeners.HomeButtonListener;
-import GUI.listeners.LogoutButtonListener;
-import GUI.listeners.MeButtonListener;
-import GUI.listeners.NotificationsButtonListener;
-import GUI.listeners.SearchButtonListener;
-import GUI.listeners.SettingsButtonListener;
+import GUIListeners.NavigatorListeners.DMessageListener;
+import GUIListeners.NavigatorListeners.HomeButtonListener;
+import GUIListeners.NavigatorListeners.LogoutButtonListener;
+import GUIListeners.NavigatorListeners.MeButtonListener;
+import GUIListeners.NavigatorListeners.NotificationsButtonListener;
+import GUIListeners.NavigatorListeners.SearchButtonListener;
+import GUIListeners.NavigatorListeners.SettingsButtonListener;
 
 @SuppressWarnings("serial")
 public class NavigationBar extends JPanel {

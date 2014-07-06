@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,53 +17,47 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import DataRequester.Account;
-import GUI.listeners.UserNameListener;
+import GUIListeners.UserNameListener;
 
 @SuppressWarnings("serial")
-public class AccountStream extends JPanel {
-	private MainPanel mainPanel;
-
-	public AccountStream(MainPanel mainPanel) {
-		this.mainPanel = mainPanel;
-		setLayout(new GridLayout(0, 1));
-
-		setBackground(Color.white);
-	}
-
-	public JScrollPane printAccounttream(ArrayList<Account> accounts) {
-		printAccounts(accounts);
+public class AccountStreamFactory {
+	
+	public static JScrollPane printAccounttream(ArrayList<Account> accounts, MainPanel mainPanel) {
+		JPanel accountPanel = new JPanel();
+		accountPanel.setLayout(new BoxLayout(accountPanel, BoxLayout.PAGE_AXIS));
+		printAccounts(accounts,accountPanel,mainPanel);
 		System.out.println("\nAssume AccountStream is painted.");
-		JScrollPane tweetPane = new JScrollPane(this);
-		tweetPane.setOpaque(true);
-		tweetPane.getVerticalScrollBar().setUnitIncrement(16);
-		tweetPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		tweetPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		return tweetPane;
+		
+		JScrollPane accountStream = new JScrollPane(accountPanel);
+		accountStream.setOpaque(true);
+		accountStream.getVerticalScrollBar().setUnitIncrement(16);
+		accountStream.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		accountStream.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		return accountStream;
 	}
 
-	private void printAccounts(ArrayList<Account> accounts) {
+	private static void printAccounts(ArrayList<Account> accounts, JPanel accountPanel, MainPanel mainPanel) {
 		for (Account account : accounts) {
 			JPanel imagePanel = new JPanel();
 			imagePanel.setBackground(Color.WHITE);
 			imagePanel.setOpaque(true);
-
 			JPanel contentPanel = new JPanel();
 			contentPanel.setBackground(Color.WHITE);
 			contentPanel.setOpaque(true);
 			contentPanel.setLayout(new GridLayout(2, 1));
 
 			addUserImage(account, imagePanel);
-			addUserName(account, contentPanel);
+			addUserName(account, contentPanel,mainPanel);
 
 			JPanel tweetPanel = new JPanel();
 			tweetPanel.setLayout(new BorderLayout());
 			tweetPanel.add(imagePanel, BorderLayout.WEST);
 			tweetPanel.add(contentPanel, BorderLayout.CENTER);
-			add(tweetPanel);
+			accountPanel.add(tweetPanel);
 		}
 	}
 
-	private void addUserImage(Account account, JPanel imagePanel) {
+	private static void addUserImage(Account account, JPanel imagePanel) {
 		URL imageURL = null;
 		try {
 			imageURL = new URL(account.getProfilePictureURL());
@@ -73,8 +68,8 @@ public class AccountStream extends JPanel {
 		imagePanel.add(userImage);
 	}
 
-	private void addUserName(Account account, JPanel contentPanel) {
-		JButton userName = new JButton("" + account.getUserName());
+	private static void addUserName(Account account, JPanel contentPanel, MainPanel mainPanel) {
+		JButton userName = new JButton(account.getUserName());
 		userName.setBorderPainted(false);
 		userName.setFocusable(false);
 		userName.setContentAreaFilled(false);

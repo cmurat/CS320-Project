@@ -35,6 +35,7 @@ public class AccountHandler {
 		try {
 			twitter.setOAuthAccessToken(accessToken);
 			currentUser = twitter.verifyCredentials();
+			System.out.println(1);
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

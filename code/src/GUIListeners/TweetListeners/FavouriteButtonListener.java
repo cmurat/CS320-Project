@@ -1,4 +1,4 @@
-package GUI.listeners;
+package GUIListeners.TweetListeners;
 
 import java.awt.Cursor;
 import java.awt.Image;

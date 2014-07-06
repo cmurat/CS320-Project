@@ -40,14 +40,14 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
 import DataRequester.DMessage;
-import GUI.listeners.DMessageNavigationFieldListener;
-import GUI.listeners.DirectMessageFieldEnterKeyListener;
-import GUI.listeners.DirectMessageFieldKeyListener;
-import GUI.listeners.DirectMessageFieldListener;
-import GUI.listeners.NameContentListener;
-import GUI.listeners.NewDirectMessageButtonListener;
-import GUI.listeners.PeerImageMouseListener;
-import GUI.listeners.ReceiverFieldListener;
+import GUIListeners.DMessageListeners.DMessageNavigationFieldListener;
+import GUIListeners.DMessageListeners.DirectMessageFieldEnterKeyListener;
+import GUIListeners.DMessageListeners.DirectMessageFieldKeyListener;
+import GUIListeners.DMessageListeners.DirectMessageFieldListener;
+import GUIListeners.DMessageListeners.NameContentListener;
+import GUIListeners.DMessageListeners.NewDirectMessageButtonListener;
+import GUIListeners.DMessageListeners.PeerImageMouseListener;
+import GUIListeners.DMessageListeners.ReceiverFieldListener;
 
 @SuppressWarnings("serial")
 public class DMessageView extends JPanel {

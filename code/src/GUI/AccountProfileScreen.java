@@ -13,10 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import DataRequester.DetailedAccount;
-import GUI.listeners.FollowButtonListener;
-import GUI.listeners.FollowersListener;
-import GUI.listeners.FollowingsListener;
-import GUI.listeners.UnFollowButtonListener;
+import GUIListeners.AccountListeners.FollowButtonListener;
+import GUIListeners.AccountListeners.FollowersListener;
+import GUIListeners.AccountListeners.FollowingsListener;
+import GUIListeners.AccountListeners.UnFollowButtonListener;
 
 @SuppressWarnings("serial")
 public class AccountProfileScreen extends JPanel {

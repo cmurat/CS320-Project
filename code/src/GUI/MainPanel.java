@@ -24,10 +24,6 @@ public class MainPanel extends JPanel {
 	private GUI gui;
 	private TweetBox tweetBox;
 	private ProfilePanel profilePanel;
-	private TweetStream tweetStream;
-	private AccountStream accountStream;
-	private JScrollPane tweetPane;
-	private JScrollPane accountPane;
 	private DMessageView dMessageView;
 	private SearchScreen searchScreen;
 	private SettingsScreen settingsScreen;
@@ -40,25 +36,21 @@ public class MainPanel extends JPanel {
 		setOpaque(true);
 		setBackground(Color.WHITE);
 		tweetBox = new TweetBox(this);
-		add(tweetBox, BorderLayout.SOUTH);
+		
 	}
+	
 
 	public void printTimeline(ArrayList<Tweet> tweets) {
 		removeAll();
-		tweetStream = new TweetStream(this);
-		add(tweetStream.printTweetStream(tweets));
+		add(TweetStreamFactory.printTweetStream(tweets, this, tweetBox));
 		add(tweetBox, BorderLayout.SOUTH);
 		refresh();
 	}
-	
+
 	public TweetBox getTweetBox(){
 		return tweetBox;
 	}
 
-	private void stopRefreshTimer() {
-		if (tweetStream != null)
-			tweetStream.stopRefreshTimer();
-	}
 
 	public void refreshTimeline() {
 		gui.homeButtonClicked();
@@ -71,11 +63,7 @@ public class MainPanel extends JPanel {
 
 	public void printMentions(ArrayList<Tweet> tweets) {
 		removeAll();
-		stopRefreshTimer();
-		TweetStream tweetStream = new TweetStream(this);
-		tweetPane = tweetStream.printTweetStream(tweets);
-		add(tweetBox, BorderLayout.SOUTH);
-		add(tweetPane, BorderLayout.NORTH);
+		add(TweetStreamFactory.printTweetStream(tweets, this, tweetBox), BorderLayout.NORTH);
 		refresh();
 	}
 
@@ -93,30 +81,26 @@ public class MainPanel extends JPanel {
 
 	public void printProfile(DetailedAccount account) {
 		removeAll();
-		stopRefreshTimer();
-		profilePanel = new ProfilePanel(this, account);
-		add(profilePanel, BorderLayout.NORTH);
+		profilePanel = new ProfilePanel(this, account,tweetBox);
+		add(profilePanel, BorderLayout.CENTER);
 		add(tweetBox, BorderLayout.SOUTH);
 		refresh();
 	}
 
 	public void printSearchScreen() {
 		removeAll();
-		stopRefreshTimer();
 		searchScreen = new SearchScreen(this);
 		add(searchScreen);
 		refresh();
 	}
 
 	public void printSearchScreenResult(ArrayList<Tweet> searchResults) {
-		TweetStream tweetStream = new TweetStream(this);
-		searchScreen.printStream(tweetStream.printTweetStream(searchResults));
+		searchScreen.printStream(TweetStreamFactory.printTweetStream(searchResults, this, tweetBox));
 		refresh();
 	}
 
 	public void printDMessages(ArrayList<DMessage> dMessages) {
 		removeAll();
-		stopRefreshTimer();
 		if (dMessageView == null)
 			dMessageView = new DMessageView(this);
 		dMessageView.printDMessageListPanel(dMessages);
@@ -135,10 +119,7 @@ public class MainPanel extends JPanel {
 
 	public void printAccounts(ArrayList<Account> accounts) {
 		removeAll();
-		stopRefreshTimer();
-		accountStream = new AccountStream(this);
-		accountPane = accountStream.printAccounttream(accounts);
-		add(accountPane);
+		add(AccountStreamFactory.printAccounttream(accounts,this));
 		refresh();
 	}
 
@@ -156,12 +137,6 @@ public class MainPanel extends JPanel {
 
 	public void followButtonPressed(long userID) {
 		gui.followButtonPressed(userID);
-	}
-
-	public void startRefreshTimer() {
-		if (tweetStream != null) {
-			tweetStream.startRefreshTimer();
-		}
 	}
 
 	public void favoriteButtonClicked(long tweetId) {
@@ -186,7 +161,6 @@ public class MainPanel extends JPanel {
 
 	public void printSettingsScreen() {
 		removeAll();
-		stopRefreshTimer();
 		settingsScreen = new SettingsScreen(this);
 		add(settingsScreen);
 		refresh();
@@ -206,7 +180,7 @@ public class MainPanel extends JPanel {
 
 	public void unFavoriteButtonClicked(long tweetId) {
 		gui.unFavoriteButtonClicked(tweetId);
-		
+
 	}
 
 	public void unRetweetButtonClicked(long tweetId) {

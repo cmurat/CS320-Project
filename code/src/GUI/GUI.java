@@ -46,7 +46,7 @@ public class GUI extends JFrame {
 	private void calculateBounds() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) (screenSize.getWidth() / 4);
-		int height = (int) screenSize.getHeight() - getTaskBarHeight() - 30;
+		int height = (int) screenSize.getHeight() - getTaskBarHeight() - 70;
 		int yPos = 0;
 		int xPos = (int) (screenSize.getWidth() - width);
 		setBounds(xPos, yPos, width, height);
@@ -103,7 +103,6 @@ public class GUI extends JFrame {
 		getContentPane().add(navigationBar, BorderLayout.NORTH);
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 		printTimeline(tweets);
-		startRefreshTimer();
 	}
 
 	public void printTimeline(ArrayList<Tweet> tweets) {
@@ -186,9 +185,7 @@ public class GUI extends JFrame {
 		guiManager.followClicked(userID);
 	}
 
-	public void startRefreshTimer() {
-		mainPanel.startRefreshTimer();
-	}
+	
 
 	public void settingsButtonClicked() {
 		guiManager.settingsButtonClicked();

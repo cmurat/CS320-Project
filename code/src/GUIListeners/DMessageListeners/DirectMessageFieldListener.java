@@ -1,4 +1,4 @@
-package GUI.listeners;
+package GUIListeners.DMessageListeners;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;

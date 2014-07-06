@@ -9,8 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import GUI.listeners.ChangeProfilePictureButtonListener;
-import GUI.listeners.ChangeUsernameButtonListener;
+import GUIListeners.SettingsListeners.ChangeProfilePictureButtonListener;
+import GUIListeners.SettingsListeners.ChangeUsernameButtonListener;
 
 @SuppressWarnings("serial")
 public class SettingsScreen extends JPanel {

@@ -1,4 +1,4 @@
-package GUI.listeners;
+package GUIListeners.TweetListeners;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,21 +11,21 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import GUI.MainPanel;
-import GUI.TweetStream;
+import GUI.TweetStreamFactory;
 
 public class DeleteButtonListener implements ActionListener {
 	private long tweetId;
 	private JButton deleteButton;
 	private MainPanel mainPanel;
 	private JPanel tweetPanel;
-	private TweetStream stream;
+	private JPanel stream;
 
-	public DeleteButtonListener(long tweetId, JButton deleteButton, MainPanel mainPanel, JPanel tweetPanel,TweetStream stream) {
+	public DeleteButtonListener(long tweetId, JButton deleteButton, MainPanel mainPanel, JPanel tweetPanel,JPanel tweetStream) {
 		this.tweetId = tweetId;
 		this.deleteButton = deleteButton;
 		this.mainPanel = mainPanel;
 		this.tweetPanel=tweetPanel;
-		this.stream = stream;
+		this.stream = tweetStream;
 	}
 
 	public void actionPerformed(ActionEvent e) {
