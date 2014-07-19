@@ -14,6 +14,7 @@ import DataRequester.AccountHandler;
 import DataRequester.DMessage;
 import DataRequester.DMessageHandler;
 import DataRequester.DetailedAccount;
+import DataRequester.ModelClass;
 import DataRequester.NavigationHandler;
 import DataRequester.Tweet;
 import DataRequester.TweetHandler;
@@ -32,15 +33,21 @@ public class DataRequestManager {
 	public DataRequestManager(GUIManager guiManager) {
 		this.guiManager = guiManager;
 		initModelClasses();
-		// initDataRequesterManagerClasses();
+		
+	}
+
+	private void setModelClassesTwitters(Twitter twitter) {
+		ModelClass.setTwitterUser(twitter);
+		
 	}
 
 	private void initModelClasses() {
 		Twitter twitter = TwitterFactory.getSingleton();
-		accountHandler = new AccountHandler(twitter);
-		dMessageHandler = new DMessageHandler(twitter);
-		navigationHandler = new NavigationHandler(twitter);
-		tweetHandler = new TweetHandler(twitter);
+		accountHandler = AccountHandler.getInstance();
+		dMessageHandler = DMessageHandler.getInsance();
+		navigationHandler = NavigationHandler.getInstance();
+		tweetHandler = TweetHandler.getInstance();
+		setModelClassesTwitters(twitter);
 	}
 
 	public String createRequestTokenURL() {

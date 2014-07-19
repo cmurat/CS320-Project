@@ -6,15 +6,16 @@ import java.util.List;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.User;
 
-public class NavigationHandler {
-	Twitter twitter;
-
-	public NavigationHandler(Twitter twitter) {
-		this.twitter = twitter;
+public class NavigationHandler extends ModelClass {
+	private static NavigationHandler navigationHandler;
+	public static NavigationHandler getInstance(){
+		if(navigationHandler ==null)
+			navigationHandler = new NavigationHandler();
+		return navigationHandler;
+		
 	}
 
 	public ArrayList<Tweet> getTimeline() {

@@ -12,7 +12,8 @@ public class RequesterTest {
 	public static void main(String args[]) throws IOException,
 			IllegalStateException, TwitterException, InvalidAttributesException {
 		Twitter twitter = TwitterFactory.getSingleton();
-		AccountHandler handle = new AccountHandler(twitter);
+		AccountHandler handle = AccountHandler.getInstance();
+		handle.setTwitterUser(twitter);
 		handle.loginTwitterFromStorage();
 	}
 

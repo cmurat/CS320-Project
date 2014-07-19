@@ -12,21 +12,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import twitter4j.Status;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
-public class AccountHandler {
-	Twitter twitter;
+public class AccountHandler extends ModelClass {
+	private static AccountHandler accountHandler;
+
 	private RequestToken requestToken;
 	private AccessToken accessToken;
 	private User currentUser;
 
-	public AccountHandler(Twitter twitter) {
-		this.twitter = twitter;
+	
+	public static AccountHandler getInstance(){
+		if(accountHandler==null)
+			accountHandler = new AccountHandler();
+		return accountHandler;
 	}
+	
 
 	public boolean loginTwitterFromStorage(){
 		accessToken = loadAccessToken();

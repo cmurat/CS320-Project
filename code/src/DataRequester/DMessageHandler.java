@@ -7,14 +7,17 @@ import java.util.Date;
 
 import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
-public class DMessageHandler {
-	Twitter twitter;
+public class DMessageHandler extends ModelClass {
+	private static DMessageHandler dMessageHandler;
 
-	public DMessageHandler(Twitter twitter) {
-		this.twitter = twitter;
+	
+	public static DMessageHandler getInsance(){
+		if(dMessageHandler ==null)
+			dMessageHandler = new DMessageHandler();
+		return dMessageHandler;
+		
 	}
 
 	public DMessage sendDirectMessage(String screenName, String message)

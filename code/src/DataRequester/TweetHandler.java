@@ -5,18 +5,18 @@ import java.util.List;
 
 import twitter4j.Status;
 import twitter4j.StatusUpdate;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
-public class TweetHandler {
+public class TweetHandler extends ModelClass {
 	private final static int TWEET_LENGTH = 140;
 	private final static int MEDIA_LENGTH = 26;
-	Twitter twitter;
+	private static TweetHandler tweetHandler;
 
-	public TweetHandler(Twitter twitter) {
-		this.twitter = twitter;
+	public static TweetHandler getInstance(){
+		if(tweetHandler ==null)
+			tweetHandler = new TweetHandler();
+		return tweetHandler;
 	}
-
 	public void postTweet(String tweet, String imageLocation) {
 		StatusUpdate status = new StatusUpdate(tweet);
 		if (!imageLocation.equals(""))
