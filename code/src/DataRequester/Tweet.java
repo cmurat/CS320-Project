@@ -1,5 +1,6 @@
 package DataRequester;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 
@@ -15,9 +16,15 @@ public class Tweet {
 		this.user = status.getUser();
 	}
 
-	@SuppressWarnings("deprecation")
+
 	public URL getUserImage() {
-		return user.getProfileImageUrlHttps();
+		try {
+			return new URL(user.getProfileImageURL());
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	public String getContent() {
 		return status.getText();

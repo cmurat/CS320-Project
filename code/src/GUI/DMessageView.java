@@ -16,6 +16,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -219,11 +220,16 @@ public class DMessageView extends JPanel {
 		conversationPanel.add(imagePanel, BorderLayout.WEST);
 	}
 
-	@SuppressWarnings("deprecation")
 	private JLabel getPeerImage(DMessage lastMessage) {
-		JLabel image = new JLabel(new ImageIcon(lastMessage.getPeer()
-				.getProfileImageUrlHttps(), lastMessage.getPeer()
-				.getScreenName()));
+		JLabel image = null;
+		try {
+			image = new JLabel(new ImageIcon(new URL(lastMessage.getPeer()
+					.getMiniProfileImageURL()), lastMessage.getPeer()
+					.getScreenName()));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		image.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 		image.setPreferredSize(new Dimension(image.getIcon().getIconWidth(),
 				image.getIcon().getIconHeight()));
@@ -432,10 +438,14 @@ public class DMessageView extends JPanel {
 		return imagePanel;
 	}
 
-	@SuppressWarnings("deprecation")
 	private void addReceivedMessageTo(JPanel messagePanel, DMessage message) {
-		messagePanel.add(getImage(message.getPeer().getProfileImageUrlHttps()),
-				BorderLayout.WEST);
+		try {
+			messagePanel.add(getImage(new URL(message.getPeer().getOriginalProfileImageURL())),
+					BorderLayout.WEST);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JPanel middlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel messageLabel = new JLabel(message.getMessage());
 		middlePanel.add(messageLabel);

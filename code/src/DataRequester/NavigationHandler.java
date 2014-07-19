@@ -30,11 +30,11 @@ public class NavigationHandler extends ModelClass {
 		return tweets;
 	}
 
-	@SuppressWarnings("deprecation")
+
 	public ArrayList<Tweet> getMentions() {
 		List<Status> statuses = null;
 		try {
-			statuses = twitter.getMentions();
+			statuses = twitter.getMentionsTimeline();
 		} catch (TwitterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
