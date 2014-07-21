@@ -9,7 +9,7 @@ import twitter4j.Status;
 import twitter4j.TwitterException;
 import twitter4j.User;
 
-public class NavigationHandler extends ModelClass {
+public class NavigationHandler extends TwitterConnection {
 	private static NavigationHandler navigationHandler;
 	public static NavigationHandler getInstance(){
 		if(navigationHandler ==null)

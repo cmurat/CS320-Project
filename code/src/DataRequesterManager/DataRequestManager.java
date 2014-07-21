@@ -14,7 +14,7 @@ import DataRequester.AccountHandler;
 import DataRequester.DMessage;
 import DataRequester.DMessageHandler;
 import DataRequester.DetailedAccount;
-import DataRequester.ModelClass;
+import DataRequester.TwitterConnection;
 import DataRequester.NavigationHandler;
 import DataRequester.Tweet;
 import DataRequester.TweetHandler;
@@ -37,7 +37,7 @@ public class DataRequestManager {
 	}
 
 	private void setModelClassesTwitters(Twitter twitter) {
-		ModelClass.setTwitterUser(twitter);
+		TwitterConnection.setTwitterUser(twitter);
 		
 	}
 

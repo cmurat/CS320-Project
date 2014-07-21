@@ -17,7 +17,7 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
-public class AccountHandler extends ModelClass {
+public class AccountHandler extends TwitterConnection {
 	private static AccountHandler accountHandler;
 
 	private RequestToken requestToken;

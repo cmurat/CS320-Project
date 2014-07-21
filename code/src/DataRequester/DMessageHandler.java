@@ -9,7 +9,7 @@ import twitter4j.DirectMessage;
 import twitter4j.ResponseList;
 import twitter4j.TwitterException;
 
-public class DMessageHandler extends ModelClass {
+public class DMessageHandler extends TwitterConnection {
 	private static DMessageHandler dMessageHandler;
 
 	

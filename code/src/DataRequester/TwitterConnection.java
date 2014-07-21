@@ -2,12 +2,12 @@ package DataRequester;
 
 import twitter4j.Twitter;
 
-public class ModelClass {
+public class TwitterConnection {
 	protected static Twitter twitter;
 	
 	
 	public static void setTwitterUser(Twitter twitter) {
-		ModelClass.twitter = twitter;
+		TwitterConnection.twitter = twitter;
 	}
 
 }

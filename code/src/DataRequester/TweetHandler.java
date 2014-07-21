@@ -7,7 +7,7 @@ import twitter4j.Status;
 import twitter4j.StatusUpdate;
 import twitter4j.TwitterException;
 
-public class TweetHandler extends ModelClass {
+public class TweetHandler extends TwitterConnection {
 	private final static int TWEET_LENGTH = 140;
 	private final static int MEDIA_LENGTH = 26;
 	private static TweetHandler tweetHandler;
